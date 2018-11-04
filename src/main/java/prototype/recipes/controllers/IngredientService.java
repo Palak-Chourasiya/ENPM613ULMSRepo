@@ -37,7 +37,7 @@ public class IngredientService {
 
     // Query methods
 
-    public IngredientEntity getRecipe(Long ingredientId) {
+    public IngredientEntity getIngredient(Long ingredientId) {
         Optional<IngredientEntity> ingredient = ingredientRepository.findById(ingredientId);
         if (!ingredient.isPresent()) {
             throw new IngredientNotFoundException(ingredientId);

@@ -39,7 +39,7 @@ public class IngredientController {
     
     @GetMapping("/{ingredientId}")
     public ResponseEntity<?> getUser(@PathVariable("ingredientId") long ingredientId) {
-        IngredientEntity ingredient = ingredientService.getRecipe(ingredientId);
+        IngredientEntity ingredient = ingredientService.getIngredient(ingredientId);
         if (ingredient == null) {
             return new ResponseEntity(new RuntimeException("Ingredient with id " + ingredientId 
                     + " not found"), HttpStatus.NOT_FOUND);
