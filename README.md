@@ -23,3 +23,6 @@ git commit
 
 When you are ready to push the branched local repository to the remote repository perform this command:
 git push
+
+When you need to pull changes from the remote repository made by team members perform this command:
+git pull https://github.com/Palak-Chourasiya/ENPM613ULMSRepo.git
