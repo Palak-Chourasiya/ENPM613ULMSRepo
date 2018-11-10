@@ -7,9 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -58,4 +60,30 @@ public class CourseController {
         return "TEST";
     }
 
+    /*
+    @PostMapping("/add")
+    public ResponseEntity<?> createCourse(@RequestBody Course course, org.springframework.web.util.UriComponentsBuilder uriBuilder) {
+    	HttpHeaders headers = new HttpHeaders();
+    	headers.setLocation(uriBuilder.path("recipes/{id}").buildAndExpand(course.getId()).toUri());
+    	
+    	return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+    
+    @PutMapping
+    @RequestMapping(value = "/user/", method = RequestMethod.POST)
+	public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
+		logger.info("Creating User : {}", user);
+
+		if (userService.isUserExist(user)) {
+			logger.error("Unable to create. A User with name {} already exist", user.getName());
+			return new ResponseEntity(new CustomErrorType("Unable to create. A User with name " + 
+			user.getName() + " already exist."),HttpStatus.CONFLICT);
+		}
+		userService.saveUser(user);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri());
+		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+	}
+	*/
 }

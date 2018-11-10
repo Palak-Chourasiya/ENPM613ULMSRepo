@@ -19,7 +19,7 @@ public class AccountEntity {
 		@Column(unique = true)
 	    @NotNull
 	    @GeneratedValue(strategy= GenerationType.AUTO)
-	    private Long Id;
+	    private Long id;
 	   
 	    @NotNull
 	    @NotEmpty
@@ -28,12 +28,12 @@ public class AccountEntity {
 	    
 	    @NotNull
 		@NotEmpty
-	    //@Column(name="FirstName", nullable=false)
+	    @Column(name="FirstName", nullable=false)
 	    private String firstName;
 	 
 	    @NotNull
 	    @NotEmpty
-	    //@Column(name="LastName", nullable=false)
+	    @Column(name="LastName", nullable=false)
 	    private String lastName;
 	    
 	    @NotNull
@@ -42,11 +42,11 @@ public class AccountEntity {
 	    private String email;
 	    
 	    public Long getId() {
-				return Id;
+				return this.id;
 			}
 		
-	    public void setId(Long studentId) {
-				Id = studentId;
+	    public void setId(Long id) {
+				this.id = id;
 			}
 		
 	    public Long getRoleId() {
