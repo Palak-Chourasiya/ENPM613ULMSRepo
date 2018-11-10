@@ -26,3 +26,15 @@ git push
 
 When you need to pull changes from the remote repository made by team members perform this command:
 git pull https://github.com/Palak-Chourasiya/ENPM613ULMSRepo.git
+
+
+Spring & Angular JS Resources:
+http://websystique.com/spring-boot/spring-boot-angularjs-spring-data-jpa-crud-app-example/
+https://github.com/jhades/spring-mvc-angularjs-sample-app
+https://spring.io/guides/gs/messaging-jms/
+https://stackoverflow.com/questions/18171127/messaging-between-users-in-spring-mvc-app
+https://github.com/eugenp/tutorials
+https://www.baeldung.com/spring-response-entity
+https://blog.angular-university.io/developing-a-modern-java-8-web-app-with-spring-mvc-and-angularjs/
+https://www.baeldung.com/spring-mvc-form-tutorial
+https://docs.angularjs.org/tutorial/step_03

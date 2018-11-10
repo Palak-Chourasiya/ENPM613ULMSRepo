@@ -1,12 +1,17 @@
 angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $urlRouterProvider) {
-
-  // State to view grooming
+  // State to view hello
+  $stateProvider.state('recipes', {
+	url: '/hello',
+	component: 'hello'
+  })
+	
+  // State to view recipes
   $stateProvider.state('recipes', {
     url: '/recipes',
     component: 'recipes'
   })
 
-  // State to view sprint planning
+  // State to view courses
   $stateProvider.state('courses', {
     url: '/courses',
     component: 'courses'
