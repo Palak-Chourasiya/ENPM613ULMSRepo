@@ -1,0 +1,219 @@
+
+<html>
+  <head>  
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.js"></script>
+  <title>AngularJS $http Rest example</title>  
+  <script type="text/javascript">
+            var app = angular.module("RecipeManagement", []);
+         
+            //Controller Part
+            app.controller("RecipeController", function($scope, $http) {
+         
+               
+                $scope.recipes = [];
+                $scope.recipeForm = {
+                    id : -1,
+                    accountId : -1,
+                    courseId : -1,
+                    title: ""
+                };
+         
+                //Now load the data from server
+                _refreshRecipeData();
+         
+                //HTTP POST/PUT methods for add/edit country 
+                // with the help of id, we are going to find out whether it is put or post operation
+                
+                $scope.submitRecipe = function() {
+         
+                    var method = "";
+                    var url = "";
+                    if ($scope.recipeForm.id == -1) {
+                        //Id is absent in form data, it is create new recipe operation
+                        method = "POST";
+                        url = 'recipes/add';
+                    } else {
+                        //Id is present in form data, it is edit country operation
+                        method = "PUT";
+                        url = 'recipes/' + recipe.id;
+                    }
+         
+                    $http({
+                        method : method,
+                        url : url,
+                        data : angular.toJson($scope.recipeForm),
+                        headers : {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then( _success, _error );
+                };
+         
+                //HTTP DELETE- delete country by Id
+                $scope.deleteCountry = function(recipe) {
+                    $http({
+                        method : 'DELETE',
+                        url : 'recipes/' + country.id
+                    }).then(_success, _error);
+                };
+ 
+             // In case of edit, populate form fields and assign form.id with recipe id
+                $scope.editCountry = function(recipe) {
+                    $scope.recipeForm.id = recipe.id;
+                    $scope.recipeForm.accountId = recipe.accountId;
+                    $scope.recipeForm.courseId = recipe.courseId;
+                    $scope.recipeForm.title = recipe.title;
+                };
+         
+                /* Private Methods */
+                //HTTP GET- get all countries collection
+                function _refreshRecipeData() {
+                	$http({
+                        method : 'GET',
+                        url : 'http://localhost:8080/recipes/1'
+                    }).then(function successCallback(response) {
+                        $scope.recipes.push(response.data);
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
+                    $http({
+                        method : 'GET',
+                        url : 'http://localhost:8080/recipes/'
+                    }).then(function successCallback(response) {
+                        $scope.recipes = response.data;
+                    }, function errorCallback(response) {
+                        console.log(response.statusText);
+                    });
+                }
+         
+                function _success(response) {
+                    _refreshCountryData();
+                    _clearFormData()
+                }
+         
+                function _error(response) {
+                    console.log(response.statusText);
+                }
+         
+                //Clear the form
+                function _clearFormData() {
+                    $scope.recipeForm.id = -1;
+                    $scope.recipeForm.accountId = -1;
+                    $scope.recipeForm.courseId = -1;
+                    $scope.recipeForm.title = "";
+                
+                };
+            });
+  </script>
+  <style>
+           
+.blue-button{
+	background: #25A6E1;
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#25A6E1',endColorstr='#188BC0',GradientType=0);
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #1A87B9
+}     
+
+.red-button{
+	background: #CD5C5C;
+
+	padding:3px 5px;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:4px;
+	border:1px solid #CD5C5C
+}      
+
+table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+   width: 50%;
+}
+
+caption {
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+th {
+  background: SteelBlue;
+  color: white;
+}
+
+
+tbody tr:nth-child(even) {
+  background: WhiteSmoke;
+}
+
+tfoot {
+  background: SeaGreen;
+  color: white;
+  text-align: right;
+}
+
+tfoot tr th:last-child {
+  font-family: monospace;
+}
+
+td,th{
+    border: 1px solid gray;
+    width: 25%;
+    text-align: left;
+    padding: 5px 10px;
+    text-align: center;
+}    
+  </style>
+  </head>
+  <body ng-app="RecipeManagement" ng-controller="RecipeController">
+       <h1>
+         AngularJS Restful web services example using $http
+      </h1> 
+      <form ng-submit="submitRecipe()">
+          <table>
+              <tr>
+                  <th colspan="2">Add/Edit recipe</th>
+               </tr>
+              <tr>
+                  <td>Recipe</td>
+                  <td><input type="text" ng-model="recipeForm.title" /></td>
+              </tr>
+              <tr>
+                  <td>Account Id</td>
+                  <td><input type="text" ng-model="recipeForm.accountId"  /></td>
+              </tr>
+              <tr>
+                  <td>Course Id</td>
+                  <td><input type="text" ng-model="recipeForm.courseId"  /></td>
+              </tr>
+              <tr>
+                  <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
+              </tr>
+          </table>
+      </form>
+      <table>
+          <tr>
+              <th>Title</th>
+              <th>Account Id</th>
+              <th>Course Id</th>
+              <th>Operations</th>
+          </tr>
+          <tr ng-repeat="recipe in recipes">
+	          <td>{{ recipe.title }}</td>
+	          <td>{{ recipe.accountId }}</td>  
+              <td>{{ recipe.courseId }}</td>
+              <td><a ng-click="editRecipe(recipe)" class="blue-button">Edit</a> | <a ng-click="deleteRecipe(recipe)" class="red-button">Delete</a></td>
+          </tr>
+      </table>
+  </body>
+</html>
