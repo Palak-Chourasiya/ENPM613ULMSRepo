@@ -6,46 +6,63 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="message")
-
+@Table(name = "message")
 public class messageEntity {
 	
-    @Id @GeneratedValue private long id;
-
-    
-    @NotEmpty
-    @Column(name="user_name", nullable=false)
-    private String user_name;
-    
-    private boolean read;
-    private String from;
-    private String to;
-	public boolean isRead() {
-		return read;
-	}
-	public void setRead(boolean read) {
-		this.read = read;
-	}
-	public String getFrom() {
-		return from;
-	}
-	public void setFrom(String from) {
-		this.from = from;
-	}
-	public String getTo() {
-		return to;
-	}
-	public void setTo(String to) {
-		this.to = to;
-	}
-    
-    
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	
+	@Column(name="user_name")
+	private String userName;
+	private boolean isRead;
+	
+	@Column(name="from")
+	private String sender;
+	private String message;
+	
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	@Override
+	public String toString() {
+		return "messageEntity [id=" + id + ", userName=" + userName + ", isRead=" + isRead + ", sender=" + sender
+				+ ", message=" + message + "]";
+	}
+	public String getSender() {
+		return sender;
+	}
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+	public boolean isRead() {
+		return isRead;
+	}
+	public void setRead(boolean isRead) {
+		this.isRead = isRead;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	
+		
 }
