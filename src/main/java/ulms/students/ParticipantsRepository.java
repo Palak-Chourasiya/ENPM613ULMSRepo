@@ -1,14 +1,13 @@
 package ulms.students;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@Repository
+@Repository("repo1")
 @Transactional(readOnly = true)
-public interface AccountRepository extends JpaRepository<AccountEntity,Long>{
-	
+public interface ParticipantsRepository extends JpaRepository<ParticipantsEntity,Long> {
 
-	 
 
 }

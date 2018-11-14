@@ -41,3 +41,17 @@ https://www.baeldung.com/spring-response-entity
 https://blog.angular-university.io/developing-a-modern-java-8-web-app-with-spring-mvc-and-angularjs/
 https://www.baeldung.com/spring-mvc-form-tutorial
 https://docs.angularjs.org/tutorial/step_03
+
+To create a new git branch
+- open git bash in the git repository folder
+- git checkout -b <your-branch-name>
+- git merge <origin-branch-name>
+example: git merge master
+- git add *
+- git commit -m "your commit message"
+- git push --set-upstream origin <your-branch-name>
+
+#To switch between branch, use git checkout <branch name>. Before merge with other branches, remember to pull the latest update first before merging to reduce conflicted.
+  - git pull
+  - get merge <origin-branch-name>
+
