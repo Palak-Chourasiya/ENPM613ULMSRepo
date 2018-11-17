@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ulms.recipes.exceptions.RecipeNotFoundException;
+import ulms.recipes.models.IngredientRepository;
 import ulms.recipes.models.RecipeEntity;
 import ulms.recipes.models.RecipeRepository;
 
@@ -24,10 +25,12 @@ public class RecipeService {
     public static final String CACHE_TTL = "${cache.recipe.timetolive:60}";
 
     private final RecipeRepository recipeRepository;
+    private final IngredientRepository ingredientRepository;
 
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, IngredientRepository ingredientRepository) {
         this.recipeRepository = recipeRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     // Property methods
@@ -39,6 +42,10 @@ public class RecipeService {
         if (!recipe.isPresent()) {
             throw new RecipeNotFoundException(recipeId);
         }
+        
+        RecipeEntity entity = recipe.get();
+        //entity.setIngredients(this.ingredientRepository.findRecipeIngredients(recipeId));
+        
         return recipe.get();
     }
     
