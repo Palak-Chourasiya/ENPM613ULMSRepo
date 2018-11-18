@@ -67,8 +67,15 @@ public class RecipeEntity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+	public Set<RecipeIngredientsEntity> getRecipeIngredients() {
+		return this.recipeIngredients;
+	}
+
+	public Set<RecipeStepsEntity> getRecipeSteps() {
+		return this.recipeSteps;
+	}
 	
 	/*** TODO: ADD RELATIONSHIP TO THE LINKED ACCOUNT ***/
 	/*** TODO: ADD RELATIONSHIP TO THE LINKED COURSE ***/
-	/*** TODO: ADD RELATIONSHIP TO THE LINKED RECIPE STEPS ***/
 }

@@ -40,4 +40,22 @@ public class RecipeStepsEntity {
 	@ManyToOne
 	@JoinColumn(name="recipe_id", insertable=false, updatable=false, referencedColumnName="id")
 	private RecipeEntity recipe;
+	
+	public Long getId() {
+		return this.id;
+	}
+	
+	public Long getRecipeId() {
+		return this.recipeId;
+	}
+	
+	public String getStepDetails() {
+		return this.stepDetails;
+	}
+	
+	/*
+	public String getImage() {
+		// TODO: CONVERT BYTE ARRAY TO BASE64 BINARY STRING
+	}
+	*/
 }

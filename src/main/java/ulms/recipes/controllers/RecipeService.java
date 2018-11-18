@@ -2,11 +2,13 @@ package ulms.recipes.controllers;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ulms.recipes.exceptions.RecipeNotFoundException;
 import ulms.recipes.models.IngredientRepository;
+import ulms.recipes.models.RecipeDTO;
 import ulms.recipes.models.RecipeEntity;
 import ulms.recipes.models.RecipeRepository;
 
@@ -44,7 +46,8 @@ public class RecipeService {
         }
         
         RecipeEntity entity = recipe.get();
-        //entity.setIngredients(this.ingredientRepository.findRecipeIngredients(recipeId));
+        RecipeDTO dto = new RecipeDTO();
+        BeanUtils.copyProperties(entity, dto);
         
         return recipe.get();
     }

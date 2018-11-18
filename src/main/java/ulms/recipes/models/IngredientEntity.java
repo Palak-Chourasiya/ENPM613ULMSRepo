@@ -54,4 +54,8 @@ public class IngredientEntity {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public Set<RecipeIngredientsEntity> getIngredientRecipes() {
+		return this.ingredientRecipes;
+	}
 }
