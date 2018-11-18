@@ -1,3 +1,20 @@
 .header {
-	background-color: red;
+	color: #556C1F;
+	background-color: #B2C49A;
+	text-align: center;
+	font-size: 2em;
+	font-weight: bold;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.btn-group {
+	float: right;
+}
+button > .glyphicon-menu-hamburger {
+	vertical-align: middle;
 }

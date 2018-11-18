@@ -1,7 +1,6 @@
 angular.module('ULMS')
-  .component('baselayout', {
-	transclude: true,
-    templateUrl: 'components/baselayout/baselayouttemplate.html',
+  .component('logo', {
+    templateUrl: 'components/logo/logotemplate.html',
     bindings: {},
 
     controller: function() {
