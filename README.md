@@ -55,3 +55,7 @@ example: git merge master
   - git pull
   - get merge <origin-branch-name>
 
+#To build the war file using gradle use the following command in GitBash command line in windows or regular command line in mac at your project root directory:
+  - gradle war
+  
+#The project war file will be located under the root project directory in build/libs/ENPM613ULMSRepo-#.#.#-SNAPSHOT.war
