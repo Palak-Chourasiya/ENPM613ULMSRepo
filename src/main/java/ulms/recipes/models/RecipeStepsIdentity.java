@@ -2,22 +2,17 @@ package ulms.recipes.models;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
+public class RecipeStepsIdentity implements Serializable {
 
-@Embeddable
-public class RecipeStepIdentity implements Serializable {
-	@NotNull
     private Long id;
 
-    @NotNull
     private Long recipeId;
 
-    public RecipeStepIdentity() {
+    public RecipeStepsIdentity() {
 
     }
 
-    public RecipeStepIdentity(Long id, Long recipeId) {
+    public RecipeStepsIdentity(Long id, Long recipeId) {
         this.id = id;
         this.recipeId = recipeId;
     }
@@ -47,7 +42,7 @@ public class RecipeStepIdentity implements Serializable {
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
 		
-		RecipeStepIdentity that = (RecipeStepIdentity) obj;
+		RecipeStepsIdentity that = (RecipeStepsIdentity) obj;
 		
 		if (this.id == null) {
 			if (that.id != null) return false;
