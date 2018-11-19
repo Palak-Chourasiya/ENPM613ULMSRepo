@@ -1,4 +1,5 @@
-package ulms.messages;
+   package messages;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -10,18 +10,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   cursor: pointer;
   opacity: 0.8;
 
-  width: 100px;
-}
-.column1{
-	float: left;
-	width: 100px
-	background-color: #E8F6F7;
-}
-.column2{
-	float: right;
-	width: 100% - 100px;
-	margin-left: 30px;
-	background-color: #ffABCD
+  width: 280px;
 }
 
 /* The popup form - hidden by default */
