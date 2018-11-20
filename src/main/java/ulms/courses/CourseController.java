@@ -7,18 +7,27 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import ulms.login.AccountEntity;
+import ulms.students.StudentEnrollmentService;
 
 @Controller
 @RequestMapping(path="/courses")
 public class CourseController {
 
+	@Autowired
+	CourseService courseService;
+	
     @GetMapping("/")
     public @ResponseBody String index() {
     	/***
@@ -60,30 +69,12 @@ public class CourseController {
         return "TEST";
     }
 
-    /*
-    @PostMapping("/add")
-    public ResponseEntity<?> createCourse(@RequestBody Course course, org.springframework.web.util.UriComponentsBuilder uriBuilder) {
-    	HttpHeaders headers = new HttpHeaders();
-    	headers.setLocation(uriBuilder.path("recipes/{id}").buildAndExpand(course.getId()).toUri());
-    	
-    	return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    @GetMapping("/course/{course_id}")
+    public ResponseEntity<?> getCourse(@PathVariable("course_id") long course_id) {
+        CourseEntity course = courseService.getCourse(course_id);
+    	if(course==null) {
+    		return new ResponseEntity(new RuntimeException("Course with id not found"), HttpStatus.NOT_FOUND);
+    	}
+    	return new ResponseEntity<CourseEntity> (course,HttpStatus.OK);
     }
-    
-    @PutMapping
-    @RequestMapping(value = "/user/", method = RequestMethod.POST)
-	public ResponseEntity<?> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
-		logger.info("Creating User : {}", user);
-
-		if (userService.isUserExist(user)) {
-			logger.error("Unable to create. A User with name {} already exist", user.getName());
-			return new ResponseEntity(new CustomErrorType("Unable to create. A User with name " + 
-			user.getName() + " already exist."),HttpStatus.CONFLICT);
-		}
-		userService.saveUser(user);
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri());
-		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-	}
-	*/
 }

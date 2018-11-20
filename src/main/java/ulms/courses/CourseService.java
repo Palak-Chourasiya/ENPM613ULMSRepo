@@ -38,7 +38,7 @@ public class CourseService {
 
     // Query methods
 
-    public CourseEntity getRecipe(Long courseId) {
+    public CourseEntity getCourse(Long courseId) {
         Optional<CourseEntity> course = courseRepository.findById(courseId);
         if (!course.isPresent()) {
             throw new CourseNotFoundException(courseId);
