@@ -1,31 +1,13 @@
 <title>ULMS Recipes</title>
 <link href="components/recipes/recipe.css" rel="stylesheet" type="text/css">
   <baselayout>
-      <h1>
-         AngularJS Restful web services example using $http
-      </h1>
-      <form ng-submit="submitRecipe()">
-          <table>
-              <tr>
-                  <th colspan="2">Add/Edit recipe</th>
-               </tr>
-              <tr>
-                  <td>Recipe</td>
-                  <td><input type="text" ng-model="recipeForm.title" /></td>
-              </tr>
-              <tr>
-                  <td>Account Id</td>
-                  <td><input type="text" ng-model="recipeForm.accountId"  /></td>
-              </tr>
-              <tr>
-                  <td>Course Id</td>
-                  <td><input type="text" ng-model="recipeForm.courseId"  /></td>
-              </tr>
-              <tr>
-                  <td colspan="2"><input type="submit" value="Submit" class="blue-button" /></td>
-              </tr>
-          </table>
-      </form>
+      <div class="list-group">
+	    <a ng-repeat="recipe in recipes" href="#" class="list-group-item">
+	      <h4 class="list-group-item-heading">{{recipe.title}}</h4>
+	      <p class="list-group-item-text">{{recipe.accountId}} HERE {{recipe.courseId}}</p>
+	      <p>{{recipe.overview}}</p>
+	    </a>
+	  </div>
       <table>
           <tr>
               <th>Title</th>

@@ -28,7 +28,12 @@ public class RecipeEntity {
 	private Long courseId;
 	
 	@NotNull
+	@Column(name="title", nullable=false)
 	private String title;
+	
+	@NotNull
+	@Column(name="overview", nullable=false)
+	private String overview;
 	
 	@OneToMany(mappedBy = "recipe")
     private Set<RecipeIngredientsEntity> recipeIngredients;
@@ -67,7 +72,15 @@ public class RecipeEntity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public String getOverview() {
+		return this.overview;
+	}
 
+	public void setOverview(String overview) {
+		this.overview = overview;
+	}
+	
 	public Set<RecipeIngredientsEntity> getRecipeIngredients() {
 		return this.recipeIngredients;
 	}

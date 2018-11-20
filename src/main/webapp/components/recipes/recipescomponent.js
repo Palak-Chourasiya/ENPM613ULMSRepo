@@ -16,7 +16,8 @@ angular.module('ULMS')
           id : -1,
           accountId : -1,
           courseId : -1,
-          title: ""
+          title: "",
+          overview: ""
       };
 
       //Now load the data from server
@@ -63,12 +64,13 @@ angular.module('ULMS')
           $scope.recipeForm.accountId = recipe.accountId;
           $scope.recipeForm.courseId = recipe.courseId;
           $scope.recipeForm.title = recipe.title;
+          $scope.recipeForm.overview = recipe.overview;
       };
 
       /* Private Methods */
       //HTTP GET- get all countries collection
       function _refreshRecipeData() {
-      	$http({
+      	  $http({
               method : 'GET',
               url : 'http://localhost:8080/recipes/1'
           }).then(function successCallback(response) {
@@ -101,6 +103,7 @@ angular.module('ULMS')
           $scope.recipeForm.accountId = -1;
           $scope.recipeForm.courseId = -1;
           $scope.recipeForm.title = "";
+          $scope.recipeForm.overview = "";
       
       };
 
