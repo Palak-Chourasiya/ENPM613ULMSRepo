@@ -17,9 +17,24 @@
 }
 
 .col {
+	padding-right: 0px;
+	width: 20%;
+}
+
+.col {
   -ms-flex-preferred-size: 0;
   flex-basis: 0;
   -ms-flex-positive: 1;
   flex-grow: 1;
   max-width: 100%;
+}
+
+.logo-hr {
+	margin-top: 0px;
+	border-top: 2px solid #eee;
+}
+
+.nav-tabs {
+	border-bottom: 0px;
+	margin-left: 5px;
 }
