@@ -1,4 +1,4 @@
-   package messages;
+package messages;
 
 
 import javax.persistence.Column;
