@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "message")
@@ -19,11 +21,36 @@ public class messageEntity {
 	
 	@Column(name="user_name")
 	private String userName;
+	
+	@Column(name="isRead")
 	private boolean isRead;
 	
 	@Column(name="from")
 	private String sender;
+	
+	@Column(name="message")
 	private String message;
+	
+	@Column(name="subject")
+	private String subject;
+	
+	@Column(name="send_date")
+	private DateTimeFormat sendDate;
+	
+	
+	
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public DateTimeFormat getSendDate() {
+		return sendDate;
+	}
+	public void setSendDate(DateTimeFormat sendDate) {
+		this.sendDate = sendDate;
+	}
 	
 	
 	public long getId() {
@@ -39,6 +66,8 @@ public class messageEntity {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	
 	
 	@Override
 	public String toString() {

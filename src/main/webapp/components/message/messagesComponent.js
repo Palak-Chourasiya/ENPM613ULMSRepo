@@ -11,9 +11,9 @@ angular.module('ULMS')
         
       };
       
-      $scope.receiver = [];
-      $scope.subject = [];
-      $scope.message = [];
+      $scope.receiver = "";
+      $scope.subject = "";
+      $scope.message = "";
 
 
       //Now load the data from server
@@ -26,15 +26,11 @@ angular.module('ULMS')
 
           var method = "";
           var url = "";
-          if ($scope.message.receiver == []) {
+          if ($scope.message.receiver != []) {
               //Id is absent in form data, it is create new recipe operation
               method = "POST";
-              url = 'recipes/add';
-          } else {
-              //Id is present in form data, it is edit country operation
-              method = "PUT";
-              url = 'recipes/' + recipe.id;
-          }
+              url = 'message/send';
+          } 
 
           $http({
               method : method,
