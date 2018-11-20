@@ -1,5 +1,6 @@
 package ulms.recipes.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -52,8 +53,8 @@ public class RecipeService {
         return recipe.get();
     }
     
-    public Page<RecipeEntity> getAllRecipes(Pageable pageRequest) {
-        return recipeRepository.findAll(pageRequest);
+    public List<RecipeEntity> getAllRecipes() {
+        return recipeRepository.findAll();
     }
     
     public void addRecipe(RecipeEntity newRecipe) {

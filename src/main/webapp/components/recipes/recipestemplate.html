@@ -1,25 +1,11 @@
 <title>ULMS Recipes</title>
-<link href="components/recipes/recipe.css" rel="stylesheet" type="text/css">
+<link href="components/recipes/recipes.css" rel="stylesheet" type="text/css">
   <baselayout>
+      <h2>Recipes</h2>
       <div class="list-group">
-	    <a ng-repeat="recipe in recipes" href="#" class="list-group-item">
+	    <a ng-repeat="recipe in recipes" ui-sref="recipe({id: '{{recipe.id}}'})" class="list-group-item">
 	      <h4 class="list-group-item-heading">{{recipe.title}}</h4>
-	      <p class="list-group-item-text">{{recipe.accountId}} HERE {{recipe.courseId}}</p>
 	      <p>{{recipe.overview}}</p>
 	    </a>
 	  </div>
-      <table>
-          <tr>
-              <th>Title</th>
-              <th>Account Id</th>
-              <th>Course Id</th>
-              <th>Operations</th>
-          </tr>
-          <tr ng-repeat="recipe in recipes">
-	          <td>{{ recipe.title }}</td>
-	          <td>{{ recipe.accountId }}</td>  
-              <td>{{ recipe.courseId }}</td>
-              <td><a ng-click="editRecipe(recipe)" class="blue-button">Edit</a> | <a ng-click="deleteRecipe(recipe)" class="red-button">Delete</a></td>
-          </tr>
-      </table>
   </baselayout>
