@@ -1,8 +1,9 @@
-package messages;
+package ulms.messages;
 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,11 +23,8 @@ public class messageEntity {
 	@Column(name="user_name")
 	private String userName;
 	
-	@Column(name="isRead")
-	private boolean isRead;
-	
-	@Column(name="from")
-	private String sender;
+	@Column(name="deleted")
+	private boolean deleted;
 	
 	@Column(name="message")
 	private String message;
@@ -37,7 +35,7 @@ public class messageEntity {
 	@Column(name="send_date")
 	private DateTimeFormat sendDate;
 	
-	
+
 	
 	public String getSubject() {
 		return subject;
@@ -67,24 +65,11 @@ public class messageEntity {
 		this.message = message;
 	}
 	
-	
-	
-	@Override
-	public String toString() {
-		return "messageEntity [id=" + id + ", userName=" + userName + ", isRead=" + isRead + ", sender=" + sender
-				+ ", message=" + message + "]";
-	}
-	public String getSender() {
-		return sender;
-	}
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
 	public boolean isRead() {
-		return isRead;
+		return deleted;
 	}
 	public void setRead(boolean isRead) {
-		this.isRead = isRead;
+		this.deleted = isRead;
 	}
 	public String getUserName() {
 		return userName;

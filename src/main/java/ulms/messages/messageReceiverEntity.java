@@ -2,6 +2,9 @@ package messages;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,9 @@ public class messageReceiverEntity {
 	@Column(name="message_flags")
 	private messageFlag message_flags;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id")
+	private messageEntity message;
 	
 	public messageFlag getMessage_flags() {
 		return message_flags;
