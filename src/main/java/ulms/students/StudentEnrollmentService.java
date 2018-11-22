@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import ulms.login.AccountEntity;
-import ulms.login.AccountRepository;
+import ulms.login.models.AccountEntity;
+import ulms.login.models.AccountRepository;
 
 
 @Service
@@ -41,7 +41,7 @@ public class StudentEnrollmentService {
 	     * @return List of Students with their account details
 	     */
 	  public Iterable<AccountEntity> getStudentList() {
-		  List<AccountEntity> participantList =  accountRepository.findAll();
+		  Iterable<AccountEntity> participantList =  accountRepository.findAll();
 		  
 		  return filterStudents(participantList);
 	    }
@@ -51,7 +51,7 @@ public class StudentEnrollmentService {
 	     * @return List of Instructors with their account details
 	     */
 	  public Iterable<AccountEntity> getInstructorList() {
-		  List<AccountEntity> participantList =  accountRepository.findAll();
+		  Iterable<AccountEntity> participantList =  accountRepository.findAll();
 		  
 		  return filterInstructors(participantList);
 	    }
@@ -62,15 +62,16 @@ public class StudentEnrollmentService {
 	   * @param participantList
 	   * @return List of Student accounts
 	   */
-	  private List<AccountEntity> filterStudents( List<AccountEntity> participantList){
-		 List<AccountEntity> resultList =new ArrayList<AccountEntity>();	  
+	  private Iterable<AccountEntity> filterStudents( Iterable<AccountEntity> participantList){
+		  List<AccountEntity> resultList =new ArrayList<AccountEntity>();	  
 		  int roleID =2;
 		  for (AccountEntity oneStudent: participantList) {
 			  if(roleID==oneStudent.getRoleId()) {
 				  resultList.add(oneStudent);
 			  }
 		  }		  
-	        return resultList;
+	      
+		  return resultList;
 	  }
 	  
 	  /**
@@ -78,23 +79,24 @@ public class StudentEnrollmentService {
 	   * @param participantList
 	   * @return List of Instructor accounts
 	   */
-	  private List<AccountEntity> filterInstructors( List<AccountEntity> participantList){
-		 List<AccountEntity> resultList =new ArrayList<AccountEntity>();	  
+	  private Iterable<AccountEntity> filterInstructors( Iterable<AccountEntity> participantList){
+		  List<AccountEntity> resultList = new ArrayList<AccountEntity>();	  
 		  int roleID =1;
 		  for (AccountEntity oneStudent: participantList) {
 			  if(roleID==oneStudent.getRoleId()) {
 				  resultList.add(oneStudent);
 			  }
 		  }		  
-	        return resultList;
+	      
+		  return resultList;
 	  }
 	  
 	  /**
 	   * @param course_id
 	   * @return All the Students will account details for a course based on course_id
 	   */
-	  public List<AccountEntity> getAllParticipantsInCourse(Long course_id) {
-		  List<ParticipantsEntity> resultList =participantsRepository.findAll();
+	  public Iterable<AccountEntity> getAllParticipantsInCourse(Long course_id) {
+		  Iterable<ParticipantsEntity> resultList =participantsRepository.findAll();
 		  List<ParticipantsEntity> participants= new ArrayList<ParticipantsEntity>();
 		  for (ParticipantsEntity oneParticipant: resultList) {
 			  if(course_id==oneParticipant.getcourse_id()) {
@@ -103,17 +105,15 @@ public class StudentEnrollmentService {
 		  }		  
 		  List<AccountEntity> oneCourseParticipants= new ArrayList<AccountEntity>();
 		  for (ParticipantsEntity oneParticipant: participants) {
-		  oneCourseParticipants.add(getStudentDetails(oneParticipant.getAccount_id()));
+			  oneCourseParticipants.add(getStudentDetails(oneParticipant.getAccount_id()));
 		  }  
 		  
 		  return filterStudents(oneCourseParticipants);
-		   	    }
-	  
-	  public List<ParticipantsEntity> getAllParticipantsInCourse() {
-	  return participantsRepository.findAll();
 	  }
-
-
+	  
+	  public Iterable<ParticipantsEntity> getAllParticipantsInCourse() {
+		  return participantsRepository.findAll();
+	  }
 }
 
 

@@ -1,6 +1,5 @@
 package ulms.recipes.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -53,7 +52,7 @@ public class RecipeService {
         return recipe.get();
     }
     
-    public List<RecipeEntity> getAllRecipes() {
+    public Iterable<RecipeEntity> getAllRecipes() {
         return recipeRepository.findAll();
     }
     

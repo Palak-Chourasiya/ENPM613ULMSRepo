@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import ulms.login.AccountEntity;
+import ulms.login.models.AccountEntity;
 import ulms.recipes.models.RecipeEntity;
 import ulms.recipes.models.RecipeIngredientsEntity;
 

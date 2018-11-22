@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ulms.login.AccountEntity;
+import ulms.login.models.AccountEntity;
 
 @Controller
-@RequestMapping(path = "/CourseRosterABC")
+@RequestMapping(path = "/CourseRoster")
 public class StudentController {
 
 	@Autowired

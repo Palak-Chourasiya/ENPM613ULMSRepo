@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import ulms.login.AccountEntity;
+import ulms.login.models.AccountEntity;
 
 @Entity
 @Table(name = "MessageReceivers")
