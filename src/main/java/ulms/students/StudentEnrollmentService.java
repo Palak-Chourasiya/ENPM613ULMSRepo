@@ -107,12 +107,15 @@ public class StudentEnrollmentService {
 		  for (ParticipantsEntity oneParticipant: participants) {
 			  oneCourseParticipants.add(getStudentDetails(oneParticipant.getAccount_id()));
 		  }  
-		  
 		  return filterStudents(oneCourseParticipants);
 	  }
 	  
 	  public Iterable<ParticipantsEntity> getAllParticipantsInCourse() {
 		  return participantsRepository.findAll();
+		   	    }
+	  
+	  public List<ParticipantsEntity> getAllParticipants() {
+	  return participantsRepository.findAll();
 	  }
 }
 
