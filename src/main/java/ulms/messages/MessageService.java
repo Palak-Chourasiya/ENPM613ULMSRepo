@@ -13,7 +13,6 @@ public class MessageService {
 	public static final Class CACHE_TYPE = messageEntity.class;
 	public static final String CACHE_TTL = "${cache.recipe.timetolive:60}";
 	 
-	 
 	private final messageRepository messRepository;
 	
 	@Autowired

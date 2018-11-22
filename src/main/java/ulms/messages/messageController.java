@@ -27,45 +27,38 @@ public class messageController {
 	MessageService messService;
 	
 	@GetMapping("/")
-    public @ResponseBody String index() {
-    	
-        return "TEST";
-    }
+	public @ResponseBody String index() {
+		return "TEST";
+	}
 	
 	
 	@RequestMapping(value = "/message/add", method = RequestMethod.GET)
-	public @ResponseBody String addMessage(@RequestParam("user_name") String user_name
-			,@RequestParam("subject") String subject, @RequestParam("message") String message){
-		
-	// assign parameters to taskDocumentEntity by constructor args or setters
-	        messageEntity messageData = new messageEntity();
-	        messageData.setMessage(message);
-	        messageData.setUserName(user_name);
-	        messageData.setSubject(subject);
-	        messageData.setSendDate(new Date());
-	        messageData.setId(6);
-	        //messService.addMessage(messageData);
-	        return messageData.toString();
-	    }
+	public @ResponseBody String addMessage(@RequestParam("user_name") String user_name,
+			                               @RequestParam("subject") String subject,
+			                               @RequestParam("message") String message) {
+		// assign parameters to taskDocumentEntity by constructor args or setters
+	    messageEntity messageData = new messageEntity();
+	    messageData.setMessage(message);
+	    messageData.setUserName(user_name);
+	    messageData.setSubject(subject);
+	    messageData.setSendDate(new Date());
+	    //messageData.setId(6);
+	    messService.addMessage(messageData);
+	    return messageData.toString();
+	}
 	
-	
-
-	 @GetMapping("/delete/{id}")
-	    public @ResponseBody String deleteMessage(@PathVariable("id") long messageId) {
+	@GetMapping("/message/delete/{id}")
+	public @ResponseBody String deleteMessage(@PathVariable("id") long messageId) {
 		messService.deleteMessage(messageId);
 		return "Success";
-		   
-	 }
+	}
 	 
-	 @GetMapping("/{id}")
-	    public ResponseEntity<?> getMessageDetails(@PathVariable("id") long messageId) {
+	@GetMapping("/message/{id}")
+	public ResponseEntity<?> getMessageDetails(@PathVariable("id") long messageId) {
 		messageEntity messagetData = messService.getMessage(messageId);
 		if(messagetData==null) {
 	     return new ResponseEntity(new RuntimeException("Message with id "+messageId+" not found"), HttpStatus.NOT_FOUND);
 		}
-	     return new ResponseEntity<messageEntity>(messagetData, HttpStatus.OK);
-
-	 }
-	
-
+	    return new ResponseEntity<messageEntity>(messagetData, HttpStatus.OK);
+	}
 }

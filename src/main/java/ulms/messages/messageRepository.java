@@ -9,5 +9,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface messageRepository extends JpaRepository<messageEntity, Long> {
 
-
 }
