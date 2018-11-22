@@ -1,21 +1,37 @@
 package ulms.messages;
 
 
+import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import ulms.login.AccountEntity;
+import ulms.recipes.models.RecipeEntity;
+import ulms.recipes.models.RecipeIngredientsEntity;
 
 
 @Entity
 @Table(name = "message")
 public class messageEntity {
 	
+	@Override
+	public String toString() {
+		return "messageEntity [id=" + id + ", userName=" + userName + ", deleted=" + deleted + ", message=" + message
+				+ ", subject=" + subject + ", sendDate=" + sendDate + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -33,9 +49,16 @@ public class messageEntity {
 	private String subject;
 	
 	@Column(name="send_date")
-	private DateTimeFormat sendDate;
+	private Date sendDate;
 	
 
+	@OneToMany(mappedBy = "message_id")
+	private Set<messageReceiverEntity> messageReceiver;
+	
+//	@ManyToOne
+//    @JoinColumn(name="user_name", insertable=false, updatable=false, referencedColumnName="user_name")
+//    private AccountEntity account;
+	
 	
 	public String getSubject() {
 		return subject;
@@ -43,10 +66,10 @@ public class messageEntity {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public DateTimeFormat getSendDate() {
+	public Date getSendDate() {
 		return sendDate;
 	}
-	public void setSendDate(DateTimeFormat sendDate) {
+	public void setSendDate(Date sendDate) {
 		this.sendDate = sendDate;
 	}
 	
@@ -65,17 +88,25 @@ public class messageEntity {
 		this.message = message;
 	}
 	
-	public boolean isRead() {
+	public boolean getDeleted() {
 		return deleted;
 	}
-	public void setRead(boolean isRead) {
-		this.deleted = isRead;
+	public void setDeleted(boolean isDeleted) {
+		this.deleted = isDeleted;
 	}
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	public messageEntity()
+	{
+		this.deleted = false;
+		this.userName = "";
+		this.subject = "";
+		this.message = "";
 	}
 	
 	

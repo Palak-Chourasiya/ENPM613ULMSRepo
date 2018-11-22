@@ -1,6 +1,9 @@
 package ulms.messages;
 
 
+import java.util.Date;
+
+import org.hibernate.annotations.common.util.impl.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ulms.messages.messageEntity;
 
@@ -27,15 +32,31 @@ public class messageController {
         return "TEST";
     }
 	
-	/*
-	@PostMapping("/add")
-	public ResponseEntity<?> sendMessage(@RequestBody messageEntity message, org.springframework.web.util.UriComponentsBuilder uriBuilder)
-	{
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uriBuilder.path("message/{id}").buildAndExpand(message.getId()).toUri());
-		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-	}
 	
+	@RequestMapping(value = "/message/add", method = RequestMethod.GET)
+	public @ResponseBody String addMessage(@RequestParam("user_name") String user_name
+			,@RequestParam("subject") String subject, @RequestParam("message") String message){
+		
+	// assign parameters to taskDocumentEntity by constructor args or setters
+	        messageEntity messageData = new messageEntity();
+	        messageData.setMessage(message);
+	        messageData.setUserName(user_name);
+	        messageData.setSubject(subject);
+	        messageData.setSendDate(new Date());
+	        messageData.setId(6);
+	        //messService.addMessage(messageData);
+	        return messageData.toString();
+	    }
+	
+	
+
+	 @GetMapping("/delete/{id}")
+	    public @ResponseBody String deleteMessage(@PathVariable("id") long messageId) {
+		messService.deleteMessage(messageId);
+		return "Success";
+		   
+	 }
+	 
 	 @GetMapping("/{id}")
 	    public ResponseEntity<?> getMessageDetails(@PathVariable("id") long messageId) {
 		messageEntity messagetData = messService.getMessage(messageId);
@@ -45,7 +66,6 @@ public class messageController {
 	     return new ResponseEntity<messageEntity>(messagetData, HttpStatus.OK);
 
 	 }
-	 */
 	
 
 }
