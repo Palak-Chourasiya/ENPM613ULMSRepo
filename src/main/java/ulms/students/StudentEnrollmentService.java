@@ -106,10 +106,10 @@ public class StudentEnrollmentService {
 		  oneCourseParticipants.add(getStudentDetails(oneParticipant.getAccount_id()));
 		  }  
 		  
-		  return filterStudents(oneCourseParticipants);
+		 return filterStudents(oneCourseParticipants);
 		   	    }
 	  
-	  public List<ParticipantsEntity> getAllParticipantsInCourse() {
+	  public List<ParticipantsEntity> getAllParticipants() {
 	  return participantsRepository.findAll();
 	  }
 

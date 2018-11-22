@@ -1,13 +1,19 @@
 package ulms.login;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import ulms.recipes.models.RecipeIngredientsEntity;
+import ulms.students.ParticipantsEntity;
 
 
 
@@ -41,7 +47,11 @@ public class AccountEntity {
 	    //@Column(name="Email", nullable=false)
 	    private String email;
 	    
-	    public Long getId() {
+	    @OneToMany(mappedBy = "account")
+	    private Set<ParticipantsEntity> participantEntity;
+	    
+
+		public Long getId() {
 				return this.id;
 			}
 		
@@ -81,4 +91,7 @@ public class AccountEntity {
 			return this.email;
 		}
 	   
+	    public Set<ParticipantsEntity> getParticipantEntity() {
+			return participantEntity;
+		}
 }

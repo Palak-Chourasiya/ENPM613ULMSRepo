@@ -16,7 +16,7 @@ import ulms.login.AccountEntity;
 
 
 @Controller
-@RequestMapping(path="/CourseRoster")
+@RequestMapping(path="/CourseRoaster")
 public class StudentController {
 
 	@Autowired
@@ -41,9 +41,9 @@ public class StudentController {
 	    }
 	 @GetMapping("/participants")
 	    public ResponseEntity<?> getParticipants() {
-		Iterable<ParticipantsEntity>  studentData = student.getAllParticipantsInCourse();
+		Iterable<ParticipantsEntity>  studentData = student.getAllParticipants();
 		if(studentData==null) {
-	     return new ResponseEntity(new RuntimeException("Student id not found"), HttpStatus.NOT_FOUND);
+	     return new ResponseEntity(new RuntimeException("No students found"), HttpStatus.NOT_FOUND);
   }
   return new ResponseEntity<Iterable <ParticipantsEntity>>(studentData, HttpStatus.OK);
 	    }
@@ -54,7 +54,7 @@ public class StudentController {
 	    public ResponseEntity<?> getStudentinCourse(@PathVariable("course_id") long course_id) {
 		 Iterable <AccountEntity> courseStudents = student.getAllParticipantsInCourse(course_id);
 		if(courseStudents==null) {
-	     return new ResponseEntity(new RuntimeException("Student with id not found"), HttpStatus.NOT_FOUND);
+	     return new ResponseEntity(new RuntimeException("No Students are present in this course"), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity< Iterable <AccountEntity>> (courseStudents,HttpStatus.OK);
 	    }
@@ -76,7 +76,7 @@ public class StudentController {
 		    public  ResponseEntity<Iterable<AccountEntity>> getInstructorList() {
 		 		Iterable<AccountEntity> instructorData = student.getInstructorList();
 			if(instructorData==null) {
-				return new ResponseEntity(new RuntimeException("Student Data not found"), HttpStatus.NOT_FOUND);
+				return new ResponseEntity(new RuntimeException("Instructor Data not found"), HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<Iterable <AccountEntity>>(instructorData, HttpStatus.OK);
 		    }

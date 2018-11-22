@@ -5,19 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import ulms.courses.CourseEntity;
+import ulms.login.AccountEntity;
+import ulms.recipes.models.IngredientEntity;
+import ulms.recipes.models.RecipeEntity;
+import ulms.recipes.models.RecipeIngredientsIdentity;
+
 
 @Entity
 @Table(name = "participants")
+@IdClass(ParticipantIdentity.class)
 public class ParticipantsEntity {
 	
 			@Id
 		    @NotNull
 		    private Long course_id;
-		   
+			
+			@Id
 		    @NotNull
 		    private Long account_id;
 
@@ -37,6 +48,12 @@ public class ParticipantsEntity {
 				this.account_id = account_id;
 			}
 		    
-		   
+			@ManyToOne
+			@JoinColumn(name="account_id", insertable=false, updatable=false, referencedColumnName="id")
+			private AccountEntity account;
+			
+			@ManyToOne
+		    @JoinColumn(name="course_id", insertable=false, updatable=false, referencedColumnName="id")
+		    private CourseEntity course;
 
 }
