@@ -1,21 +1,22 @@
-package messages;
+package ulms.messages;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
-
-import ulms.recipes.models.IngredientEntity;
-
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 @Service
-public class messageService {
-	
+public class MessageService {
+	public static final String CACHE_NAME = "cache.account";
+	public static final Class CACHE_TYPE = messageEntity.class;
+	public static final String CACHE_TTL = "${cache.recipe.timetolive:60}";
+	 
 	private final messageRepository messRepository;
 	
 	@Autowired
-	public messageService(messageRepository messRepository) {
+	public MessageService(messageRepository messRepository) {
 		this.messRepository = messRepository;
 	}
 	
@@ -28,9 +29,12 @@ public class messageService {
         return messRepository.findAll(pageRequest);
     }
 
-	
 	public void addMessage(messageEntity newMessage) {
 		messRepository.save(newMessage);
+	}
+	
+	public void deleteMessage(Long messageID) {
+		messRepository.deleteById(messageID);
 	}
 
 }

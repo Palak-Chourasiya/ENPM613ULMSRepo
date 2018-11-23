@@ -1,14 +1,18 @@
 package ulms.courses;
 
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import ulms.students.ParticipantsEntity;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "course")
@@ -34,6 +38,12 @@ public class CourseEntity {
 	@Column(name="end_date", nullable=false)
 	private ZonedDateTime end_date;
 	
+	@OneToMany(mappedBy = "course")
+    private Set<ParticipantsEntity> participantEntity;
+
+    public Set<ParticipantsEntity> getParticipantEntity() {
+		return participantEntity;
+	}
 	
 	public Long getId() {
 		return this.id;

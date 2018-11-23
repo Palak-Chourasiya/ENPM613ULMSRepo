@@ -1,13 +1,20 @@
-package messages;
+package ulms.messages;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import ulms.login.models.AccountEntity;
 
 @Entity
 @Table(name = "MessageReceivers")
 public class messageReceiverEntity {
 
+	@Id
 	@Column(name="message_id")
 	private Long message_id;
 	
@@ -17,6 +24,16 @@ public class messageReceiverEntity {
 	@Column(name="message_flags")
 	private messageFlag message_flags;
 	
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="id")
+//	private messageEntity message;
+	@ManyToOne
+    @JoinColumn(name="message_id", insertable=false, updatable=false, referencedColumnName="id")
+    private messageEntity message;
+	
+	//@ManyToOne
+    //@JoinColumn(name="email", insertable=false, updatable=false, referencedColumnName="email")
+    //private AccountEntity account;
 	
 	public messageFlag getMessage_flags() {
 		return message_flags;
@@ -25,7 +42,7 @@ public class messageReceiverEntity {
 		this.message_flags = message_flags;
 	}
 	public enum messageFlag {
-        read("read"), notread("notread"), deleted("deleted");
+        read("read"), notread("not_read"), deleted("deleted");
 
         private String value;
 
@@ -39,7 +56,7 @@ public class messageReceiverEntity {
         	{
         	case "read":
         		return messageFlag.read;
-        	case "notread":
+        	case "not_read":
         		return messageFlag.notread;
         	case "deleted":
         		return messageFlag.deleted;
