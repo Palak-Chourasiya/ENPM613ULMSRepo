@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "permission")
 public class PermissionEntity {
@@ -35,7 +37,8 @@ public class PermissionEntity {
     private Long groupId;
 	
 	@OneToMany(mappedBy = "permission")
-    private List<RolePermissionsEntity> rolePermissions;
+	@JsonIgnore
+    private Set<RolePermissionsEntity> rolePermissions;
 	
 	@ManyToOne
 	@JoinColumn(name="group_id", insertable=false, updatable=false, referencedColumnName="id")
@@ -64,4 +67,8 @@ public class PermissionEntity {
     public void setRoleId(Long groupId) {
     	this.groupId = groupId;
 	}
+    
+    public PermissionGroupEntity getGroup() {
+    	return this.group;
+    }
 }

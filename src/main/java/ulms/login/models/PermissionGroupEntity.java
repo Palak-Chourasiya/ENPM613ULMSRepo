@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "permissiongroup")
 public class PermissionGroupEntity {
@@ -27,6 +29,7 @@ public class PermissionGroupEntity {
     private String group;
 	
 	@OneToMany(mappedBy = "group")
+	@JsonIgnore
     private List<PermissionEntity> permissionGroup;
 	
 	public Long getId() {

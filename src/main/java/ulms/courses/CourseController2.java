@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ulms.login.AccountEntity;
+import ulms.login.models.AccountEntity;
 import ulms.students.StudentEnrollmentService;
 
 @Controller
-@RequestMapping(path="/courses")
+@RequestMapping(path="/courses2")
 public class CourseController2 {
 
 	@Autowired

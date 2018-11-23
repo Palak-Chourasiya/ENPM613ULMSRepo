@@ -7,5 +7,5 @@ public interface IAccountService {
     
     public Iterable<AccountEntity> getAllAccounts();
     
-    public void addRecipe(AccountEntity newAccount);
+    public void addAccount(AccountEntity newAccount);
 }

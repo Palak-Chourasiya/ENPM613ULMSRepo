@@ -86,4 +86,8 @@ public class AccountEntity {
 	public String getEmail() {
 		return this.email;
 	}
+	
+	public RoleEntity getRole() {
+		return this.role;
+	}
 }

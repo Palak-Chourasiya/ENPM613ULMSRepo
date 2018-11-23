@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "role")
 public class RoleEntity {
@@ -29,6 +31,7 @@ public class RoleEntity {
     private String role;
 	
 	@OneToMany(mappedBy = "role")
+	@JsonIgnore
     private List<AccountEntity> roleAccount;
 	
 	@OneToMany(mappedBy = "role")
@@ -48,5 +51,9 @@ public class RoleEntity {
 	
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public List<RolePermissionsEntity> getRolePermissions() {
+		return this.rolePermissions;
 	}
 }
