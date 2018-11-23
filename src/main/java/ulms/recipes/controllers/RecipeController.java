@@ -25,7 +25,7 @@ public class RecipeController {
 	
     @GetMapping("/")
     public ResponseEntity<?> index() {
-    	return new ResponseEntity<List<RecipeEntity>>(recipeService.getAllRecipes(), HttpStatus.OK);
+    	return new ResponseEntity<Iterable<RecipeEntity>>(recipeService.getAllRecipes(), HttpStatus.OK);
     }
     
     @PostMapping("/add")

@@ -1,5 +1,6 @@
 package ulms.courses;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -48,8 +49,8 @@ public class CourseService {
         return course.get();
     }
     
-    public Page<CourseEntity> getAllCourses(Pageable pageRequest) {
-        return courseRepository.findAll(pageRequest);
+    public Iterable<CourseEntity> getAllCourses() {
+        return courseRepository.findAll();
     }
     
     public void addCourse(CourseEntity newCourse) {
