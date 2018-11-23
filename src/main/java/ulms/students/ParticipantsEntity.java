@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import ulms.courses.CourseEntity;
-import ulms.login.AccountEntity;
+import ulms.login.models.AccountEntity;
 import ulms.recipes.models.IngredientEntity;
 import ulms.recipes.models.RecipeEntity;
 import ulms.recipes.models.RecipeIngredientsIdentity;
