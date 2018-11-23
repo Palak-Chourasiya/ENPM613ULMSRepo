@@ -1,4 +1,4 @@
-package ulms.courses;
+package ulms.courses.modules;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,82 +17,76 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import ulms.courses.modules.CourseModuleEntity;
+import ulms.courses.CourseEntity;
 import ulms.students.ParticipantsEntity;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "course")
-public class CourseEntity {
+@Table(name = "module")
+public class CourseModuleEntity {
 	@Id
-	@Column(name="id", unique = true)
+	@Column(name="module_number", unique = true)
 	@NotNull
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private Long module_number;
+	
+	public Long getModule_number() {
+		return module_number;
+	}
+
+	public void setModule_number(Long module_number) {
+		this.module_number = module_number;
+	}
+
+	public Long getCourse_id() {
+		return course_id;
+	}
+
+	public void setCourse_id(Long course_id) {
+		this.course_id = course_id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public ZonedDateTime getDate_published() {
+		return date_published;
+	}
+
+	public void setDate_published(ZonedDateTime date_published) {
+		this.date_published = date_published;
+	}
+	
+	@ManyToOne()
+	@PrimaryKeyJoinColumn(name="course_id", referencedColumnName="id")
+    private CourseEntity courseEntity;
+
+    public CourseEntity getModuleEntity() {
+		return courseEntity;
+	}
+
+	@Column(name="course_id", nullable=false)
+	private Long course_id;
 	
 	@Column(name="title", nullable=false)
 	private String title;
+
 	
-	@Column(name="details", nullable=false)
-	private String details;
+	@Column(name="date_published", nullable=false)
+	private ZonedDateTime date_published;
 	
-	@Column(name="instructor_id", nullable=false)
-	private Long instructor_id;
-	
-	/*
-	@Column(name="start_date", nullable=false)
-	private ZonedDateTime start_date;
-	
-	@Column(name="end_date", nullable=false)
-	private ZonedDateTime end_date;
-	*/
-	
-	@OneToMany(mappedBy = "course")
+	@OneToMany(mappedBy = "module")
     private Set<ParticipantsEntity> participantEntity;
 
     public Set<ParticipantsEntity> getParticipantEntity() {
 		return participantEntity;
 	}
 	
-    @OneToMany(mappedBy = "module")
-    @ManyToOne()
-	@PrimaryKeyJoinColumn(name="id", referencedColumnName="course_id")
-    private Set<CourseModuleEntity> moduleEntity;
-
-    public Set<CourseModuleEntity> getModuleEntity() {
-		return moduleEntity;
-	}
-    
-	public Long getId() {
-		return this.id;
-	}
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getTitle() {
-		return this.title;
-	}
-	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public String getDetails() {
-		return this.details;
-	}
-	
-	public void setDetails(String details) {
-		this.details = details;
-	}
-	
-	public Long getInstructorId() {
-		return this.instructor_id;
-	}
-	
-	public void setInstructorId(Long instructor_id) {
-		this.instructor_id  = instructor_id;
-	}
 	
 	/*
 	public ZonedDateTime getStartDate() {
