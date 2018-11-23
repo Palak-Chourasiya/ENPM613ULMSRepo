@@ -1,7 +1,7 @@
 body{
     margin: 0;
     padding: 0;
-    background: url(pic1.jpg);
+    background: gray;
     background-size: cover;
     background-position: center;
     font-family: sans-serif;
@@ -9,9 +9,9 @@ body{
 
 .loginbox{
     width: 320px;
-    height: 420px;
+    height: 430px;
     background: #000;
-    color: #800080;
+    color: #fff;
     top: 50%;
     left: 50%;
     position: absolute;
@@ -21,12 +21,12 @@ body{
 }
 
 .avatar{
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     position: absolute;
-    top: -50px;
-    left: calc(50% - 50px);
+    top: -75px;
+    left: calc(50% - 75px);
 }
 
 h1{
@@ -62,7 +62,7 @@ h1{
     border: none;
     outline: none;
     height: 40px;
-    background: #800080;
+    background: #fb2525;
     color: #fff;
     font-size: 18px;
     border-radius: 20px;
@@ -70,7 +70,7 @@ h1{
 .loginbox input[type="submit"]:hover
 {
     cursor: pointer;
-    background: #ffa500;
+    background: #ffc107;
     color: #000;
 }
 .loginbox a{
@@ -82,70 +82,5 @@ h1{
 
 .loginbox a:hover
 {
-    color: #800080;
+    color: #ffc107;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
