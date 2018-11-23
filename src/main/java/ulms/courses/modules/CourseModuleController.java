@@ -32,6 +32,7 @@ public class CourseModuleController {
 	@Autowired
 	CourseModuleManagementService moduleService;
 	
+	/*
     @GetMapping("/")
     public ResponseEntity<?> getCourses() {
     	Iterable<CourseModuleEntity> courses = moduleService.getAllModules();
@@ -40,6 +41,7 @@ public class CourseModuleController {
     	}
     	return new ResponseEntity<Iterable<CourseModuleEntity>>(courses, HttpStatus.OK);
     }
+    */
 
     @GetMapping("/{course_id}")
     public ResponseEntity<?> getCourse(@PathVariable("course_id") long course_id) {

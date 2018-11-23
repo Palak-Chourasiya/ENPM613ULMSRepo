@@ -43,6 +43,10 @@ public class AccountEntity {
     @Column(name="email", nullable=false)
     private String email;
     
+    @OneToOne
+    @JoinColumn(name="id", insertable=false, updatable=false, referencedColumnName="account_id")
+    private LoginEntity login;
+    
     @ManyToOne
     @JoinColumn(name="role_id", insertable=false, updatable=false, referencedColumnName="id")
     private RoleEntity role;
