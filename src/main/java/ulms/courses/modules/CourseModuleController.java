@@ -1,4 +1,4 @@
-package ulms.courses;
+package ulms.courses.modules;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,28 +26,28 @@ import ulms.messages.messageEntity;
 import ulms.students.StudentEnrollmentService;
 
 @Controller
-@RequestMapping(path="/courses")
-public class CourseController {
+@RequestMapping(path="/courses/module")
+public class CourseModuleController {
 
 	@Autowired
-	CourseService courseService;
+	CourseModuleManagementService moduleService;
 	
     @GetMapping("/")
     public ResponseEntity<?> getCourses() {
-    	Iterable<CourseEntity> courses = courseService.getAllCourses();
+    	Iterable<CourseModuleEntity> courses = moduleService.getAllModules();
     	if(courses==null) {
     		return new ResponseEntity(new RuntimeException("No courses found"), HttpStatus.NOT_FOUND);
     	}
-    	return new ResponseEntity<Iterable<CourseEntity>>(courses, HttpStatus.OK);
+    	return new ResponseEntity<Iterable<CourseModuleEntity>>(courses, HttpStatus.OK);
     }
 
     @GetMapping("/{course_id}")
     public ResponseEntity<?> getCourse(@PathVariable("course_id") long course_id) {
-        CourseEntity course = courseService.getCourse(course_id);
+        CourseModuleEntity course = moduleService.getCourse(course_id);
     	if(course==null) {
     		return new ResponseEntity(new RuntimeException("Course with id not found"), HttpStatus.NOT_FOUND);
     	}
-    	return new ResponseEntity<CourseEntity> (course, HttpStatus.OK);
+    	return new ResponseEntity<CourseModuleEntity> (course, HttpStatus.OK);
     }
     
     /*
