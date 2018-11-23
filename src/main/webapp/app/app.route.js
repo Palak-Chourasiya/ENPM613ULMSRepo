@@ -1,5 +1,11 @@
 angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $urlRouterProvider) {
 	
+  // State to login to ULMS
+  $stateProvider.state('login', {
+	  url: '/login',
+	  component: 'login'
+  })
+	
   // State to view list of recipes
   $stateProvider.state('recipes', {
     url: '/recipes',
@@ -19,6 +25,6 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 */
   // What to do if no state is specified
   $urlServiceProvider.rules.otherwise({
-    state: 'recipes'
+    state: 'login'
   });
 })
