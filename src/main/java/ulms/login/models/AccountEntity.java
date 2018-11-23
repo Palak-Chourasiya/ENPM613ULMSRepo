@@ -1,14 +1,18 @@
 package ulms.login.models;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
 
 @Entity
 @Table(name = "account")
@@ -39,20 +43,24 @@ public class AccountEntity {
     @Column(name="email", nullable=false)
     private String email;
     
+    @ManyToOne
+    @JoinColumn(name="role_id", insertable=false, updatable=false, referencedColumnName="id")
+    private RoleEntity role;
+    
     public Long getId() {
-			return this.id;
+    	return this.id;
 	}
 	
     public void setId(Long id) {
-			this.id = id;
+    	this.id = id;
 	}
 	
     public Long getRoleId() {
-			return roleId;
+    	return this.roleId;
 	}
 	
     public void setRoleId(Long roleId) {
-			this.roleId = roleId;
+    	this.roleId = roleId;
 	}
 		
 	public void setFirstName(String firstName) {
