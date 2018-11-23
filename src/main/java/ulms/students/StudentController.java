@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ulms.login.models.AccountEntity;
 
 @Controller
-@RequestMapping(path="/CourseRoaster")
+@RequestMapping(path="/studentList")
 public class StudentController {
 
 	@Autowired
@@ -43,7 +43,7 @@ public class StudentController {
 	/**
 	 * @return List of all Students enrolled under the ULMS with their details
 	 */
-	@GetMapping("/StudentList")
+	@GetMapping("/EnrolledStudents")
 	public ResponseEntity<Iterable<AccountEntity>> getStudentList() {
 		Iterable<AccountEntity> studentData = student.getStudentList();
 		if (studentData == null) {
@@ -66,7 +66,7 @@ public class StudentController {
 	 /**
 	  * @return List of Students based on CourseID
 	  */
-	 @GetMapping("/course/{course_id}")
+	 @GetMapping("/{course_id}")
 	    public ResponseEntity<?> getStudentinCourse(@PathVariable("course_id") long course_id) {
 		 Iterable <AccountEntity> courseStudents = student.getAllParticipantsInCourse(course_id);
 		if(courseStudents==null) {
