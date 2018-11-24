@@ -21,9 +21,6 @@ public class RecipeEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name="account_id", nullable=false)
-	private Long accountId;
-	
 	@Column(name="course_id", nullable=false)
 	private Long courseId;
 	
@@ -36,10 +33,13 @@ public class RecipeEntity {
 	private String overview;
 	
 	@OneToMany(mappedBy = "recipe")
-    private Set<RecipeIngredientsEntity> recipeIngredients;
+	private List<RecipeAccountsEntity> recipeAccounts;
 	
 	@OneToMany(mappedBy = "recipe")
-	private Set<RecipeStepsEntity> recipeSteps;
+    private List<RecipeIngredientsEntity> recipeIngredients;
+	
+	@OneToMany(mappedBy = "recipe")
+	private List<RecipeStepsEntity> recipeSteps;
 	
 	public Long getId() {
 		return this.id;
@@ -47,14 +47,6 @@ public class RecipeEntity {
 	
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	public Long getAccountId() {
-		return this.accountId;
-	}
-	
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
 	}
 	
 	public Long getCourseId() {
@@ -81,11 +73,15 @@ public class RecipeEntity {
 		this.overview = overview;
 	}
 	
-	public Set<RecipeIngredientsEntity> getRecipeIngredients() {
+	public List<RecipeAccountsEntity> getRecipeAccounts() {
+		return this.recipeAccounts;
+	}
+	
+	public List<RecipeIngredientsEntity> getRecipeIngredients() {
 		return this.recipeIngredients;
 	}
 
-	public Set<RecipeStepsEntity> getRecipeSteps() {
+	public List<RecipeStepsEntity> getRecipeSteps() {
 		return this.recipeSteps;
 	}
 	
