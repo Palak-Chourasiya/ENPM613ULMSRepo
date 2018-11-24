@@ -34,7 +34,7 @@ public class CourseModuleController {
 	
     @GetMapping("/")
     public ResponseEntity<?> getCourses() {
-    	Iterable<CourseModuleEntity> courses = moduleService.getAllModules();
+    	Iterable<CourseModuleEntity> courses = moduleService.getAllModule();
     	if(courses==null) {
     		return new ResponseEntity(new RuntimeException("No courses found"), HttpStatus.NOT_FOUND);
     	}
@@ -42,30 +42,29 @@ public class CourseModuleController {
     }
 
     @GetMapping("/{course_id}")
-    public ResponseEntity<?> getCourse(@PathVariable("course_id") long course_id) {
-        CourseModuleEntity course = moduleService.getCourse(course_id);
+    public ResponseEntity<?> getCourse(@PathVariable("course_id") long module_number) {
+        CourseModuleEntity course = moduleService.getAllModule(module_number);
     	if(course==null) {
     		return new ResponseEntity(new RuntimeException("Course with id not found"), HttpStatus.NOT_FOUND);
     	}
     	return new ResponseEntity<CourseModuleEntity> (course, HttpStatus.OK);
     }
     
-    /*
+    
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ResponseEntity<?> addMessage(@RequestParam("title") String title,
-			                               @RequestParam("details") String details,
-			                               @RequestParam("instructor_id") Long instructor_id,
-			                               @RequestParam("start_date") String start_date,
-			                               @RequestParam("end_date") String end_date) {
+	public ResponseEntity<?> addModule(@RequestParam("module_number") Long module_number,
+			                               @RequestParam("course_id") Long course_id,
+			                               @RequestParam("title") String title,
+			                               @RequestParam("date_published") ZonedDateTime date_published) {
+    	
 		// assign parameters to taskDocumentEntity by constructor args or setters
-	    CourseEntity course = new CourseEntity();
-	    course.setTitle(title);
-	    course.setDetails(details);
-	    course.setInstructorId(instructor_id);
-	    course.setStartDate(start_date);
-	    course.setEndDate(end_date);
-	    courseService.addCourse(course);
-	    return new ResponseEntity<CourseEntity> (course, HttpStatus.OK);
+	    CourseModuleEntity module = new CourseModuleEntity();
+	    module.setModule_number(module_number);
+	    module.setCourse_id(course_id);
+	    module.setTitle(title);
+	    module.setDate_published(date_published);
+	    moduleService.addModule(module);
+	    return new ResponseEntity<CourseModuleEntity> (module, HttpStatus.OK);
 	}
-	*/
+	
 }

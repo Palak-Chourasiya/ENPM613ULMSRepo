@@ -52,7 +52,7 @@ public class CourseEntity {
     public Set<ParticipantsEntity> getParticipantEntity() {
 		return participantEntity;
 	}
-	
+	/*
     @OneToMany(mappedBy = "module")
     @ManyToOne()
 	@PrimaryKeyJoinColumn(name="id", referencedColumnName="course_id")
@@ -61,7 +61,7 @@ public class CourseEntity {
     public Set<CourseModuleEntity> getModuleEntity() {
 		return moduleEntity;
 	}
-    
+    */
 	public Long getId() {
 		return this.id;
 	}

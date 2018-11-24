@@ -40,21 +40,21 @@ public class CourseModuleManagementService {
 
     // Query methods
 
-    public CourseModuleEntity getCourse(Long courseId) {
-        Optional<CourseModuleEntity> course = courseRepository.findById(courseId);
-        if (!course.isPresent()) {
-            throw new CourseNotFoundException(courseId);
+    public CourseModuleEntity getAllModule(Long module_number) {
+        Optional<CourseModuleEntity> module = courseRepository.findById(module_number);
+        if (!module.isPresent()) {
+            throw new CourseModuleNotFoundException(module_number);
         }
-        
-        
-        return course.get();
+        return module.get();
     }
-    
-    public Iterable<CourseModuleEntity> getAllCourses() {
+    public Iterable<CourseModuleEntity> getAllModule() {
         return courseRepository.findAll();
     }
     
-    public void addCourse(CourseModuleEntity newCourse) {
-        courseRepository.save(newCourse);
+    //create module in the DB
+    public void addModule(CourseModuleEntity newmodule) {
+        courseRepository.save(newmodule);
     }
+   
+
 }
