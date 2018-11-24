@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "account")
 public class AccountEntity {
@@ -42,6 +44,11 @@ public class AccountEntity {
     @NotEmpty
     @Column(name="email", nullable=false)
     private String email;
+    
+    @OneToOne
+    @JoinColumn(name="id", insertable=false, updatable=false, referencedColumnName="account_id")
+    @JsonIgnore
+    private LoginEntity login;
     
     @ManyToOne
     @JoinColumn(name="role_id", insertable=false, updatable=false, referencedColumnName="id")
@@ -85,5 +92,9 @@ public class AccountEntity {
 	
 	public String getEmail() {
 		return this.email;
+	}
+	
+	public RoleEntity getRole() {
+		return this.role;
 	}
 }

@@ -2,6 +2,7 @@ package ulms.login.controllers;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class AccountService implements IAccountService {
         if (!account.isPresent()) {
             throw new AccountNotFoundException(accountId);
         }
+        
         return account.get();
     }
     
@@ -42,7 +44,7 @@ public class AccountService implements IAccountService {
         return accountRepository.findAll();
     }
     
-    public void addRecipe(AccountEntity newAccount) {
+    public void addAccount(AccountEntity newAccount) {
         accountRepository.save(newAccount);
     }
 }

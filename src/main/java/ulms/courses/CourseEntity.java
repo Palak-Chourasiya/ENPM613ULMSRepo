@@ -1,5 +1,6 @@
 package ulms.courses;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -22,7 +24,7 @@ import ulms.students.ParticipantsEntity;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "course")
-public class CourseEntity {
+public class CourseEntity implements Serializable {
 	@Id
 	@Column(name="id", unique = true)
 	@NotNull
@@ -38,13 +40,12 @@ public class CourseEntity {
 	@Column(name="instructor_id", nullable=false)
 	private Long instructor_id;
 	
-	/*
 	@Column(name="start_date", nullable=false)
 	private ZonedDateTime start_date;
 	
 	@Column(name="end_date", nullable=false)
 	private ZonedDateTime end_date;
-	*/
+	
 	
 	@OneToMany(mappedBy = "course")
     private Set<ParticipantsEntity> participantEntity;
@@ -52,16 +53,28 @@ public class CourseEntity {
     public Set<ParticipantsEntity> getParticipantEntity() {
 		return participantEntity;
 	}
+<<<<<<< HEAD
 	/*
     @OneToMany(mappedBy = "module")
     @ManyToOne()
 	@PrimaryKeyJoinColumn(name="id", referencedColumnName="course_id")
     private Set<CourseModuleEntity> moduleEntity;
+=======
+	
+    @OneToMany(mappedBy="course")
+    private Set<CourseModuleEntity> module;
+
+>>>>>>> a0ae400c4174899e3dc381786fc96dbae049efa2
 
     public Set<CourseModuleEntity> getModuleEntity() {
-		return moduleEntity;
+		return module;
 	}
+<<<<<<< HEAD
     */
+=======
+	
+    
+>>>>>>> a0ae400c4174899e3dc381786fc96dbae049efa2
 	public Long getId() {
 		return this.id;
 	}

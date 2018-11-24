@@ -19,7 +19,7 @@ angular.module('ULMS')
           var method = "";
           var url = "";
        
-          /* Private Methods */
+           Private Methods 
       //HTTP GET- get all countries collection
       function _refreshStudentData() {
       	  $http({

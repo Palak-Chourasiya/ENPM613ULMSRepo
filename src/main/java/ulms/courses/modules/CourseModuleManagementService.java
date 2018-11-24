@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ulms.courses.CourseNotFoundException;
+import ulms.courses.CourseRepository;
+import ulms.login.models.AccountEntity;
 import ulms.recipes.exceptions.RecipeNotFoundException;
 import ulms.recipes.models.IngredientRepository;
 import ulms.recipes.models.RecipeDTO;
@@ -29,12 +31,15 @@ public class CourseModuleManagementService {
     public static final String CACHE_TTL = "${cache.recipe.timetolive:60}";
 
 
-    private final ModuleRepository courseRepository;
+    private final CourseModuleRepository courseModuleRepository;
+    private final CourseRepository courseRepository;
 
     @Autowired
-    public CourseModuleManagementService(ModuleRepository courseRepository) {
-        this.courseRepository = courseRepository;
+    public CourseModuleManagementService(CourseModuleRepository courseModuleRepository, CourseRepository courseRepository) {
+        this.courseModuleRepository = courseModuleRepository;
+        this.courseRepository = courseRepository; 
     }
+<<<<<<< HEAD
 
     // Property methods
 
@@ -57,4 +62,24 @@ public class CourseModuleManagementService {
     }
    
 
+=======
+    /**
+     * 
+     * @return Fetches the modules of all courses 
+     */
+    public Iterable<CourseModuleEntity> getAllCourseModules() {
+        return courseModuleRepository.findAll();
+    }
+    /**
+     * 
+     * @return Fetches one module 
+     */
+	 public CourseModuleEntity getModuleDetails(Long module_number) {
+	        Optional<CourseModuleEntity> module = courseModuleRepository.findById(module_number);
+	        return module.get();
+	    }
+    
+    
+    
+>>>>>>> a0ae400c4174899e3dc381786fc96dbae049efa2
 }

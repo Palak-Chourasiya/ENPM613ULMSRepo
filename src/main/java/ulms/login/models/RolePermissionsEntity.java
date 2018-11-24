@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ulms.recipes.models.RecipeEntity;
 import ulms.recipes.models.RecipeIngredientsIdentity;
 
@@ -28,6 +30,7 @@ public class RolePermissionsEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="role_id", insertable=false, updatable=false, referencedColumnName="id")
+	@JsonIgnore
 	private RoleEntity role;
 	
 	@ManyToOne
@@ -40,5 +43,9 @@ public class RolePermissionsEntity {
     
     public Long getPermissionId() {
     	return this.permissionId;
+    }
+    
+    public PermissionEntity getPermission() {
+    	return this.permission;
     }
 }
