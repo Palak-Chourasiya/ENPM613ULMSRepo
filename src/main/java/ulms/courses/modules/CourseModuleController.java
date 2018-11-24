@@ -26,32 +26,38 @@ import ulms.messages.messageEntity;
 import ulms.students.StudentEnrollmentService;
 
 @Controller
-@RequestMapping(path="/courses/module")
-public class CourseModuleController {
+@RequestMapping(path="/module")
 
+public class CourseModuleController {
 	@Autowired
 	CourseModuleManagementService moduleService;
 	
-	/*
-    @GetMapping("/")
-    public ResponseEntity<?> getCourses() {
-    	Iterable<CourseModuleEntity> courses = moduleService.getAllModules();
+	@GetMapping("/")
+	public @ResponseBody String index() {
+		return "TEST";
+	}
+	
+    @GetMapping("/showAll")
+    public ResponseEntity<?> getCourseModules() {
+    	Iterable<CourseModuleEntity> courses = moduleService.getAllCourseModules();
     	if(courses==null) {
     		return new ResponseEntity(new RuntimeException("No courses found"), HttpStatus.NOT_FOUND);
     	}
     	return new ResponseEntity<Iterable<CourseModuleEntity>>(courses, HttpStatus.OK);
     }
-    */
-
-    @GetMapping("/{course_id}")
-    public ResponseEntity<?> getCourse(@PathVariable("course_id") long course_id) {
-        CourseModuleEntity course = moduleService.getCourse(course_id);
-    	if(course==null) {
-    		return new ResponseEntity(new RuntimeException("Course with id not found"), HttpStatus.NOT_FOUND);
-    	}
-    	return new ResponseEntity<CourseModuleEntity> (course, HttpStatus.OK);
-    }
-    
+    /**
+	 * @param module_number
+	 * @return Module detail 
+	 */
+	@GetMapping("/{module_number}")
+	public ResponseEntity<?> getModuleDetails(@PathVariable("module_number") long module_number) {
+		CourseModuleEntity courseModuleData = moduleService.getModuleDetails(module_number);
+		if (courseModuleData == null) {
+			return new ResponseEntity(new RuntimeException("Modulewit id" + module_number + " not found"),
+					HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<CourseModuleEntity>(courseModuleData, HttpStatus.OK);
+	}
     /*
     @RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ResponseEntity<?> addMessage(@RequestParam("title") String title,

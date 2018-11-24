@@ -1,5 +1,6 @@
 package ulms.courses.modules;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -22,7 +24,7 @@ import ulms.students.ParticipantsEntity;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "module")
-public class CourseModuleEntity {
+public class CourseModuleEntity implements Serializable {
 	@Id
 	@Column(name="module_number", unique = true)
 	@NotNull
@@ -32,6 +34,20 @@ public class CourseModuleEntity {
 	public Long getModule_number() {
 		return module_number;
 	}
+	
+	@ManyToOne
+	@JoinColumn(name="course_id",insertable=false, updatable=false)
+    private CourseEntity course;
+
+    @Column(name="course_id", nullable=false)
+	private Long course_id;
+	
+	@Column(name="title", nullable=false)
+	private String title;
+
+	
+	@Column(name="date_published", nullable=false)
+	private ZonedDateTime date_published;
 
 	public void setModule_number(Long module_number) {
 		this.module_number = module_number;
@@ -61,30 +77,7 @@ public class CourseModuleEntity {
 		this.date_published = date_published;
 	}
 	
-	@ManyToOne()
-	@PrimaryKeyJoinColumn(name="course_id", referencedColumnName="id")
-    private CourseEntity courseEntity;
-
-    public CourseEntity getModuleEntity() {
-		return courseEntity;
-	}
-
-	@Column(name="course_id", nullable=false)
-	private Long course_id;
 	
-	@Column(name="title", nullable=false)
-	private String title;
-
-	
-	@Column(name="date_published", nullable=false)
-	private ZonedDateTime date_published;
-	
-	@OneToMany(mappedBy = "module")
-    private Set<ParticipantsEntity> participantEntity;
-
-    public Set<ParticipantsEntity> getParticipantEntity() {
-		return participantEntity;
-	}
 	
 	
 	
