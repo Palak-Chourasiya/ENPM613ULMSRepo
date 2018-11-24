@@ -6,6 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface ModuleRepository extends JpaRepository<CourseModuleEntity, Long> {
+public interface CourseModuleRepository extends JpaRepository<CourseModuleEntity, Long> {
 	
 }
