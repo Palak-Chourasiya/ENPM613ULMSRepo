@@ -47,7 +47,7 @@ public class messageEntity {
 	@Column(name="subject")
 	private String subject;	
 
-	@OneToMany(mappedBy = "message")
+	@OneToMany(mappedBy = "getKey().message_id")
 	private Set<messageReceiverEntity> messageReceiver;
 	
 //	@ManyToOne

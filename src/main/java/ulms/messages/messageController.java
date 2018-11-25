@@ -4,6 +4,7 @@ package ulms.messages;
 import java.util.Date;
 
 import org.hibernate.annotations.common.util.impl.Log;
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,13 +19,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ulms.messages.messageEntity;
+import ulms.messages.messageReceiverEntity.messageFlag;
 
 @Controller
-@RequestMapping(path="/messageTest")
+@RequestMapping(path="/message")
 public class messageController {
 	
 	@Autowired
 	MessageService messService;
+	
+	@Autowired
+	messageReceiverService messReceiverService;
 	
 	@GetMapping("/")
 	public @ResponseBody String index() {
@@ -32,22 +37,35 @@ public class messageController {
 	}
 	
 	
-	@RequestMapping(value = "/message/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public @ResponseBody String addMessage(@RequestParam("user_name") String user_name,
 			                               @RequestParam("subject") String subject,
-			                               @RequestParam("message") String message) {
+			                               @RequestParam("message") String message,
+			                               @RequestParam("receivers") String receivers) {
 		// assign parameters to taskDocumentEntity by constructor args or setters
 	    messageEntity messageData = new messageEntity();
 	    messageData.setMessage(message);
 	    messageData.setUserName(user_name);
 	    messageData.setSubject(subject);
 	    messageData.setSendDate(new Date());
-	    //messageData.setId(6);
 	    messService.addMessage(messageData);
+	    
+	    for(String receiver : receivers.split(";"))
+	    {
+	    	messageReceiverEntity messageReceiverData = new messageReceiverEntity();
+	    	messageReceiverKey messKey = new messageReceiverKey();
+	    	messKey.setEmail(receiver);
+	    	messKey.setId(messageData.getId());
+	    	messageReceiverData.setKey(messKey);
+	    	messageReceiverData.setMessage_flags(messageFlag.notread);
+	    	messReceiverService.addMessageReceiver(messageReceiverData);
+	    }
+	    	
+	    
 	    return messageData.toString();
 	}
 	
-	@GetMapping("/message/delete/{id}")
+	@GetMapping("/delete/{id}")
 	public @ResponseBody String deleteMessage(@PathVariable("id") long messageId) {
 		messService.deleteMessage(messageId);
 		return "Success";
