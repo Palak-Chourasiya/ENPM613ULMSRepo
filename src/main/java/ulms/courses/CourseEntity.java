@@ -53,28 +53,16 @@ public class CourseEntity implements Serializable {
     public Set<ParticipantsEntity> getParticipantEntity() {
 		return participantEntity;
 	}
-<<<<<<< HEAD
-	/*
-    @OneToMany(mappedBy = "module")
-    @ManyToOne()
-	@PrimaryKeyJoinColumn(name="id", referencedColumnName="course_id")
-    private Set<CourseModuleEntity> moduleEntity;
-=======
 	
     @OneToMany(mappedBy="course")
     private Set<CourseModuleEntity> module;
 
->>>>>>> a0ae400c4174899e3dc381786fc96dbae049efa2
 
     public Set<CourseModuleEntity> getModuleEntity() {
 		return module;
 	}
-<<<<<<< HEAD
-    */
-=======
 	
     
->>>>>>> a0ae400c4174899e3dc381786fc96dbae049efa2
 	public Long getId() {
 		return this.id;
 	}

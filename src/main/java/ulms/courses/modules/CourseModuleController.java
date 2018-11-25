@@ -31,12 +31,7 @@ import ulms.students.StudentEnrollmentService;
 public class CourseModuleController {
 	@Autowired
 	CourseModuleManagementService moduleService;
-	
-<<<<<<< HEAD
-    @GetMapping("/")
-    public ResponseEntity<?> getCourses() {
-    	Iterable<CourseModuleEntity> courses = moduleService.getAllModule();
-=======
+
 	@GetMapping("/")
 	public @ResponseBody String index() {
 		return "TEST";
@@ -45,25 +40,13 @@ public class CourseModuleController {
     @GetMapping("/showAll")
     public ResponseEntity<?> getCourseModules() {
     	Iterable<CourseModuleEntity> courses = moduleService.getAllCourseModules();
->>>>>>> a0ae400c4174899e3dc381786fc96dbae049efa2
+
     	if(courses==null) {
     		return new ResponseEntity(new RuntimeException("No courses found"), HttpStatus.NOT_FOUND);
     	}
     	return new ResponseEntity<Iterable<CourseModuleEntity>>(courses, HttpStatus.OK);
     }
-<<<<<<< HEAD
 
-    @GetMapping("/{course_id}")
-    public ResponseEntity<?> getCourse(@PathVariable("course_id") long module_number) {
-        CourseModuleEntity course = moduleService.getAllModule(module_number);
-    	if(course==null) {
-    		return new ResponseEntity(new RuntimeException("Course with id not found"), HttpStatus.NOT_FOUND);
-    	}
-    	return new ResponseEntity<CourseModuleEntity> (course, HttpStatus.OK);
-    }
-    
-    
-=======
     /**
 	 * @param module_number
 	 * @return Module detail 
@@ -72,13 +55,13 @@ public class CourseModuleController {
 	public ResponseEntity<?> getModuleDetails(@PathVariable("module_number") long module_number) {
 		CourseModuleEntity courseModuleData = moduleService.getModuleDetails(module_number);
 		if (courseModuleData == null) {
-			return new ResponseEntity(new RuntimeException("Modulewit id" + module_number + " not found"),
+			return new ResponseEntity(new RuntimeException("Module with id" + module_number + " not found"),
 					HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<CourseModuleEntity>(courseModuleData, HttpStatus.OK);
 	}
-    /*
->>>>>>> a0ae400c4174899e3dc381786fc96dbae049efa2
+   
+    
     @RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ResponseEntity<?> addModule(@RequestParam("module_number") Long module_number,
 			                               @RequestParam("course_id") Long course_id,
@@ -94,5 +77,12 @@ public class CourseModuleController {
 	    moduleService.addModule(module);
 	    return new ResponseEntity<CourseModuleEntity> (module, HttpStatus.OK);
 	}
+	
+    @GetMapping("/delete/{module_number}")
+	public @ResponseBody String deleteMessage(@PathVariable("module_number") long module_number) {
+    	moduleService.deleteModule(module_number);
+		return "Success";
+	}
+  
 	
 }
