@@ -72,7 +72,7 @@ public class CourseModuleController {
 	    course.setInstructorId(instructor_id);
 	    course.setStartDate(start_date);
 	    course.setEndDate(end_date);
-	    courseService.addCourse(course);
+	    courseManagementService.addCourse(course);
 	    return new ResponseEntity<CourseEntity> (course, HttpStatus.OK);
 	}
 	*/

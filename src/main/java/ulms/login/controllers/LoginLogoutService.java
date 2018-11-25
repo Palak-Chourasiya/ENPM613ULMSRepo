@@ -17,7 +17,7 @@ import ulms.login.models.LoginRepository;
  * -related operations.
  */
 @Service
-public class LoginLogoutService implements ILoginLogoutService {
+public class LoginLogoutService implements UserLoginLogoutServiceInterface {
     public static final String CACHE_NAME = "cache.login";
     public static final Class CACHE_TYPE = AccountEntity.class;
     public static final String CACHE_TTL = "${cache.login.timetolive:60}";

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import ulms.courses.CourseNotFoundException;
 import ulms.courses.CourseRepository;
 import ulms.login.models.AccountEntity;
+import ulms.messages.messageEntity;
 import ulms.recipes.exceptions.RecipeNotFoundException;
 import ulms.recipes.models.IngredientRepository;
 import ulms.recipes.models.RecipeDTO;
@@ -54,6 +55,10 @@ public class CourseModuleManagementService {
 	        Optional<CourseModuleEntity> module = courseModuleRepository.findById(module_number);
 	        return module.get();
 	    }
+	 
+	 public void addModule(CourseModuleEntity courseModule) {
+		 courseModuleRepository.save(courseModule);
+		}
     
     
     
