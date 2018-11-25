@@ -5,10 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ulms.login.exceptions.AccountNotFoundException;
 import ulms.login.exceptions.LoginNotFoundException;
 import ulms.login.models.AccountEntity;
-import ulms.login.models.AccountRepository;
 import ulms.login.models.LoginEntity;
 import ulms.login.models.LoginRepository;
 
@@ -33,10 +31,10 @@ public class LoginLogoutService implements ILoginLogoutService {
 
     // Query methods
 
-    public LoginEntity getAccount(String userName) {
+    public LoginEntity getLogin(String userName) {
         Optional<LoginEntity> login = loginRepository.findById(userName);
         if (!login.isPresent()) {
-            throw new LoginNotFoundException(userName);
+        	return null;
         }
         
         return login.get();

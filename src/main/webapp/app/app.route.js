@@ -1,4 +1,11 @@
 angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $urlRouterProvider) {
+  // State to display HTTP Request errors
+  $stateProvider.state('error', {
+	  url: '/error',
+	  component: 'error',
+	  params: { status: null, statusText: null }
+  })
+	
 	
   // State to login to ULMS
   $stateProvider.state('login', {

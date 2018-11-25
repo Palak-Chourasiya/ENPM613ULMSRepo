@@ -3,7 +3,7 @@ package ulms.login.controllers;
 import ulms.login.models.LoginEntity;
 
 public interface ILoginLogoutService {
-	public LoginEntity getAccount(String username);
+	public LoginEntity getLogin(String username);
     
     public Iterable<LoginEntity> getAllLogins();
     

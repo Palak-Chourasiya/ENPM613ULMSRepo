@@ -4,14 +4,17 @@
     <img src="images/avatar.png" class="avatar">
     <h1></h1>
     <h1>Login Here</h1>
-    <form ng-submit="submitLogin()">
+    <div ng-show="submitForm.userName.$error.invalid" class="alert alert-danger" role="alert">
+	  <p ng-show="submitForm.userName.$error.required"><strong></strong><span>Email is required.</span></p>
+	  <p ng-show="submitForm.userName.$error.invalid"><strong></strong>Invalid email address.</p>
+	</div>
+    <form name="submitForm" ng-submit="submitLogin()">
         <p>Username</p>
-        <input type="text" name="" placeholder="Enter Username" ng-model="loginForm.userName">
+        <input type="text" name="userName" placeholder="Enter Username" ng-model="loginForm.userName">
         <p>Password</p>
-        <input type="password" name="" placeholder="Enter Password" ng-model="loginForm.password">
+        <input type="password" name="password" placeholder="Enter Password" ng-model="loginForm.password">
         <input type="submit" name="" value="Login">
         <a href="#">Lost your password?</a><br>
         <a href="#">Don't have an account?</a>
     </form>
-    
 </div>
