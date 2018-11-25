@@ -1,9 +1,11 @@
 package ulms.login.controllers;
 
 import java.security.Principal;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +37,18 @@ public class LoginLogoutController {
 	  return Collections.singletonMap("token", session.getId());
 	}
 	
+	@RequestMapping("/user")
+	public Principal user(HttpServletRequest request) {
+        String authToken = request.getHeader("Authorization")
+          .substring("Basic".length()).trim();
+        return () ->  new String(Base64.getDecoder()
+          .decode(authToken)).split(":")[0];
+    }
+	
 	@GetMapping("/login")
 	@ResponseBody
-    public Principal login(Principal user) {
-		return user;
+    public boolean login(HttpServletRequest request) {
+		return true;
     	//return new ResponseEntity<LoginEntity>(loginService.getLogin(userName), HttpStatus.OK);
     }
 	
@@ -48,16 +58,11 @@ public class LoginLogoutController {
     }
 	
 	@PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> submitLogin(@RequestBody LoginEntity login) {
+    public boolean submitLogin(@RequestBody LoginEntity login) {
 		String user = login.getUserName();
     	LoginEntity temp = loginService.getLogin(login.getUserName());
     	
-    	if (temp == null) {
-    		//Collections.singletonMap("error", "your string value");
-    		return new ResponseEntity<String>((new LoginNotFoundException(login.getUserName())).getMessage(), HttpStatus.NOT_FOUND);
-    	} else {
-    		return new ResponseEntity<String>("Login Successful", HttpStatus.OK);
-    	}
+    	return true;
     }
 	
 	@GetMapping("/logout")
