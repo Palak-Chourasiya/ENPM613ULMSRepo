@@ -27,7 +27,7 @@ import ulms.login.models.LoginEntity;
 public class LoginLogoutController {
 	
 	@Autowired
-	ILoginLogoutService loginService;
+	UserLoginLogoutServiceInterface loginService;
 	
 	@RequestMapping("/token")
 	@ResponseBody

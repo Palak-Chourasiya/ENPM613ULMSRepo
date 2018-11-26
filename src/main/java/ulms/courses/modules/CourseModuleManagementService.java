@@ -50,5 +50,4 @@ public class CourseModuleManagementService {
 	 public void deleteModule(Long module_number) {
 		 	courseModuleRepository.deleteById(module_number);
 		}
-	 
 }

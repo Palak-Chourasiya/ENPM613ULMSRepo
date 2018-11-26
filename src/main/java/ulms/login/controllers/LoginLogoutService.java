@@ -4,8 +4,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import ulms.login.exceptions.LoginNotFoundException;
 import ulms.login.models.AccountEntity;
 import ulms.login.models.LoginEntity;
 import ulms.login.models.LoginRepository;
@@ -15,7 +13,7 @@ import ulms.login.models.LoginRepository;
  * -related operations.
  */
 @Service
-public class LoginLogoutService implements ILoginLogoutService {
+public class LoginLogoutService implements UserLoginLogoutServiceInterface {
     public static final String CACHE_NAME = "cache.login";
     public static final Class CACHE_TYPE = AccountEntity.class;
     public static final String CACHE_TTL = "${cache.login.timetolive:60}";
@@ -47,4 +45,10 @@ public class LoginLogoutService implements ILoginLogoutService {
     public void addLogin(LoginEntity newLogin) {
         loginRepository.save(newLogin);
     }
+
+	@Override
+	public LoginEntity getAccount(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
