@@ -1,64 +1,30 @@
 angular.module('ULMS')
-  .component('recipes', {
-    templateUrl: 'components/studentList/studentList.css',
+  .component('student', {
+    templateUrl: 'components/student/student.html',
     bindings: {},
 
-    controller: function($scope, $http) {
+    controller: function($scope, $http ,$state) {
 
       var ctrl = this;
-      
+      var 
       this.$onInit = function() {
         
       };
+      $scope.student = [];
+      $scope.demo='demo';
       
-      $scope.students = [];
-
-      //Now load the data from server
-      _refreshStudentData();
-
-          var method = "";
-          var url = "";
-       
-           Private Methods 
-      //HTTP GET- get all countries collection
-      function _refreshStudentData() {
+      _fetchStudentData();
+      function _fetchStudentData() {
       	  $http({
               method : 'GET',
-              url : 'http://localhost:8080/studentList/'
+              url : 'http://localhost:8080/studentList/1'
           }).then(function successCallback(response) {
-              $scope.students.push(response.data);
+              $scope.student.push(response.data);
           }, function errorCallback(response) {
               console.log(response.statusText);
           });
-          $http({
-              method : 'GET',
-              url : 'http://localhost:8080/studentList/'
-          }).then(function successCallback(response) {
-              $scope.students = response.data;
-          }, function errorCallback(response) {
-              console.log(response.statusText);
-          });
+
       }
-
-      function _success(response) {
-          _refreshCountryData();
-          _clearFormData()
-      }
-
-      function _error(response) {
-          console.log(response.statusText);
-      }
-
-      //Clear the form
-      function _clearFormData() {
-          $scope.recipeForm.id = -1;
-          $scope.recipeForm.accountId = -1;
-          $scope.recipeForm.courseId = -1;
-          $scope.recipeForm.title = "";
-          $scope.recipeForm.overview = "";
-      
-      };
-
-
     }
+
   })
