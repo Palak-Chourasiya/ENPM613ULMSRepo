@@ -67,7 +67,7 @@ public class StudentController {
 	  * @return List of Students based on CourseID
 	  */
 	 @GetMapping("/{course_id}")
-	    public ResponseEntity<?> getStudentinCourse(@PathVariable("course_id") long course_id) {
+	    public ResponseEntity<?> getStudentsinCourse(@PathVariable("course_id") long course_id) {
 		 Iterable <AccountEntity> courseStudents = student.getAllParticipantsInCourse(course_id);
 		if(courseStudents==null) {
 	     return new ResponseEntity(new RuntimeException("No Students are present in this course"), HttpStatus.NOT_FOUND);
