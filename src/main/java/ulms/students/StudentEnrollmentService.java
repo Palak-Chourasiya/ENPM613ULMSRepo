@@ -17,11 +17,9 @@ public class StudentEnrollmentService {
 	 public static final String CACHE_NAME = "cache.account";
 	 public static final Class CACHE_TYPE = AccountEntity.class;
 	 @Autowired
-	 @Qualifier("repo2")
 	 private final AccountRepository accountRepository;
 	
 	 @Autowired
-	 @Qualifier("repo1")
 	 private final ParticipantsRepository participantsRepository;
 	 
 	  @Autowired

@@ -21,7 +21,7 @@ angular.module('ULMS')
       };
 
       //Now load the data from server
-      _refreshRecipeData();
+      getRecipes();
 
       //HTTP POST/PUT methods for add/edit country 
       // with the help of id, we are going to find out whether it is put or post operation
@@ -69,7 +69,7 @@ angular.module('ULMS')
 
       /* Private Methods */
       //HTTP GET- get all countries collection
-      function _refreshRecipeData() {
+      function getRecipes() {
       	  $http({
               method : 'GET',
               url : 'http://localhost:8080/recipes/1'

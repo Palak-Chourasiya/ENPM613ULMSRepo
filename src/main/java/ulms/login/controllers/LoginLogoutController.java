@@ -28,6 +28,8 @@ import ulms.login.models.LoginEntity;
 @RequestMapping(path="/")
 public class LoginLogoutController {
 	
+	//@Autowired
+	//IAuthenticationService authenticationService;
 	@Autowired
 	UserLoginLogoutServiceInterface loginService;
 	
@@ -37,8 +39,8 @@ public class LoginLogoutController {
 	  return Collections.singletonMap("token", session.getId());
 	}
 	
-	@RequestMapping("/user")
-	public Principal user(HttpServletRequest request) {
+	@RequestMapping("/hasaccess")
+	public Principal hasAccess(HttpServletRequest request) {
         String authToken = request.getHeader("Authorization")
           .substring("Basic".length()).trim();
         return () ->  new String(Base64.getDecoder()
@@ -59,8 +61,10 @@ public class LoginLogoutController {
 	
 	@PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
     public boolean submitLogin(@RequestBody LoginEntity login) {
-		String user = login.getUserName();
-    	LoginEntity temp = loginService.getLogin(login.getUserName());
+		//String user = login.getUserName();
+    	//LoginEntity temp = loginService.getLogin(login.getUserName());
+    	
+    	//return authenticationService.verifyLogin(login.getUserName(), login.getPassword());
     	
     	return true;
     }

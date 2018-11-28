@@ -66,7 +66,7 @@ public class StudentController {
 	 /**
 	  * @return List of Students based on CourseID
 	  */
-	 @GetMapping("/{course_id}")
+	 @GetMapping("/course/{course_id}")
 	    public ResponseEntity<?> getStudentsinCourse(@PathVariable("course_id") long course_id) {
 		 Iterable <AccountEntity> courseStudents = student.getAllParticipantsInCourse(course_id);
 		if(courseStudents==null) {
@@ -81,10 +81,10 @@ public class StudentController {
 		 	@GetMapping("/InstructorList")
 		    public  ResponseEntity<Iterable<AccountEntity>> getInstructorList() {
 		 		Iterable<AccountEntity> instructorData = student.getInstructorList();
-			if(instructorData==null) {
-				return new ResponseEntity(new RuntimeException("Instructor Data not found"), HttpStatus.NOT_FOUND);
-			}
-			return new ResponseEntity<Iterable <AccountEntity>>(instructorData, HttpStatus.OK);
+				if(instructorData==null) {
+					return new ResponseEntity(new RuntimeException("Instructor Data not found"), HttpStatus.NOT_FOUND);
+				}
+				return new ResponseEntity<Iterable <AccountEntity>>(instructorData, HttpStatus.OK);
 		    }
 
 }
