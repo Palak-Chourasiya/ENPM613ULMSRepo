@@ -18,7 +18,7 @@ public class AccountController {
     IAccountService accountService; //Service which will do all data retrieval/manipulation work
 	
     @GetMapping("/")
-    public ResponseEntity<?> index() {
+    public ResponseEntity<?> getAllAccounts() {
     	return new ResponseEntity<Iterable<AccountEntity>>(accountService.getAllAccounts(), HttpStatus.OK);
     }
     

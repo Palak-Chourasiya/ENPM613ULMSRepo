@@ -55,7 +55,6 @@ public class CourseModuleController {
 			                               @RequestParam("title") String title,
 			                               @RequestParam("date_published") ZonedDateTime date_published) {
     	
-		// assign parameters to taskDocumentEntity by constructor args or setters
 	    CourseModuleEntity module = new CourseModuleEntity();
 	    module.setModule_number(module_number);
 	    module.setCourse_id(course_id);

@@ -22,7 +22,7 @@ import org.springframework.data.domain.Pageable;
  * -related operations.
  */
 @Service
-public class CourseService {
+public class CourseManagementService {
     public static final String CACHE_NAME = "cache.recipe";
     public static final Class<CourseEntity> CACHE_TYPE = CourseEntity.class;
     public static final String CACHE_TTL = "${cache.recipe.timetolive:60}";
@@ -31,7 +31,7 @@ public class CourseService {
     private final CourseRepository courseRepository;
 
     @Autowired
-    public CourseService(CourseRepository courseRepository) {
+    public CourseManagementService(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
 

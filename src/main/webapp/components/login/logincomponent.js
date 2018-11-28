@@ -19,11 +19,12 @@ angular.module('ULMS')
       
       $scope.submitLogin = function() {
 
-          var method = "GET";
+          var method = "POST";
           var url = "login";
           
           var temp = angular.toJson($scope.loginForm);
 
+          /*
           $http({
         	method: "GET",
             url: "token"
@@ -39,18 +40,39 @@ angular.module('ULMS')
               $scope.greeting = data;
             });
           })
+          */
           
           /*
           $http({
-              method : method,
-              url : url,
+              method : "GET",
+              url : "login",
               //data : angular.toJson($scope.loginForm),
               headers : {
-            	  authorization : "Basic " + btoa($scope.loginForm.userName + ":" + $scope.loginForm.password),
-                  'Content-Type' : 'application/json'
+            	  authorization : "Basic " + btoa($scope.loginForm.userName + ":" + $scope.loginForm.password)//,
+                  //'Content-Type' : 'application/json'
               }
           }).then( _success, _error );
           */
+          
+          $http({
+        	  method : "POST",
+        	  url : "login",
+        	  data : angular.toJson($scope.loginForm)
+          }).then(function(response) {
+        	  var temp = response.data;
+        	  if (response.data) {
+        		  var token = $window.btoa($scope.loginForm.userName + ':' + $scope.loginForm.password);
+                var userData = {
+                    userName: $scope.loginForm.userName,
+                    authData: token
+                }
+                $window.sessionStorage.setItem(
+                  'userData', JSON.stringify(userData)
+                );
+                $http.defaults.headers.common['Authorization']
+                  = 'Basic ' + token;
+        	  }
+          });
       };
       
       function _success(response) {
