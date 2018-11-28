@@ -16,10 +16,9 @@ import ulms.login.models.AccountRepository;
 public class StudentEnrollmentService {
 	 public static final String CACHE_NAME = "cache.account";
 	 public static final Class CACHE_TYPE = AccountEntity.class;
-	 @Autowired
+	 public static final String CACHE_TTL = "${cache.login.timetolive:60}";
+	 
 	 private final AccountRepository accountRepository;
-	
-	 @Autowired
 	 private final ParticipantsRepository participantsRepository;
 	 
 	  @Autowired

@@ -1,6 +1,6 @@
 angular.module('ULMS')
-  .component('recipes', {
-    templateUrl: 'components/studentList/studentList.css',
+  .component('student', {
+    templateUrl: 'components/student/student.html',
     bindings: {},
 
     controller: function($scope, $http) {
@@ -19,7 +19,6 @@ angular.module('ULMS')
           var method = "";
           var url = "";
        
-           Private Methods 
       //HTTP GET- get all countries collection
       function _refreshStudentData() {
       	  $http({
