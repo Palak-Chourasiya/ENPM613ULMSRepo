@@ -46,10 +46,10 @@ public class messageEntity {
 	
 	@Column(name="subject")
 	private String subject;	
-
-	@OneToMany(mappedBy = "getKey().message_id")
-	private Set<messageReceiverEntity> messageReceiver;
 	
+	
+	
+		
 //	@ManyToOne
 //    @JoinColumn(name="user_name", insertable=false, updatable=false, referencedColumnName="user_name")
 //    private AccountEntity account;
@@ -59,6 +59,17 @@ public class messageEntity {
 		this.userName = "";
 		this.subject = "";
 		this.message = "";
+	}
+	
+	public messageEntity(String userName, String subject, String message)
+	{
+		this.deleted = false;
+		this.userName = userName;
+		this.subject = subject;
+		this.message = message;
+		this.sendDate = new Date();
+		this.id = (Long) null;
+		
 	}
 	
 	public long getId() {

@@ -19,7 +19,7 @@ public class MessageService {
 	public MessageService(messageRepository messRepository) {
 		this.messRepository = messRepository;
 	}
-	
+
 	public messageEntity getMessage(Long messageID) {
 		Optional<messageEntity> message = messRepository.findById(messageID);
 		return message.get();

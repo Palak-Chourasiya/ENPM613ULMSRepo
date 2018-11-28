@@ -43,11 +43,7 @@ public class messageController {
 			                               @RequestParam("message") String message,
 			                               @RequestParam("receivers") String receivers) {
 		// assign parameters to taskDocumentEntity by constructor args or setters
-	    messageEntity messageData = new messageEntity();
-	    messageData.setMessage(message);
-	    messageData.setUserName(user_name);
-	    messageData.setSubject(subject);
-	    messageData.setSendDate(new Date());
+	    messageEntity messageData = new messageEntity(user_name, subject, message);
 	    messService.addMessage(messageData);
 	    
 	    for(String receiver : receivers.split(";"))

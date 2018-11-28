@@ -9,6 +9,16 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class messageReceiverKey implements Serializable{
+	 public messageReceiverKey()
+	 {
+		 this.id = null;
+		 this.email = null;
+	 }
+	 public messageReceiverKey(Long id, String email)
+	 {
+		 this.id = id;
+		 this.email = email;
+	 }
 	
 	@Column (name="message_id", nullable = false)
 	private Long id;

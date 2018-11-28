@@ -14,6 +14,12 @@ import ulms.login.models.AccountEntity;
 @Entity
 @Table(name = "MessageReceivers")
 public class messageReceiverEntity {
+	
+	public messageReceiverEntity()
+	{
+		this.key = new messageReceiverKey();
+		this.message_flags = messageFlag.notread;
+	}
 
 	@Override
 	public String toString() {
@@ -60,9 +66,6 @@ public class messageReceiverEntity {
         		return messageFlag.deleted;
         	}
         	return messageFlag.notread;
-           
         }
-
     }
-
 	}
