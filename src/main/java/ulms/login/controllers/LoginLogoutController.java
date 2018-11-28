@@ -28,13 +28,10 @@ import ulms.login.models.LoginEntity;
 @RequestMapping(path="/")
 public class LoginLogoutController {
 	
+	//@Autowired
+	//IAuthenticationService authenticationService;
 	@Autowired
-<<<<<<< HEAD
-	ILoginLogoutService loginService;
-	IAuthenticationService authenticationService;
-=======
 	UserLoginLogoutServiceInterface loginService;
->>>>>>> f746edaf4e88f2634b15c5cfedad34975e202305
 	
 	@RequestMapping("/token")
 	@ResponseBody
@@ -67,9 +64,9 @@ public class LoginLogoutController {
 		//String user = login.getUserName();
     	//LoginEntity temp = loginService.getLogin(login.getUserName());
     	
-    	return authenticationService.verifyLogin(login.getUserName(), login.getPassword());
+    	//return authenticationService.verifyLogin(login.getUserName(), login.getPassword());
     	
-    	//return true;
+    	return true;
     }
 	
 	@GetMapping("/logout")
