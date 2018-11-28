@@ -24,7 +24,7 @@ import ulms.students.StudentEnrollmentService;
 public class CourseController2 {
 
 	@Autowired
-	CourseService courseService;
+	CourseManagementService courseManagementService;
 	
     @GetMapping("/")
     public @ResponseBody String index() {
@@ -69,7 +69,7 @@ public class CourseController2 {
 
     @GetMapping("/{course_id}")
     public ResponseEntity<?> getCourse(@PathVariable("course_id") long course_id) {
-        CourseEntity course = courseService.getCourse(course_id);
+        CourseEntity course = courseManagementService.getCourse(course_id);
     	if(course==null) {
     		return new ResponseEntity(new RuntimeException("Course with id not found"), HttpStatus.NOT_FOUND);
     	}

@@ -30,11 +30,11 @@ import ulms.students.StudentEnrollmentService;
 public class CourseController {
 
 	@Autowired
-	CourseService courseService;
+	CourseManagementService courseManagementService;
 	
     @GetMapping("/")
     public ResponseEntity<?> getCourses() {
-    	Iterable<CourseEntity> courses = courseService.getAllCourses();
+    	Iterable<CourseEntity> courses = courseManagementService.getAllCourses();
     	if(courses==null) {
     		return new ResponseEntity(new RuntimeException("No courses found"), HttpStatus.NOT_FOUND);
     	}
@@ -43,29 +43,10 @@ public class CourseController {
 
     @GetMapping("/{course_id}")
     public ResponseEntity<?> getCourse(@PathVariable("course_id") long course_id) {
-        CourseEntity course = courseService.getCourse(course_id);
+        CourseEntity course = courseManagementService.getCourse(course_id);
     	if(course==null) {
     		return new ResponseEntity(new RuntimeException("Course with id not found"), HttpStatus.NOT_FOUND);
     	}
     	return new ResponseEntity<CourseEntity> (course, HttpStatus.OK);
     }
-    
-    /*
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ResponseEntity<?> addMessage(@RequestParam("title") String title,
-			                               @RequestParam("details") String details,
-			                               @RequestParam("instructor_id") Long instructor_id,
-			                               @RequestParam("start_date") String start_date,
-			                               @RequestParam("end_date") String end_date) {
-		// assign parameters to taskDocumentEntity by constructor args or setters
-	    CourseEntity course = new CourseEntity();
-	    course.setTitle(title);
-	    course.setDetails(details);
-	    course.setInstructorId(instructor_id);
-	    course.setStartDate(start_date);
-	    course.setEndDate(end_date);
-	    courseService.addCourse(course);
-	    return new ResponseEntity<CourseEntity> (course, HttpStatus.OK);
-	}
-	*/
 }
