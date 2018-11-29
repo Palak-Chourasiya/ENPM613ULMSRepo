@@ -3,16 +3,15 @@ angular.module('ULMS')
     templateUrl: 'components/student/student.html',
     bindings: {},
 
-    controller: function($scope, $http ,$state) {
+    controller: function($scope, $http) {
 
       var ctrl = this;
       var 
       this.$onInit = function() {
         
       };
-      $scope.student = [];
-      $scope.demo='demo';
-      
+     // $scope.student = [];
+     /* $scope.demo='demo';
       _fetchStudentData();
       function _fetchStudentData() {
       	  $http({
@@ -25,6 +24,6 @@ angular.module('ULMS')
           });
 
       }
-    }
+    }*/
 
   })

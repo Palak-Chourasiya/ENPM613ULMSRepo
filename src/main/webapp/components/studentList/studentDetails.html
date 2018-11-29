@@ -3,9 +3,9 @@
   <baselayout>
       <h2>Students</h2>
       <div class="list-group">
-	    <a ng-repeat="recipe in recipes" ui-sref="recipe({id: '{{recipe.id}}'})" class="list-group-item">
-	      <h4 class="list-group-item-heading">{{recipe.title}}</h4>
-	      <p>{{recipe.overview}}</p>
+	    <a ng-repeat="student in students" ui-sref="student({id: '{{student.id}}'})" class="list-group-item">
+	      <h4 class="list-group-item-heading">{{student.firstName}} {{student.lastName}}</h4>
+	      <p>{{student.email}}</p>
 	    </a>
 	  </div>
   </baselayout>
