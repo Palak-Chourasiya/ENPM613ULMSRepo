@@ -6,7 +6,6 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  params: { status: null, statusText: null }
   })
 	
-	
   // State to login to ULMS
   $stateProvider.state('login', {
 	  url: '/login',

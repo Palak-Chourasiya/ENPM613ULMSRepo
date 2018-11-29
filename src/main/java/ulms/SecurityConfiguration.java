@@ -30,6 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated();
         */
     	
+    	/*
     	httpSecurity.csrf().disable()
     	            .authorizeRequests()
     	            .antMatchers("/app/**", "/images/**", "index.html", "/components/login/**").permitAll()
@@ -37,7 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .and()
                     .formLogin()
                        .loginPage("/")
-                       .permitAll(); 
+                       .permitAll();
+        */
     	
     	
     	//https://docs.spring.io/spring-security/site/docs/3.2.x/reference/htmlsingle/html5/#csrf-include-csrf-token-ajax

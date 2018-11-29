@@ -6,7 +6,7 @@ angular.module('ULMS')
     controller: function($scope, $http) {
 
       var ctrl = this;
-      var 
+      
       this.$onInit = function() {
         
       };
