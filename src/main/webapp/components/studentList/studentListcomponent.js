@@ -31,11 +31,6 @@ angular.module('ULMS')
           });
       }
 
-      function _success(response) {
-          _refreshCountryData();
-          _clearFormData()
-      }
-
       function _error(response) {
           console.log(response.statusText);
       }

@@ -23,11 +23,6 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  url: '/recipe',
 	  component: 'recipe'
   })
-  // State to view student
-  $stateProvider.state('student', {
-	  url: '/student',
-	  component: 'student'
-  })
   // State to view student List
   $stateProvider.state('studentList', {
 	  url: '/studentList',
@@ -38,13 +33,13 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  url: '/student',
 	  component: 'student'
   })
-/*
+
   // State to view courses
-  $stateProvider.state('courses', {
+  $stateProvider.state('course', {
     url: '/courses',
-    component: 'courses'
+    component: 'course'
   })
-*/
+
   // What to do if no state is specified
   $urlServiceProvider.rules.otherwise({
     state: 'login'
