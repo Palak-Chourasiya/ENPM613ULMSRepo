@@ -33,6 +33,11 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  url: '/studentList',
 	  component: 'studentList'
   })
+  // State to view single student 
+  $stateProvider.state('student', {
+	  url: '/student',
+	  component: 'student'
+  })
 /*
   // State to view courses
   $stateProvider.state('courses', {
