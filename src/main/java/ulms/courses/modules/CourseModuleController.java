@@ -1,6 +1,8 @@
 package ulms.courses.modules;
 
 import java.time.ZonedDateTime;
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +55,7 @@ public class CourseModuleController {
 	public ResponseEntity<?> addModule(@RequestParam("module_number") Long module_number,
 			                               @RequestParam("course_id") Long course_id,
 			                               @RequestParam("title") String title,
-			                               @RequestParam("date_published") ZonedDateTime date_published) {
+			                               @RequestParam("date_published") Date date_published) {
     	
 	    CourseModuleEntity module = new CourseModuleEntity();
 	    module.setModule_number(module_number);

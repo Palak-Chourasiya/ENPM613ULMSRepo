@@ -1,6 +1,7 @@
 package ulms.courses.modules;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -50,7 +51,7 @@ public class CourseModuleEntity implements Serializable {
 
 	
 	@Column(name="date_published", nullable=false)
-	private ZonedDateTime date_published;
+	private Date date_published;
 
 	public void setModule_number(Long module_number) {
 		this.module_number = module_number;
@@ -72,11 +73,11 @@ public class CourseModuleEntity implements Serializable {
 		this.title = title;
 	}
 
-	public ZonedDateTime getDate_published() {
+	public Date getDate_published() {
 		return date_published;
 	}
 
-	public void setDate_published(ZonedDateTime date_published) {
+	public void setDate_published(Date date_published) {
 		this.date_published = date_published;
 	}
 	
