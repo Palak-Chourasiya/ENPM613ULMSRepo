@@ -53,6 +53,25 @@ public class CourseModuleEntity implements Serializable {
 	@Column(name="date_published", nullable=false)
 	private Date date_published;
 
+	@Column(name="recipe_link") 
+	private String recipe_link;
+	
+	public CourseEntity getCourse() {
+		return course;
+	}
+
+	public void setCourse(CourseEntity course) {
+		this.course = course;
+	}
+
+	public String getRecipe_link() {
+		return recipe_link;
+	}
+
+	public void setRecipe_link(String recipe_link) {
+		this.recipe_link = recipe_link;
+	}
+
 	public void setModule_number(Long module_number) {
 		this.module_number = module_number;
 	}

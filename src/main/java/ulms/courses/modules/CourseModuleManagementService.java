@@ -1,5 +1,7 @@
 package ulms.courses.modules;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class CourseModuleManagementService {
      * 
      * @return Fetches the modules of all courses 
      */
-    public Iterable<CourseModuleEntity> getAllCourseModules() {
+    public List<CourseModuleEntity> getAllCourseModules() {
         return courseModuleRepository.findAll();
     }
     /**
@@ -50,4 +52,24 @@ public class CourseModuleManagementService {
 	 public void deleteModule(Long module_number) {
 		 	courseModuleRepository.deleteById(module_number);
 		}
+	public Iterable<CourseModuleEntity> getModulesforCourse(long course_id) {
+		List<CourseModuleEntity> modules= new ArrayList<CourseModuleEntity>();
+		try {
+		 modules= getAllCourseModules();
+		}catch(Exception e) {
+			System.out.println(e+ "exception caught");
+		}
+		List<CourseModuleEntity> modulesforcourse= new ArrayList<CourseModuleEntity>();
+		
+		try {
+			for(CourseModuleEntity module:modules) {
+				if(course_id==module.getCourse_id()) {
+					modulesforcourse.add(module);
+				}
+			}
+			}catch(Exception e) {
+				System.out.println(e+ "exception caught");
+			}
+		return modulesforcourse;
+	}
 }
