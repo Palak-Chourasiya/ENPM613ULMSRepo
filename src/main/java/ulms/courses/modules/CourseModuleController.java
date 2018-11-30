@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ulms.courses.CourseEntity;
+
 @Controller
 @RequestMapping(path="/module")
 
@@ -22,12 +24,7 @@ public class CourseModuleController {
 	CourseModuleManagementService moduleService;
 
 	@GetMapping("/")
-	public @ResponseBody String index() {
-		return "TEST";
-	}
-	
-    @GetMapping("/showAll")
-    public ResponseEntity<?> getCourseModules() {
+	public ResponseEntity<?> getCourseModules() {
     	Iterable<CourseModuleEntity> courses = moduleService.getAllCourseModules();
 
     	if(courses==null) {
@@ -72,5 +69,15 @@ public class CourseModuleController {
 		return "Success";
 	}
   
+    @GetMapping("/courseModule/{course_id}")
+    public ResponseEntity<?> getModulesforCourse(@PathVariable("course_id") long course_id) {
+    	Iterable<CourseModuleEntity> courseModuleData= moduleService.getModulesforCourse(course_id);
+    	if(courseModuleData==null) {
+    		return new ResponseEntity(new RuntimeException("Modules are not present in the course with id" + course_id),
+					HttpStatus.NOT_FOUND);
+    	}
+		return  new ResponseEntity<Iterable<CourseModuleEntity>>(courseModuleData, HttpStatus.OK);
+	} 
 	
+    
 }

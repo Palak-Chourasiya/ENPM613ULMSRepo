@@ -38,6 +38,10 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
     url: '/courses',
     component: 'course'
   })
+  $stateProvider.state('module', {
+    url: '/module',
+    component: 'module'
+  })
 
   // What to do if no state is specified
   $urlServiceProvider.rules.otherwise({
