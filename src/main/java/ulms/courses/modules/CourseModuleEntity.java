@@ -19,6 +19,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ulms.courses.CourseEntity;
 import ulms.students.ParticipantsEntity;
 
@@ -36,6 +38,7 @@ public class CourseModuleEntity implements Serializable {
 	}
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="course_id",insertable=false, updatable=false)
     private CourseEntity course;
 

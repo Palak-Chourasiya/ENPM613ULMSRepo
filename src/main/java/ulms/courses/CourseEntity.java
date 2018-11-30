@@ -19,6 +19,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ulms.courses.modules.CourseModuleEntity;
 import ulms.students.ParticipantsEntity;
 
@@ -48,6 +50,7 @@ public class CourseEntity implements Serializable {
 	
 	
 	@OneToMany(mappedBy = "course")
+	@JsonIgnore
     private Set<ParticipantsEntity> participantEntity;
 
     public Set<ParticipantsEntity> getParticipantEntity() {
@@ -55,6 +58,7 @@ public class CourseEntity implements Serializable {
 	}
 	
     @OneToMany(mappedBy="course")
+    @JsonIgnore
     private Set<CourseModuleEntity> module;
 
 

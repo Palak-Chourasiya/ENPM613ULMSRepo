@@ -53,6 +53,7 @@ public class AccountEntity {
     */
     
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="role_id", insertable=false, updatable=false, referencedColumnName="id")
     private RoleEntity role;
     

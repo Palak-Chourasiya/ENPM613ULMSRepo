@@ -23,7 +23,7 @@ angular.module('ULMS')
         function _refreshCourseData() {
             $http({
                 method : 'GET',
-                url : 'http://localhost:8080/courses'
+                url : 'http://localhost:8080/courses/'
             }).then(function successCallback(response) {
                 $scope.courses = response.data;
             }, function errorCallback(response) {
