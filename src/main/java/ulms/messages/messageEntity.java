@@ -30,7 +30,7 @@ public class messageEntity {
 	@Column(name="id", unique = true)
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long message_id;
 	
 	@Column(name="user_name")
 	private String userName;
@@ -46,6 +46,14 @@ public class messageEntity {
 	
 	@Column(name="subject")
 	private String subject;	
+	
+    @OneToMany(mappedBy="message")
+    private Set<messageReceiverEntity> receivers;
+
+
+    public Set<messageReceiverEntity> getReceiverEntity() {
+		return receivers;
+	}
 	
 	
 	
@@ -68,16 +76,16 @@ public class messageEntity {
 		this.subject = subject;
 		this.message = message;
 		this.sendDate = new Date();
-		this.id = (Long) null;
+		this.message_id = (Long) null;
 		
 	}
 	
 	public long getId() {
-		return id;
+		return message_id;
 	}
 	
 	public void setId(long id) {
-		this.id = id;
+		this.message_id = id;
 	}
 	
 	public String getUserName() {
@@ -122,7 +130,7 @@ public class messageEntity {
 	
 	@Override
 	public String toString() {
-		return "messageEntity [id=" + id + ", userName=" + userName + ", deleted=" + deleted + ", message=" + message
+		return "messageEntity [id=" + message_id + ", userName=" + userName + ", deleted=" + deleted + ", message=" + message
 				+ ", subject=" + subject + ", sendDate=" + sendDate + "]";
 	}		
 }

@@ -49,10 +49,9 @@ public class messageController {
 	    for(String receiver : receivers.split(";"))
 	    {
 	    	messageReceiverEntity messageReceiverData = new messageReceiverEntity();
-	    	messageReceiverKey messKey = new messageReceiverKey();
-	    	messKey.setEmail(receiver);
-	    	messKey.setId(messageData.getId());
-	    	messageReceiverData.setKey(messKey);
+	    	messageReceiverIdentity messKey = new messageReceiverIdentity();
+	    	messageReceiverData.setMessage_id(messageData.getId());
+	    	messageReceiverData.setEmail(receiver);
 	    	messageReceiverData.setMessage_flags(messageFlag.notread);
 	    	messReceiverService.addMessageReceiver(messageReceiverData);
 	    }

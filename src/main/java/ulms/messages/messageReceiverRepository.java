@@ -6,6 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface messageReceiverRepository extends JpaRepository<messageReceiverEntity, messageReceiverKey>{
+public interface messageReceiverRepository extends JpaRepository<messageReceiverEntity, messageReceiverIdentity>{
 
 }

@@ -1,10 +1,13 @@
 package ulms.messages;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -13,31 +16,56 @@ import ulms.login.models.AccountEntity;
 
 @Entity
 @Table(name = "MessageReceivers")
-public class messageReceiverEntity {
+@IdClass(messageReceiverIdentity.class)
+public class messageReceiverEntity implements Serializable {
 	
 	public messageReceiverEntity()
 	{
-		this.key = new messageReceiverKey();
-		this.message_flags = messageFlag.notread;
+//		this.key = new messageReceiverIdentity();
+//		this.message_flags = messageFlag.notread;
 	}
 
 	@Override
 	public String toString() {
-		return "messageReceiverEntity [key=" + key + ", message_flags=" + message_flags + "]";
+		return "";
+		//return "messageReceiverEntity [key=" + key + ", message_flags=" + message_flags + "]";
 	}
 
-	@EmbeddedId
-	private messageReceiverKey key;
 	
+	@ManyToOne
+	@JoinColumn(name="message_id",insertable=false, updatable=false)
+    private messageEntity message;
+
+	
+	@Id
+	@Column(name="message_id")
+	private long message_id;
+	
+	@Id
+	@Column(name="email")
+	private String email;
+	
+	public long getMessage_id() {
+		return message_id;
+	}
+
+	public void setMessage_id(long message_id) {
+		this.message_id = message_id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	@Column(name="message_flags")
 	private messageFlag message_flags;
 	
-	public messageReceiverKey getKey() {
-		return key;
-	}
-	public void setKey(messageReceiverKey key) {
-		this.key = key;
-	}
+
 	public messageFlag getMessage_flags() {
 		return message_flags;
 	}
