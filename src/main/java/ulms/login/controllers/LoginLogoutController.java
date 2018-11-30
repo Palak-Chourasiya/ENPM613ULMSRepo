@@ -47,6 +47,11 @@ public class LoginLogoutController {
           .decode(authToken)).split(":")[0];
     }
 	
+	@RequestMapping("/user")
+    public Principal user(Principal user) {
+      return user;
+    }
+	
 	@GetMapping("/login")
 	@ResponseBody
     public boolean login(HttpServletRequest request) {
