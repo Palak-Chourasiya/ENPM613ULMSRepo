@@ -42,5 +42,12 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   // What to do if no state is specified
   $urlServiceProvider.rules.otherwise({
     state: 'login'
-  });
+  })
+  
+  // State to view account 
+  $stateProvider.state('account', {
+	    url: '/account',
+	    component: 'account'
+  })
+	    	
 })
