@@ -86,6 +86,8 @@ public class CourseEntity implements Serializable {
 	@Column(name="end_date", nullable=false)
 	private Date end_date;
 	
+	@Column(name="syllabus") 
+	private String syllabus;
 	
 	@OneToMany(mappedBy = "course")
 	@JsonIgnore
@@ -135,6 +137,14 @@ public class CourseEntity implements Serializable {
 	
 	public void setInstructorId(Long instructor_id) {
 		this.instructor_id  = instructor_id;
+	}
+	
+	public String getSyllabus() {
+		return this.syllabus;
+	}
+
+	public void setSyllabus(String syllabus) {
+		this.syllabus = syllabus;
 	}
 	
 	/*
