@@ -86,7 +86,7 @@ public class CourseEntity implements Serializable {
 	@Column(name="end_date", nullable=false)
 	private Date end_date;
 	
-	@Column(name="syllabus") 
+	@Column(name="syllabus_link") 
 	private String syllabus;
 	
 	@OneToMany(mappedBy = "course")
