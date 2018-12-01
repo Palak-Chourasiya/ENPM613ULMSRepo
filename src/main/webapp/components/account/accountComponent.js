@@ -23,7 +23,7 @@ angular.module('ULMS')
       function _refreshAccountData() {
           $http({
               method : 'GET',
-              url : 'http://localhost:8080/accounts/'
+              url : 'http://localhost:8080/accounts/15'
           }).then(function successCallback(response) {
         	  $scope.account = response.data;
           }, function errorCallback(response) {
