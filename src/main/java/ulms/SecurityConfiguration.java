@@ -39,17 +39,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
     	/***************
     	httpSecurity
-        .httpBasic().and()
         .authorizeRequests()
-        .antMatchers("/", "/#!/login").hasRole("USER")
+        .antMatchers("/", "/#!/login", "/static/**").hasRole("USER")
         .anyRequest().authenticated()
         .and()
         .formLogin()
-        .loginPage("/")
-        .loginProcessingUrl("/login")
+        .loginPage("/login")
+        .loginProcessingUrl("/authenticate")
 		.permitAll();
-    	***************/
-    	
+    	********************/
         //httpSecurity.authorizeRequests().antMatchers("/**").permitAll();
     	/*
     	httpSecurity.httpBasic().disable();

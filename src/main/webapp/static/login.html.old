@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<title>ULMS Portal</title>
+<link href="/static/login.css" rel="stylesheet" type="text/css">
+<body>
+	<div class="loginbox">
+	    <img src="/images/avatar.png" class="avatar">
+	    <h1></h1>
+	    <h1>Login Here</h1>
+	    <form name="submitForm">
+	        <p>Username</p>
+	        <input type="text" name="userName" placeholder="Enter Username" ng-model="loginForm.userName">
+	        <p>Password</p>
+	        <input type="password" name="password" placeholder="Enter Password" ng-model="loginForm.password">
+	        <input type="submit" name="" value="Login">
+	        <a href="#">Lost your password?</a><br>
+	        <a href="#">Don't have an account?</a>
+	    </form>
+	</div>
+</body>
+</html>

@@ -53,9 +53,9 @@ public class LoginLogoutController {
     }
 	
 	@GetMapping("/login")
-	@ResponseBody
-    public boolean login(HttpServletRequest request) {
-		return true;
+    public String login(HttpServletRequest request) {
+		return "login";
+		//return true;
     	//return new ResponseEntity<LoginEntity>(loginService.getLogin(userName), HttpStatus.OK);
     }
 	

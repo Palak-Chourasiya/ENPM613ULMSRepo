@@ -32,26 +32,38 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  url: '/student',
 	  component: 'student'
   })
-
   // State to view courses
+  $stateProvider.state('courses', {
+	  url: '/courses',
+	  component: 'courses'
+  })
+  // State to view a single course
   $stateProvider.state('course', {
-    url: '/courses',
+    url: '/course',
     component: 'course'
   })
+  // State to view modules
+  $stateProvider.state('modules', {
+	  url: '/modules',
+	  component: 'modules'
+  })
+  // State to view a single module
   $stateProvider.state('module', {
     url: '/module',
     component: 'module'
   })
-
-  // What to do if no state is specified
-  $urlServiceProvider.rules.otherwise({
-    state: 'login'
-  })
-  
   // State to view account 
   $stateProvider.state('account', {
 	    url: '/account',
 	    component: 'account'
   })
-	    	
+  // State to view message 
+  $stateProvider.state('messages', {
+	    url: '/messages',
+	    component: 'messages'
+  })
+  // What to do if no state is specified
+  $urlServiceProvider.rules.otherwise({
+    state: 'login'
+  })   	
 })
