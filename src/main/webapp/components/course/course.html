@@ -1,0 +1,29 @@
+<title>ULMS Portal</title>
+<link href="components/course/course.css" rel="stylesheet"
+	type="text/css">
+
+<baselayout>
+
+<h2>BAKING</h2>
+<div row>
+	<div class="col-md-8">
+		<div class="list-group">
+			<a ng-repeat="module in course.moduleEntity"
+			   href="{{module.recipe_link}}" target="_blank"
+		       class="list-group-item">
+				<h4 class="list-group-item-heading">Module Name : {{module.title}}</h4>
+		        <p>Recipe Page: {{module.recipe_link}}</p>
+		        <p>Published Date: {{module.date_published}}</p>
+			</a>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<nav class="bs-docs-sidebar">
+			<ul class="nav bs-docs-sidenav">
+				<li><a ui-sref="StudentList" >Students</a></li>
+				<li><a ui-sref="StudentList" >Instructor</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
+</baselayout>
