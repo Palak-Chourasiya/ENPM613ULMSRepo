@@ -31,8 +31,28 @@ import ulms.students.StudentEnrollmentService;
 @RequestMapping(path="/syllabus")
 public class SyllabusController {
 
-	@GetMapping("/")
-    public String ksldjf(HttpServletRequest request) {
-		return "syllabusAmericanCuisine";
+	@GetMapping("/american")
+    public String americanSyllabus(HttpServletRequest request) {
+		return "/syllabus/syllabusAmericanCuisine";
+    }
+	
+	@GetMapping("/baking")
+    public String bakingSyllabus(HttpServletRequest request) {
+		return "/syllabus/syllabusBaking";
+    }
+	
+	@GetMapping("/indian")
+    public String indianSyllabus(HttpServletRequest request) {
+		return "/syllabus/syllabusIndianCuisine";
+    }
+	
+	@GetMapping("/japanese")
+    public String japaneseSyllabus(HttpServletRequest request) {
+		return "/syllabus/syllabusJapaneseCuisine";
+    }
+	
+	@GetMapping("/mexican")
+    public String mexicanSyllabus(HttpServletRequest request) {
+		return "/syllabus/syllabusMexicanCuisine";
     }
 }
