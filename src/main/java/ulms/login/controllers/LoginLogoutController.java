@@ -6,11 +6,15 @@ import java.util.Collections;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,30 +37,9 @@ public class LoginLogoutController {
 	@Autowired
 	UserLoginLogoutServiceInterface loginService;
 	
-	@RequestMapping("/token")
-	@ResponseBody
-	public Map<String,String> token(HttpSession session) {
-	  return Collections.singletonMap("token", session.getId());
-	}
-	
-	@RequestMapping("/hasaccess")
-	public Principal hasAccess(HttpServletRequest request) {
-        String authToken = request.getHeader("Authorization")
-          .substring("Basic".length()).trim();
-        return () ->  new String(Base64.getDecoder()
-          .decode(authToken)).split(":")[0];
-    }
-	
-	@RequestMapping("/user")
-    public Principal user(Principal user) {
-      return user;
-    }
-	
 	@GetMapping("/login")
     public String login(HttpServletRequest request) {
 		return "login";
-		//return true;
-    	//return new ResponseEntity<LoginEntity>(loginService.getLogin(userName), HttpStatus.OK);
     }
 	
 	@GetMapping("/alllogins")
@@ -75,6 +58,16 @@ public class LoginLogoutController {
     }
 	
 	@GetMapping("/logout")
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
+	    return "redirect:/login?logout";
+	}
+	
+	/*
+	@GetMapping("/logout")
     public ResponseEntity<?> logout() {
     	return new ResponseEntity<Iterable<LoginEntity>>(loginService.getAllLogins(), HttpStatus.OK);
     }
@@ -83,4 +76,5 @@ public class LoginLogoutController {
     public ResponseEntity<?> submitLogout() {
     	return new ResponseEntity<Iterable<LoginEntity>>(loginService.getAllLogins(), HttpStatus.OK);
     }
+    */
 }

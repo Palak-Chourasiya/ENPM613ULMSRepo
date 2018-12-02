@@ -6,11 +6,13 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  params: { status: null, statusText: null }
   })
 	
-  // State to login to ULMS
+  // State to login to ULMS; NOTE: NOW STATIC TEMPLATE PAGE
+  /*
   $stateProvider.state('login', {
 	  url: '/login',
 	  component: 'login'
   })
+  */
 	
   // State to view list of recipes
   $stateProvider.state('recipes', {
@@ -64,6 +66,6 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   })
   // What to do if no state is specified
   $urlServiceProvider.rules.otherwise({
-    state: 'login'
+    state: 'courses'
   })   	
 })

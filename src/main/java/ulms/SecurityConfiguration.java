@@ -37,17 +37,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-    	/***************
+
     	httpSecurity
         .authorizeRequests()
-        .antMatchers("/", "/#!/login", "/static/**").hasRole("USER")
+        .antMatchers("/", "/static/**", "/images/**", "/styles/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()
         .loginPage("/login")
-        .loginProcessingUrl("/authenticate")
+        .usernameParameter("username")
+        .passwordParameter("password")
+        //.loginProcessingUrl("/authenticate")
+        .and()
+        .logout()
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/login")
+        .invalidateHttpSession(true)
+        .deleteCookies("JSESSIONID")
 		.permitAll();
-    	********************/
+
         //httpSecurity.authorizeRequests().antMatchers("/**").permitAll();
     	/*
     	httpSecurity.httpBasic().disable();
