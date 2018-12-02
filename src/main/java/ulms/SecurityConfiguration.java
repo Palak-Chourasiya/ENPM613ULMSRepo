@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -40,19 +41,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     	httpSecurity
         .authorizeRequests()
-        .antMatchers("/", "/static/**", "/images/**", "/styles/**").permitAll()
-        .anyRequest().authenticated()
+        .antMatchers( "/static/**", "/images/**", "/styles/**", "/components/error/**").permitAll()
+        // All remaining paths…
+        .anyRequest()
+        // ...require user to at least be authenticated
+        .authenticated()
         .and()
+        // And if a user needs to be authenticated...
         .formLogin()
         .loginPage("/login")
         .usernameParameter("username")
         .passwordParameter("password")
         //.loginProcessingUrl("/ulms")
         .defaultSuccessUrl("/ulms",true)
+        .failureUrl("/login.html?error=true")
         .and()
+        // If user isn't authorised to access a path...
+        .exceptionHandling()
+        // ...redirect them to /403
+        .accessDeniedPage("/403")
+        .and()
+        // And if the user needs to logout...
         .logout()
+        // ...redirect them to /logout
         .logoutUrl("/logout")
-        .logoutSuccessUrl("/login")
+        .logoutSuccessUrl("/login?logout")
         .invalidateHttpSession(true)
         .deleteCookies("JSESSIONID")
 		.permitAll();

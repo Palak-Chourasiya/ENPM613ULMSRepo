@@ -1,4 +1,14 @@
 angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $urlRouterProvider) {
+  // function to check the authentication //
+  var Auth = ["$q", "authService", function ($q, authService) {
+      authService.fillAuthData;
+      if (authService.authentication.isAuth) {
+          return $q.when(authService.authentication);
+      } else {
+          return $q.reject({ authenticated: false });
+      }
+  }];
+	
   // State to display HTTP Request errors
   $stateProvider.state('error', {
 	  url: '/error',
@@ -42,7 +52,8 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   // State to view a single course
   $stateProvider.state('course', {
     url: '/course',
-    component: 'course'
+    component: 'course',
+    params: { id: null }
   })
   // State to view modules
   $stateProvider.state('modules', {
@@ -67,5 +78,11 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   // What to do if no state is specified
   $urlServiceProvider.rules.otherwise({
     state: 'courses'
-  })   	
+  })
+  /*
+  $urlServiceProvider.rules.otherwise({
+    state: 'error',
+    params: { status: '404', statusText: 'Page Not Found' }
+  })
+  */
 })
