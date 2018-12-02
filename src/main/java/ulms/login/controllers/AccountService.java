@@ -1,5 +1,7 @@
 package ulms.login.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import ulms.login.exceptions.AccountNotFoundException;
 import ulms.login.models.AccountEntity;
 import ulms.login.models.AccountRepository;
+import ulms.messages.model.entity.messageReceiverEntity;
 
 /**
  * Service providing high-level, selectively cached data access and other {@link AccountEntity}
@@ -34,9 +37,8 @@ public class AccountService implements IAccountService {
     public AccountEntity getAccount(Long accountId) {
         Optional<AccountEntity> account = accountRepository.findById(accountId);
         if (!account.isPresent()) {
-            throw new AccountNotFoundException(accountId);
+            return null;
         }
-        
         return account.get();
     }
     
@@ -47,4 +49,13 @@ public class AccountService implements IAccountService {
     public void addAccount(AccountEntity newAccount) {
         accountRepository.save(newAccount);
     }
+    
+	public AccountEntity getMessageByEmail(String email)
+	{
+		List<AccountEntity> accounts = new ArrayList<>();
+		accounts = accountRepository.findByEmail(email);
+		if (accounts.size() != 1)
+			return null;
+		return accounts.get(0);
+	}
 }
