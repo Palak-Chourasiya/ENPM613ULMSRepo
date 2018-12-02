@@ -1,10 +1,7 @@
 package ulms.courses;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,12 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ulms.courses.modules.CourseModuleEntity;
 import ulms.students.ParticipantsEntity;
@@ -41,13 +37,58 @@ public class CourseEntity implements Serializable {
 	private Long instructor_id;
 	
 	@Column(name="start_date", nullable=false)
-	private ZonedDateTime start_date;
+	private Date start_date;
 	
+	public Long getInstructor_id() {
+		return instructor_id;
+	}
+
+
+	public void setInstructor_id(Long instructor_id) {
+		this.instructor_id = instructor_id;
+	}
+
+
+	public Date getStart_date() {
+		return start_date;
+	}
+
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+
+	public Date getEnd_date() {
+		return end_date;
+	}
+
+
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
+	}
+
+
+	public Set<CourseModuleEntity> getModule() {
+		return module;
+	}
+
+
+	public void setModule(Set<CourseModuleEntity> module) {
+		this.module = module;
+	}
+
+
+	public void setParticipantEntity(Set<ParticipantsEntity> participantEntity) {
+		this.participantEntity = participantEntity;
+	}
+
 	@Column(name="end_date", nullable=false)
-	private ZonedDateTime end_date;
+	private Date end_date;
 	
 	
 	@OneToMany(mappedBy = "course")
+	@JsonIgnore
     private Set<ParticipantsEntity> participantEntity;
 
     public Set<ParticipantsEntity> getParticipantEntity() {
@@ -55,6 +96,7 @@ public class CourseEntity implements Serializable {
 	}
 	
     @OneToMany(mappedBy="course")
+    @JsonIgnore
     private Set<CourseModuleEntity> module;
 
 

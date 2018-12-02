@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ulms.students.StudentEnrollmentService;
 
 @Controller
-@RequestMapping(path="/courses2")
+@RequestMapping(path="/coursesTest")
 public class CourseController2 {
 
 	@Autowired

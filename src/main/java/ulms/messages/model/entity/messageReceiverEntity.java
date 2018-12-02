@@ -1,10 +1,14 @@
-package ulms.messages;
+package ulms.messages.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -13,9 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import ulms.login.models.AccountEntity;
+import ulms.messages.model.dto.MessageReceiverDto;
+import ulms.messages.model.dto.MessageReceiverDto.messageFlag;
 
 @Entity
-@Table(name = "MessageReceivers")
+@Table(name = "messagereceivers")
 @IdClass(messageReceiverIdentity.class)
 public class messageReceiverEntity implements Serializable {
 	
@@ -24,11 +30,23 @@ public class messageReceiverEntity implements Serializable {
 //		this.key = new messageReceiverIdentity();
 //		this.message_flags = messageFlag.notread;
 	}
+	
+	
+	
+	public messageReceiverEntity(Long message_id, String email, messageFlag message_flag)
+	{
+		this.message_id = message_id;
+		this.email = email;
+		this.message_flag= message_flag;
+	}
+	
+	
+	
 
 	@Override
 	public String toString() {
-		return "";
-		//return "messageReceiverEntity [key=" + key + ", message_flags=" + message_flags + "]";
+		//return "";
+		return "messageReceiverEntity [message_id =" + message_id + ", email: "+ email + ", message_flags=" + message_flag.getValue() + "]";
 	}
 
 	
@@ -39,17 +57,17 @@ public class messageReceiverEntity implements Serializable {
 	
 	@Id
 	@Column(name="message_id")
-	private long message_id;
+	private Long message_id;
 	
 	@Id
 	@Column(name="email")
 	private String email;
 	
-	public long getMessage_id() {
+	public Long getMessage_id() {
 		return message_id;
 	}
 
-	public void setMessage_id(long message_id) {
+	public void setMessage_id(Long message_id) {
 		this.message_id = message_id;
 	}
 
@@ -62,19 +80,20 @@ public class messageReceiverEntity implements Serializable {
 	}
 
 
-	@Column(name="message_flags")
-	private messageFlag message_flags;
+	@Enumerated(EnumType.STRING)
+	@Column(name="message_flag")
+	private messageFlag message_flag;
 	
 
 	public messageFlag getMessage_flags() {
-		return message_flags;
+		return message_flag;
 	}
 	public void setMessage_flags(messageFlag message_flags) {
-		this.message_flags = message_flags;
+		this.message_flag = message_flags;
 	}
 	
 	public enum messageFlag {
-        read("read"), notread("not_read"), deleted("deleted");
+        read("read"), not_read("not_read"), deleted("deleted");
 
         private String value;
 
@@ -89,11 +108,31 @@ public class messageReceiverEntity implements Serializable {
         	case "read":
         		return messageFlag.read;
         	case "not_read":
-        		return messageFlag.notread;
+        		return messageFlag.not_read;
         	case "deleted":
         		return messageFlag.deleted;
         	}
-        	return messageFlag.notread;
+        	return messageFlag.not_read;
         }
     }
+	
+
+	
+	public static List<messageReceiverEntity> toEntity(List<MessageReceiverDto> entities)
+	{
+		List<messageReceiverEntity> returnValue = new ArrayList<>();
+		for(MessageReceiverDto entity : entities)
+			returnValue.add(messageReceiverEntity.toEntity(entity));
+		return returnValue;
+	}
+	
+	public static messageReceiverEntity toEntity(MessageReceiverDto entity)
+	{
+		return new messageReceiverEntity(entity.getMessage_id(), entity.getEmail(), messageFlag.fromString(entity.getMessage_flag().toString()));
+	}
+	
+	
+	
+	
+	
 	}

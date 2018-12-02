@@ -1,4 +1,4 @@
-package ulms.messages;
+package ulms.messages.model.entity;
 
 import java.io.Serializable;
 
@@ -20,7 +20,8 @@ public class messageReceiverIdentity implements Serializable{
 	 }
 	 public messageReceiverIdentity(Long id, String email)
 	 {
-		
+		this.message_id = id;
+		this.email = email;
 	 }
 	
 	
@@ -61,8 +62,7 @@ public class messageReceiverIdentity implements Serializable{
 	public String toString() {
 		return "messageRecieverKey [id=" + message_id + ", email=" + email + "]";
 	}
-
 	
-	
+		
 
 }

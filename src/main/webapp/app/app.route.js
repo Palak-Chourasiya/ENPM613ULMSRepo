@@ -6,7 +6,6 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  params: { status: null, statusText: null }
   })
 	
-	
   // State to login to ULMS
   $stateProvider.state('login', {
 	  url: '/login',
@@ -28,13 +27,18 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  url: '/studentList',
 	  component: 'studentList'
   })
-/*
-  // State to view courses
-  $stateProvider.state('courses', {
-    url: '/courses',
-    component: 'courses'
+  // State to view single student 
+  $stateProvider.state('student', {
+	  url: '/student',
+	  component: 'student'
   })
-*/
+
+  // State to view courses
+  $stateProvider.state('course', {
+    url: '/courses',
+    component: 'course'
+  })
+
   // What to do if no state is specified
   $urlServiceProvider.rules.otherwise({
     state: 'login'

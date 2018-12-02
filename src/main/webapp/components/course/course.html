@@ -1,0 +1,15 @@
+<title>ULMS Portal</title>
+<link href="components/course/course.css" rel="stylesheet" type="text/css">
+
+<baselayout>
+      <h2>Courses</h2>
+      <div class="list-group">
+	    <a ng-repeat="course in courses" ui-sref="course({id: '{{course.id}}'})" class="list-group-item">
+	      <h4 class="list-group-item-heading"> {{course.title}}</h4>
+	      <p>Description: {{course.details}}</p>
+	      <p>Start Date: {{course.start_date}}</p>
+	      <p>End Date: {{course.end_date}}</p>
+	    </a>
+	  </div>
+	  
+	  </baselayout>

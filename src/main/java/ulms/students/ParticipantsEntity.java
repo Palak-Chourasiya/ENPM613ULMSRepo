@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ulms.courses.CourseEntity;
 import ulms.login.models.AccountEntity;
 import ulms.recipes.models.IngredientEntity;
@@ -49,10 +51,12 @@ public class ParticipantsEntity {
 			}
 		    
 			@ManyToOne
+			@JsonIgnore
 			@JoinColumn(name="account_id", insertable=false, updatable=false, referencedColumnName="id")
 			private AccountEntity account;
 			
 			@ManyToOne
+			@JsonIgnore
 		    @JoinColumn(name="course_id", insertable=false, updatable=false, referencedColumnName="id")
 		    private CourseEntity course;
 
