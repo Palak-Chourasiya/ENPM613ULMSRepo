@@ -1,13 +1,5 @@
 package ulms.courses;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -41,5 +33,15 @@ public class SyllabusController {
 	@GetMapping("/mexican")
     public String mexicanSyllabus(HttpServletRequest request) {
 		return "/syllabus/syllabusMexicanCuisine";
+    }
+	
+	@GetMapping("/mediterranean")
+    public String mediterraneanSyllabus(HttpServletRequest request) {
+		return "/syllabus/syllabusMediterraneanCuisine";
+    }
+	
+	@GetMapping("/sauces")
+    public String saucesSyllabus(HttpServletRequest request) {
+		return "/syllabus/syllabusSaucesCuisine";
     }
 }
