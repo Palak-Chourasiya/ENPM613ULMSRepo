@@ -45,13 +45,21 @@ public class CourseModuleManagementService {
 	        return module.get();
 	    }
 	 
+	//creates a new course module
 	 public void addModule(CourseModuleEntity courseModule) {
 			courseModuleRepository.save(courseModule);
 		}
 	 
+	//creates a new course module
 	 public void deleteModule(Long module_number) {
 		 	courseModuleRepository.deleteById(module_number);
 		}
+	 
+	 // if course module already exist in the Db, update
+	 public void updateModule(CourseModuleEntity updateEntity) {
+		 courseModuleRepository.save(updateEntity);
+	 }
+	 
 	public Iterable<CourseModuleEntity> getModulesforCourse(long course_id) {
 		List<CourseModuleEntity> modules= new ArrayList<CourseModuleEntity>();
 		try {
