@@ -43,7 +43,7 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   $stateProvider.state('student', {
 	  url: '/studentforCourse',
 	  component: 'student',
-	  params: { course_id: null }	  
+	  params: { id: null }	  
   })
   // State to view courses
   $stateProvider.state('courses', {

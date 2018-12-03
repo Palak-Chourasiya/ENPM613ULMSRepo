@@ -11,13 +11,13 @@ angular.module('ULMS')
         
       };
      // $scope.student = [];
-      $scope.students='demo';
+      $scope.students=[];
       _fetchStudentData();
       
       function _fetchStudentData() {
       	  $http({
               method : 'GET',
-              url : 'http://localhost:8080/studentList/course/'+ $stateParams.course_id
+              url : 'http://localhost:8080/studentList/course/'+ $stateParams.id
           }).then(function successCallback(response) {
               $scope.students= response.data;
           }, function errorCallback(response) {
