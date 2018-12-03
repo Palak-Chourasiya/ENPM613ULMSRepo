@@ -57,7 +57,7 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   $stateProvider.state('course', {
     url: '/course',
     component: 'course',
-    params: { id: null }
+    params: { id: null, module_id: null }
   })
   // State to view modules
   $stateProvider.state('modules', {

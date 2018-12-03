@@ -31,5 +31,21 @@ angular.module('ULMS')
             });
         }
         
+
+        $scope.deleteCourseModule = function(module){
+        	$http({
+                method : 'DELETE',
+                url : 'http://localhost:8080/module/delete' + module.module_number
+            }).then(_success, _error)
+        }
+        
+     function _success(response) {  
+    	 _refreshCourseData();
+    }
+
+    function _error(response) {
+        console.log(response.statusText);
+    }
+        
       }
     })
