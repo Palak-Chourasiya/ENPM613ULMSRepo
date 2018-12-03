@@ -24,6 +24,7 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   })
   */
 	
+  /***
   // State to view list of recipes
   $stateProvider.state('recipes', {
     url: '/recipes',
@@ -34,6 +35,8 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	  url: '/recipe',
 	  component: 'recipe'
   })
+  ***/
+  
   // State to view student List
   $stateProvider.state('studentList', {
 	  url: '/studentList',
