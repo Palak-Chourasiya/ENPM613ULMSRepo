@@ -103,7 +103,7 @@ public class messageController {
     
     
     //Add Message
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/{userName}", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> addMessage(@PathVariable("userName") String userName, @RequestBody MessageFormDto messageDto)
 	{
