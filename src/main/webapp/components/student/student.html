@@ -2,8 +2,12 @@
 <link href="components/student/student.css" rel="stylesheet" type="text/css">
 <baselayout>  
  <div>
-<p class="studentDetail">Student Name:{{$ctrl.student.firstName}}</p>
-<p>{{demo}}</p>
+<h2>Students</h2>
+      <div class="list-group">
+	    <a ng-repeat="student in students" class="list-group-item">
+	      <h4 class="list-group-item-heading">{{student.firstName}} {{student.lastName}}</h4>
+	      <p>{{student.email}}</p>
+	    </a>
 </div>
 </baselayout>
 

@@ -17,12 +17,12 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   })
 	
   // State to login to ULMS; NOTE: NOW STATIC TEMPLATE PAGE
-  /*
+  
   $stateProvider.state('login', {
 	  url: '/login',
 	  component: 'login'
   })
-  */
+  
 	
   // State to view list of recipes
   $stateProvider.state('recipes', {
@@ -41,8 +41,9 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   })
   // State to view single student 
   $stateProvider.state('student', {
-	  url: '/student',
-	  component: 'student'
+	  url: '/studentforCourse',
+	  component: 'student',
+	  params: { course_id: null }	  
   })
   // State to view courses
   $stateProvider.state('courses', {
@@ -79,10 +80,10 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   $urlServiceProvider.rules.otherwise({
     state: 'courses'
   })
-  /*
-  $urlServiceProvider.rules.otherwise({
+  
+ /* $urlServiceProvider.rules.otherwise({
     state: 'error',
     params: { status: '404', statusText: 'Page Not Found' }
-  })
-  */
+  })*/
+  
 })
