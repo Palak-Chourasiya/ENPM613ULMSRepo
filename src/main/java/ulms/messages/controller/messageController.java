@@ -37,7 +37,7 @@ import ulms.messages.service.messageReceiverService;
 import ulms.recipes.models.RecipeEntity;
 
 @Controller
-@RequestMapping(path="/message")
+@RequestMapping(path="/messages")
 public class messageController {
 	
 	@Autowired
@@ -55,7 +55,7 @@ public class messageController {
 	
 	
 	//GetMessage	
- 	@RequestMapping(method = RequestMethod.GET)
+ 	@GetMapping(value = "/{messageId}")
     public ResponseEntity<?> getMessage(@PathVariable("messageId") Long messageId)
     {
 		messageEntity messagetData = messService.getMessage(messageId);
@@ -100,7 +100,12 @@ public class messageController {
 
 	}
     
-    
+    @GetMapping("/messages")
+	public @ResponseBody String test()
+	{
+		return "This is a test";
+	}
+
     
     //Add Message
 	@RequestMapping(value = "/{userName}", method = RequestMethod.POST)

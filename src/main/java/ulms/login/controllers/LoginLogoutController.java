@@ -49,16 +49,6 @@ public class LoginLogoutController {
     	return new ResponseEntity<Iterable<LoginEntity>>(loginService.getAllLogins(), HttpStatus.OK);
     }
 	
-	@PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
-    public boolean submitLogin(@RequestBody LoginEntity login) {
-		//String user = login.getUserName();
-    	//LoginEntity temp = loginService.getLogin(login.getUserName());
-    	
-    	//return authenticationService.verifyLogin(login.getUserName(), login.getPassword());
-    	
-    	return true;
-    }
-	
 	@GetMapping("/logout")
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();

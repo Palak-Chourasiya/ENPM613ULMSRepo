@@ -19,7 +19,7 @@ angular.module('ULMS')
       $scope.sendMessage = function() {
 
     	  var method = "POST";
-          var url = "message/ngan.ngo";
+          var url = "messages/nngo";
           var data = $scope.messageForm;
 
           $http({

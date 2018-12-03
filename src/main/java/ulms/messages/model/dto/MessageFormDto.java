@@ -10,8 +10,8 @@ import ulms.messages.model.entity.messageEntity;
 import ulms.messages.model.entity.messageReceiverEntity;
 
 public class MessageFormDto {
-	public MessageDto sender;
-	public List<MessageReceiverDto> receivers;
+	private MessageDto sender;
+	private List<MessageReceiverDto> receivers;
 	
 	
 	public MessageDto getSender() {
