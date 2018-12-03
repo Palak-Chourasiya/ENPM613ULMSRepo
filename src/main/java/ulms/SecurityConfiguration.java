@@ -57,10 +57,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .failureUrl("/login?error=true")
         .and()
         // If user isn't authorised to access a path...
-        .exceptionHandling()
+        //.exceptionHandling()
         // ...redirect them to /403
-        .accessDeniedPage("/403")
-        .and()
+        //.accessDeniedPage("/403")
+        //.and()
         // And if the user needs to logout...
         .logout()
         // ...redirect them to /logout
