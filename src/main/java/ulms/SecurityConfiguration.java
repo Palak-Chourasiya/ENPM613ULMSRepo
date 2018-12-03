@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     	httpSecurity
         .authorizeRequests()
-        .antMatchers( "/static/**", "/images/**", "/styles/**", "/components/error/**").permitAll()
+        .antMatchers("/", "/login**", "/static/**", "/images/**", "/styles/**", "/components/error/**").permitAll()
         // All remaining paths…
         .anyRequest()
         // ...require user to at least be authenticated
@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .passwordParameter("password")
         //.loginProcessingUrl("/ulms")
         .defaultSuccessUrl("/ulms",true)
-        .failureUrl("/login.html?error=true")
+        .failureUrl("/login?error=true")
         .and()
         // If user isn't authorised to access a path...
         .exceptionHandling()
