@@ -12,6 +12,7 @@ angular.module('ULMS')
       };
      // $scope.student = [];
       $scope.students=[];
+      
       _fetchStudentData();
       
       function _fetchStudentData() {
