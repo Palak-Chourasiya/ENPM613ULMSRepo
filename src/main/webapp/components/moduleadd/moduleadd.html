@@ -1,11 +1,12 @@
 <title>ULMS Portal</title>
-<link href="components/course/course.css" rel="stylesheet"
+<link href="components/moduleadd/moduleadd.css" rel="stylesheet"
 	type="text/css">
 
 <baselayout>
 
 <h2>{{course.title}}</h2>
-<a class="btn btn-default" ui-sref="moduleadd({id: course.id})" role="button">Add Module</a>
+<a class="btn btn-default" ui-sref="courseadd" role="button">Add Course</a>
+<a class="btn btn-default" href="#" role="button">Edit Course</a>
 <div class="row">
 	<div class="col-md-8">
 		<div class="list-group">
@@ -16,14 +17,14 @@
 			        <p>Recipe Page: {{module.recipe_link}}</p>
 			        <p>Published Date: {{module.date_published}}</p>
 				</a>
-				<button type="button" ng-click="deleteCourseModule(module.module_number)">Delete: {{module.title}}</button>
+				<button type="button" ng-click="deleteCourseModule('{{module}}')">Delete: {{module.title}}</button>
 			</div>	
 		</div>
 	</div>
 	<div class="col-md-4">
 		<nav class="bs-docs-sidebar">
 			<ul class="nav bs-docs-sidenav">
-				<li><a ui-sref="student({id: course.id})" >Students</a></li>
+				<li><a ui-sref="student({id: '{{course.id}}'})" >Students</a></li>
 				<li><a ui-sref="StudentList" >Instructor</a></li>
 				<li><a href="{{course.syllabus}}" target="_blank">Syllabus</a></li>
 			</ul>

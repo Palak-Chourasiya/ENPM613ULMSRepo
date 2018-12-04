@@ -57,12 +57,18 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
   $stateProvider.state('course', {
     url: '/course',
     component: 'course',
-    params: { id: null, module_id: null }
+    params: { id: null }
   })
   // State to view modules
   $stateProvider.state('modules', {
 	  url: '/modules',
 	  component: 'modules'
+  })
+  // State to view a single module add
+  $stateProvider.state('moduleadd', {
+    url: '/moduleadd',
+    component: 'moduleadd',
+    params: { id: null }
   })
   // State to view a single module
   $stateProvider.state('module', {

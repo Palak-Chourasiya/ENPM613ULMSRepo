@@ -55,17 +55,18 @@ public class messageController {
 	
 	
 	//GetMessage	
- 	@RequestMapping(method = RequestMethod.GET)
+ 	@GetMapping("/{messageId}")
     public ResponseEntity<?> getMessage(@PathVariable("messageId") Long messageId)
     {
 		messageEntity messagetData = messService.getMessage(messageId);
 		return new ResponseEntity<>(MessageDto.toDto(messagetData), HttpStatus.OK);
     }
     
-    @RequestMapping(value="/get" ,method = RequestMethod.GET)
-    public ResponseEntity<?> getMessageIds(@PathVariable("email") String email,
-    		@PathVariable("message_flag") String flag){
+    @GetMapping("/{message_flag}/{email}")
+    public ResponseEntity<?> getMessageIds(@PathVariable("message_flag") String flag,
+                                           @PathVariable("email") String email) {
     	List<messageReceiverEntity> receiverData = messReceiverService.getMessageByEmail(email, messageReceiverEntity.messageFlag.fromString(flag));
+    	List<messageReceiverEntity> test = messReceiverService.getMessageByEmail(email);
     	List<String> messageIds = new ArrayList<>();
     	for(messageReceiverEntity entity : receiverData)
     		messageIds.add(String.valueOf(entity.getMessage_id()));

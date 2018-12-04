@@ -114,6 +114,19 @@ public class messageReceiverEntity implements Serializable {
         	}
         	return messageFlag.not_read;
         }
+        
+        public String toIndex() {
+        	switch (this.value) {
+	        	case "read":
+	        		return "1";
+	        	case "not_read":
+	        		return "2";
+	        	case "deleted":
+	        		return "3";
+        		default:
+        			return "1";
+        	}
+        }
     }
 	
 

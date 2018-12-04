@@ -15,7 +15,7 @@ import ulms.messages.model.entity.messageReceiverIdentity;
 @Transactional(readOnly = true)
 public interface messageReceiverRepository extends JpaRepository<messageReceiverEntity, messageReceiverIdentity>{
 	
-	@Query("select u from messageReceiverEntity u where u.email = ?1")
+	@Query("select u from messageReceiverEntity u where u.email = '?1'")
 	List<messageReceiverEntity> findByEmail(String email);
 	
 	@Query("select u from messageReceiverEntity u where u.email = ?1 and u.message_flag = 'read'")
@@ -28,6 +28,6 @@ public interface messageReceiverRepository extends JpaRepository<messageReceiver
 	List<messageReceiverEntity> findDeleteEmail(String email);
 	
 	
-	@Query("select u from messageReceiverEntity u where u.email = ?1 and u.message_flag = flag")
+	@Query("select u from messageReceiverEntity u where u.email = '?1' and u.message_flag = '?2'")
 	List<messageReceiverEntity> findAllEmail(String email, String flag);
 }
