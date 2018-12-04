@@ -29,6 +29,7 @@ import ulms.login.models.LoginEntity;
 import ulms.messages.model.dto.MessageDto;
 import ulms.messages.model.dto.MessageFormDto;
 import ulms.messages.model.dto.MessageReceiverDto;
+import ulms.messages.model.entity.messageDetailsEntity;
 import ulms.messages.model.entity.messageEntity;
 import ulms.messages.model.entity.messageReceiverEntity;
 import ulms.messages.model.entity.messageReceiverEntity.messageFlag;
@@ -55,48 +56,45 @@ public class messageController {
 	
 	
 	//GetMessage	
- 	@GetMapping(value = "/{messageId}")
+	@RequestMapping(value = "/{messageId}",method = RequestMethod.GET)
     public ResponseEntity<?> getMessage(@PathVariable("messageId") Long messageId)
     {
-		messageEntity messagetData = messService.getMessage(messageId);
-		return new ResponseEntity<>(MessageDto.toDto(messagetData), HttpStatus.OK);
+		messageEntity messageData = messService.getMessage(messageId);
+		if (messageData == null)
+			return new ResponseEntity<>("Message not found", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(MessageDto.toDto(messageData), HttpStatus.OK);
     }
     
-    @RequestMapping(value="/get" ,method = RequestMethod.GET)
+    @RequestMapping(value="/get/{email}/{message_flag}" ,method = RequestMethod.GET)
     public ResponseEntity<?> getMessageIds(@PathVariable("email") String email,
     		@PathVariable("message_flag") String flag){
     	List<messageReceiverEntity> receiverData = messReceiverService.getMessageByEmail(email, messageReceiverEntity.messageFlag.fromString(flag));
-    	List<String> messageIds = new ArrayList<>();
-    	for(messageReceiverEntity entity : receiverData)
-    		messageIds.add(String.valueOf(entity.getMessage_id()));
-    	if (messageIds.isEmpty())
-            return new ResponseEntity<>("Message Not Found", HttpStatus.NOT_FOUND);
-
-    	return new ResponseEntity<Iterable<String>>(messageIds, HttpStatus.OK);
+    	List<messageDetailsEntity> messageDetails = new ArrayList<>();
+      	for(messageReceiverEntity entity : receiverData)
+      	{
+      		messageDetailsEntity messageDetail = messageDetailsEntity.toEntity(messService.getMessage(entity.getMessage_id()), entity);	
+      		messageDetails.add(messageDetail);
+      	}
+    	return new ResponseEntity<>(messageDetails, HttpStatus.OK);
     }
     
-    
-    
-    
-     
     //Delete Message
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?>  deleteMessage(@PathVariable("id") Long messageId) {
     	messageEntity messageData = messService.getMessage(messageId);
     	messageData.setDeleted(true);
     	messService.updateMessage(messageData);
-        return new ResponseEntity<>(messageId, HttpStatus.NO_CONTENT);
-
+        return new ResponseEntity<>(messageData, HttpStatus.OK);
 	}
     
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/delete/{id}/{email}", method = RequestMethod.PUT)
 	public ResponseEntity<?>  deleteMessage(@PathVariable("id") Long messageId, @PathVariable("email") String email) {
     	messageReceiverEntity messageData = messReceiverService.findById(messageId, email);
     	messageData.setMessage_flags(messageReceiverEntity.messageFlag.deleted);
     	messReceiverService.update(messageData);
-        return new ResponseEntity<>(messageId, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(messageId, HttpStatus.OK);
 
 	}
     

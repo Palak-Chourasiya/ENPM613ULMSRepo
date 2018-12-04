@@ -28,6 +28,6 @@ public interface messageReceiverRepository extends JpaRepository<messageReceiver
 	List<messageReceiverEntity> findDeleteEmail(String email);
 	
 	
-	@Query("select u from messageReceiverEntity u where u.email = ?1 and u.message_flag = flag")
-	List<messageReceiverEntity> findAllEmail(String email, String flag);
+	@Query("select u from messageReceiverEntity u where u.email = ?1 and u.message_flag = ?2")
+	List<messageReceiverEntity> findAllEmail(String email, messageReceiverEntity.messageFlag flag);
 }

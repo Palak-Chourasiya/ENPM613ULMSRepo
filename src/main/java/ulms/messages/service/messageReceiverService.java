@@ -35,7 +35,7 @@ public class messageReceiverService {
 	
 	public List<messageReceiverEntity> getMessageByEmail(String email, messageReceiverEntity.messageFlag flag)
 	{
-		return messReceiverRepository.findAllEmail(email, flag.toString());
+		return messReceiverRepository.findAllEmail(email, flag);
 	}
 	
 	public messageReceiverEntity findById(Long id, String email)
