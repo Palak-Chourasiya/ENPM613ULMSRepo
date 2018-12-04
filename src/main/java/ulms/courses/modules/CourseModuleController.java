@@ -48,7 +48,7 @@ public class CourseModuleController {
 	}
    
     
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseEntity<?> addModule(@RequestParam("module_number") Long module_number,
 			                               @RequestParam("course_id") Long course_id,
 			                               @RequestParam("title") String title,
@@ -63,8 +63,8 @@ public class CourseModuleController {
 	    return new ResponseEntity<CourseModuleEntity> (module, HttpStatus.OK);
 	}
 	
-    @GetMapping("/delete/{module_number}")
-	public @ResponseBody String deleteMessage(@PathVariable("module_number") long module_number) {
+    @RequestMapping(value="/delete/{module_number}", method = RequestMethod.DELETE)
+	public @ResponseBody String deleteModule(@PathVariable("module_number") long module_number) {
     	moduleService.deleteModule(module_number);
 		return "Success";
 	}

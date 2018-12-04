@@ -26,7 +26,6 @@ public class LoginLogoutController {
 	//@Autowired
 	//IAuthenticationService authenticationService;
 	@Autowired
-
 	UserLoginLogoutServiceInterface loginService;
 	
 	@GetMapping("")

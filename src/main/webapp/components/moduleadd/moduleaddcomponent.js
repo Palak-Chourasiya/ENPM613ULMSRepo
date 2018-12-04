@@ -1,6 +1,6 @@
 angular.module('ULMS')
-  .component('course', {
-    templateUrl: 'components/course/course.html',
+  .component('moduleadd', {
+    templateUrl: 'components/moduleadd/moduleadd.html',
     bindings: {},
     
     controller: function($scope, $http, $stateParams) {
@@ -12,19 +12,16 @@ angular.module('ULMS')
         };
         
         $scope.course = [];
-        $scope.courseForm = {
-            id : -1,
+        $scope.moduleForm = {
+        	module_number: -1,
+            course_id : $stateParams.id,
             title : "",
-            details : "",
-            start_date : "",
-            instructor_id : -1
+            date_published : "",
+            recipe_link : ""
         };
 
         //Now load the data from server
         _refreshCourseData();
-
-            var method = "";
-            var url = "";
          
         //HTTP GET- get all courses collection
         function _refreshCourseData() {
@@ -38,11 +35,11 @@ angular.module('ULMS')
             });
         }
         
-        $scope.addCourse = function() { 
+        $scope.addModule = function() { 
             $http({
                 method : "POST",
-                url : 'course/add',
-                data : angular.toJson($scope.courseForm),
+                url : 'module/add',
+                data : angular.toJson($scope.moduleForm),
                 headers : {
                     'Content-Type' : 'application/json'
                 }
@@ -53,7 +50,7 @@ angular.module('ULMS')
         $scope.deleteCourseModule = function(module){
         	$http({
                 method : 'DELETE',
-                url : 'http://localhost:8080/module/delete' + module
+                url : 'http://localhost:8080/module/delete' + module.module_number
             }).then(_success, _error)
         }
         

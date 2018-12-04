@@ -3,7 +3,7 @@ angular.module('ULMS')
     templateUrl: 'components/messages/messages.html',
     bindings: {},
 
-    controller: function($scope, $http) {
+    controller: function($scope, $http, $stateParams) {
 
       var ctrl = this;
       
@@ -11,27 +11,17 @@ angular.module('ULMS')
         
       };
       
-      $scope.receivers = "";
-      $scope.subject = "";
-      $scope.message = "";
-      
-      
-      $scope.sendMessage = function() {
-
-    	  var method = "POST";
-          var url = "messages/nngo";
-          var data = $scope.messageForm;
-
-          $http({
-              method : method,
-              url : url,
-              data : angular.toJson($scope.messageForm),
-              headers : {
-                  'Content-Type' : 'application/json'
-              }
-          }).then( _success, _error );
-      };
-
-
+      $scope.messagesData=[];
+      getMessageData();
+      function getMessageData(){
+    	  $http({
+    		  method: 'GET',
+    		  url : 'http://localhost:8080/messages/get/ij@umd.edu/not_read'
+    	  }).then(function successCallback(response){
+    		  $scope.messagesData = response.data;
+    	  }, function errorCallback(response){
+    		  console.log(response.statusText);
+    	  });
+      }
     }
   })

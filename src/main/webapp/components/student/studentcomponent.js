@@ -3,7 +3,7 @@ angular.module('ULMS')
     templateUrl: 'components/student/student.html',
     bindings: {},
 
-    controller: function($scope, $http) {
+    controller: function($scope, $http, $stateParams) {
 
       var ctrl = this;
       
@@ -11,19 +11,21 @@ angular.module('ULMS')
         
       };
      // $scope.student = [];
-     /* $scope.demo='demo';
+      $scope.students=[];
+      
       _fetchStudentData();
+      
       function _fetchStudentData() {
       	  $http({
               method : 'GET',
-              url : 'http://localhost:8080/studentList/1'
+              url : 'http://localhost:8080/studentList/course/'+ $stateParams.id
           }).then(function successCallback(response) {
-              $scope.student.push(response.data);
+              $scope.students= response.data;
           }, function errorCallback(response) {
               console.log(response.statusText);
           });
 
-      }*/
+      }
     }
 
   })

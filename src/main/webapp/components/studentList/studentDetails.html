@@ -3,7 +3,7 @@
   <baselayout>
       <h2>Students</h2>
       <div class="list-group">
-	    <a ng-repeat="student in students" ui-sref="student({id: '{{student.id}}'})" class="list-group-item">
+	    <a ng-repeat="student in students"  class="list-group-item">
 	      <h4 class="list-group-item-heading">{{student.firstName}} {{student.lastName}}</h4>
 	      <p>{{student.email}}</p>
 	    </a>

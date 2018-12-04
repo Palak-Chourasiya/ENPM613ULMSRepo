@@ -8,14 +8,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ulms.messages.model.entity.messageReceiverEntity;
-import ulms.messages.model.entity.messageReceiverEntity.messageFlag;
 import ulms.messages.model.entity.messageReceiverIdentity;
 
 @Repository
 @Transactional(readOnly = true)
 public interface messageReceiverRepository extends JpaRepository<messageReceiverEntity, messageReceiverIdentity>{
 	
-	@Query("select u from messageReceiverEntity u where u.email = ?1")
+	@Query("select u from messageReceiverEntity u where u.email = '?1'")
 	List<messageReceiverEntity> findByEmail(String email);
 	
 	@Query("select u from messageReceiverEntity u where u.email = ?1 and u.message_flag = 'read'")
@@ -30,4 +29,5 @@ public interface messageReceiverRepository extends JpaRepository<messageReceiver
 	
 	@Query("select u from messageReceiverEntity u where u.email = ?1 and u.message_flag = ?2")
 	List<messageReceiverEntity> findAllEmail(String email, messageReceiverEntity.messageFlag flag);
+
 }

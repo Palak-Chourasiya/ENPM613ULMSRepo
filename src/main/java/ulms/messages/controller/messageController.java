@@ -55,8 +55,8 @@ public class messageController {
 	
 	
 	
-	//GetMessage	
-	@RequestMapping(value = "/{messageId}",method = RequestMethod.GET)
+
+ 	@GetMapping("/{messageId}")
     public ResponseEntity<?> getMessage(@PathVariable("messageId") Long messageId)
     {
 		messageEntity messageData = messService.getMessage(messageId);
@@ -65,6 +65,16 @@ public class messageController {
 		return new ResponseEntity<>(MessageDto.toDto(messageData), HttpStatus.OK);
     }
     
+//	 @GetMapping("/course/{course_id}")
+//	    public ResponseEntity<?> getStudentsinCourse(@PathVariable("course_id") long course_id) {
+//		 Iterable <AccountEntity> courseStudents = student.getAllParticipantsInCourse(course_id);
+//		if(courseStudents==null) {
+//	     return new ResponseEntity(new RuntimeException("No Students are present in this course"), HttpStatus.NOT_FOUND);
+//		}
+//		return new ResponseEntity<Iterable<AccountEntity>>(courseStudents, HttpStatus.OK);
+//	 }
+// 	
+ 	
     @RequestMapping(value="/get/{email}/{message_flag}" ,method = RequestMethod.GET)
     public ResponseEntity<?> getMessageIds(@PathVariable("email") String email,
     		@PathVariable("message_flag") String flag){
@@ -75,7 +85,7 @@ public class messageController {
       		messageDetailsEntity messageDetail = messageDetailsEntity.toEntity(messService.getMessage(entity.getMessage_id()), entity);	
       		messageDetails.add(messageDetail);
       	}
-    	return new ResponseEntity<>(messageDetails, HttpStatus.OK);
+    	return new ResponseEntity<Iterable<messageDetailsEntity>>(messageDetails, HttpStatus.OK);
     }
     
     //Delete Message
@@ -98,7 +108,7 @@ public class messageController {
 
 	}
     
-    @GetMapping("/messages")
+    @GetMapping("/")
 	public @ResponseBody String test()
 	{
 		return "This is a test";
