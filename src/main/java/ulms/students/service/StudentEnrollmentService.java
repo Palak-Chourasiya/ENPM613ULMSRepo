@@ -1,4 +1,4 @@
-package ulms.students;
+package ulms.students.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import ulms.login.models.AccountEntity;
 import ulms.login.models.AccountRepository;
+import ulms.students.models.ParticipantsEntity;
+import ulms.students.models.ParticipantsRepository;
 
 
 @Service
-public class StudentEnrollmentService {
+public class StudentEnrollmentService implements StudentEnrollmentServiceInterface {
 	 public static final String CACHE_NAME = "cache.account";
 	 public static final Class CACHE_TYPE = AccountEntity.class;
 	 public static final String CACHE_TTL = "${cache.login.timetolive:60}";

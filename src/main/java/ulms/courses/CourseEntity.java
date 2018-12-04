@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ulms.courses.modules.CourseModuleEntity;
-import ulms.students.ParticipantsEntity;
+import ulms.students.models.ParticipantsEntity;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "course")

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ulms.login.models.AccountEntity;
-import ulms.students.StudentEnrollmentService;
+import ulms.students.service.StudentEnrollmentService;
 
 @Controller
 @RequestMapping(path="/syllabus")

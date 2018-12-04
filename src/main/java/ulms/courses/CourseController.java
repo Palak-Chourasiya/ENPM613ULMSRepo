@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ulms.login.models.AccountEntity;
 import ulms.messages.model.entity.messageEntity;
-import ulms.students.StudentEnrollmentService;
+import ulms.students.service.StudentEnrollmentService;
 
 @Controller
 @RequestMapping(path="/courses")

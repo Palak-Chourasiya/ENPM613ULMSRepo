@@ -1,4 +1,4 @@
-package ulms.students;
+package ulms.students.models;
 
 import java.io.Serializable;
 

@@ -22,7 +22,7 @@ import org.springframework.data.domain.Pageable;
  * -related operations.
  */
 @Service
-public class CourseManagementService {
+public class CourseManagementService implements CourseManagementServiceInterface {
     public static final String CACHE_NAME = "cache.recipe";
     public static final Class<CourseEntity> CACHE_TYPE = CourseEntity.class;
     public static final String CACHE_TTL = "${cache.recipe.timetolive:60}";
@@ -51,9 +51,5 @@ public class CourseManagementService {
     
     public Iterable<CourseEntity> getAllCourses() {
         return courseRepository.findAll();
-    }
-    
-    public void addCourse(CourseEntity newCourse) {
-        courseRepository.save(newCourse);
     }
 }

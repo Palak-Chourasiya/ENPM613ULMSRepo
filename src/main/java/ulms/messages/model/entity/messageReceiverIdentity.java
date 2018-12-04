@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import ulms.login.models.AccountEntity;
-import ulms.students.ParticipantIdentity;
+import ulms.students.models.ParticipantIdentity;
 
 @Embeddable
 public class messageReceiverIdentity implements Serializable{

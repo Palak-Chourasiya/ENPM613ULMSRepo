@@ -1,4 +1,4 @@
-package ulms.students;
+package ulms.students.controller;
 
 import java.awt.List;
 
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ulms.login.models.AccountEntity;
+import ulms.students.models.ParticipantsEntity;
+import ulms.students.service.StudentEnrollmentService;
 
 @Controller
 @RequestMapping(path="/studentList")

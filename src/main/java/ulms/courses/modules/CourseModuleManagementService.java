@@ -15,7 +15,7 @@ import ulms.recipes.models.RecipeEntity;
  * -related operations.
  */
 @Service
-public class CourseModuleManagementService {
+public class CourseModuleManagementService implements CourseModuleManagementServiceInterface{
     public static final String CACHE_NAME = "cache.recipe";
     public static final Class<CourseModuleEntity> CACHE_TYPE = CourseModuleEntity.class;
     public static final String CACHE_TTL = "${cache.recipe.timetolive:60}";

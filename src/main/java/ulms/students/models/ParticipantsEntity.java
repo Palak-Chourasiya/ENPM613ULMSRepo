@@ -1,4 +1,4 @@
-package ulms.students;
+package ulms.students.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,6 +50,10 @@ public class ParticipantsEntity {
 				this.account_id = account_id;
 			}
 		    
+			/*The Participants table hold the mapping of the accounts of students and instructors with the course.
+			 * hence, there is a many-to-one relationship between participant table and account table
+			 * and participant table and course table. 
+			 */
 			@ManyToOne
 			@JsonIgnore
 			@JoinColumn(name="account_id", insertable=false, updatable=false, referencedColumnName="id")
