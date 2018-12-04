@@ -97,6 +97,13 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	    url: '/inbox',
 	    component: 'messages'
   })
+     // State to delete module
+  $stateProvider.state('deleteModule', {
+	    url: '/deleteModule',
+	    component: 'deleteModule',
+	    params : {id: null}
+	    	
+  })
   // What to do if no state is specified
   $urlServiceProvider.rules.otherwise({
     state: 'courses'

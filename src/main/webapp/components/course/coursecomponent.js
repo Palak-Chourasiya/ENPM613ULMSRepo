@@ -50,7 +50,7 @@ angular.module('ULMS')
         };
         
 
-        $scope.deleteCourseModule = function(module){
+  /*      $scope.deleteCourseModule = function(module){
         	$http({
                 method : 'DELETE',
                 url : 'http://localhost:8080/module/delete' + module
@@ -63,7 +63,7 @@ angular.module('ULMS')
 
     function _error(response) {
         console.log(response.statusText);
-    }
+    }*/
         
       }
     })

@@ -16,7 +16,7 @@
 			        <p>Recipe Page: {{module.recipe_link}}</p>
 			        <p>Published Date: {{module.date_published}}</p>
 				</a>
-				<button type="button" ng-click="deleteCourseModule(module.module_number)">Delete: {{module.title}}</button>
+				<a ui-sref="deleteModule({id: module.module_number})">Delete: {{module.title}}</a>
 			</div>	
 		</div>
 	</div>

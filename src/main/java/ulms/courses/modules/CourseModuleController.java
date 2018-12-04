@@ -63,10 +63,11 @@ public class CourseModuleController {
 	    return new ResponseEntity<CourseModuleEntity> (module, HttpStatus.OK);
 	}
 	
-    @RequestMapping(value="/delete/{module_number}", method = RequestMethod.DELETE)
-	public @ResponseBody String deleteModule(@PathVariable("module_number") long module_number) {
+    @RequestMapping(value="/delete/{module_number}", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<?> deleteModule(@PathVariable("module_number") long module_number) {
     	moduleService.deleteModule(module_number);
-		return "Success";
+    	Iterable<CourseModuleEntity> courseModuleData= moduleService.getAllCourseModules();
+    	return new ResponseEntity<Iterable<CourseModuleEntity>>(courseModuleData, HttpStatus.OK);
 	}
   
     @GetMapping("/courseModule/{course_id}")
