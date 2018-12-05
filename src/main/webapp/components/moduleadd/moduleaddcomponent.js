@@ -9,7 +9,7 @@ angular.module('ULMS')
         $scope.message=null;
         $scope.createModuleForm = {
         	module_number: -1,
-           course_id : $stateParams.id,
+            course_id : $stateParams.id,
             title : "",
             date_published : "",
             recipe_link : ""
@@ -18,31 +18,27 @@ angular.module('ULMS')
         this.$onInit = function() {
         	
         };       
-        
+        $scope.modules=[];
         $scope.addModule = function() {         	
            var temp=angular.toJson($scope.createModuleForm);
            var method = "POST";
            var url = "module/add";
+           var headers ="";
            
         	$http({
                 method : "POST",
                 url : 'module/add',
-                data : angular.toJson($scope.createModuleForm),
+                data : temp,
                 headers : {
                     'Content-Type' : 'application/json'
                 }
-            }).then( _success, _error );
-        };
-        
-        
-     function _success(response) {  
-    	 $scope.message="Successfully created";
-    	 console.log(response.statusText);
-    }
-
-    function _error(response) {
-        console.log(response.statusText);
-    }
+            }).then(function successCallback(response) {
+                $scope.modules= response.data;
+            }, function errorCallback(response) {
+                console.log(response.statusText);
+            });
+       
+        }
         
       }
     })
