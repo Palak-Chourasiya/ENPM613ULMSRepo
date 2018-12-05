@@ -3,7 +3,7 @@ angular.module('ULMS')
     templateUrl: 'components/messages/messages.html',
     bindings: {},
 
-    controller: function($scope, $http, $stateParams) {
+    controller: function($scope, $http, $window) {
 
       var ctrl = this;
       
@@ -39,7 +39,6 @@ angular.module('ULMS')
     	    	  }
     	  }
       var url = 'http://localhost:8080/messages/ReceiverDelete/'+$scope.deletedIds;
-      $scope.message = url;
       $http({
 		  method: 'GET',
 		  url : url
@@ -51,6 +50,34 @@ angular.module('ULMS')
 		  console.log(response.statusText);
 	  });
     	  
+      }
+      
+      
+      
+      
+      
+      
+      //Messagew
+      this.showModal = false;
+      this.showView = false;
+      this.counter = 1;
+      this.toggleDialog = function () {
+          this.showModal = !this.showModal;
+      }
+      this.toggleView = function () {
+          this.showView = !this.showView;
+      }
+      this.changeDisplay = function () {
+          this.counter++;
+      }
+      
+      
+      $scope.openMessage = function(messageData)
+      {
+    	  var message = "sender: "+messageData.userName+"\n"+
+    	  "Subject: "+messageData.subject+"\n\n"+
+    	  "Content: \n"+messageData.message+"\n";
+    	  $window.alert(message);
       }
     }
   })
