@@ -3,32 +3,21 @@
 	type="text/css">
 
 <baselayout>
-
-<h2>{{course.title}}</h2>
-<a class="btn btn-default" ui-sref="courseadd" role="button">Add Course</a>
-<a class="btn btn-default" href="#" role="button">Edit Course</a>
-<div class="row">
-	<div class="col-md-8">
-		<div class="list-group">
-			<div ng-repeat="module in course.moduleEntity">
-				<a href="{{module.recipe_link}}" target="_blank"
-			       class="list-group-item">
-					<h4 class="list-group-item-heading">Module Name : {{module.title}}</h4>
-			        <p>Recipe Page: {{module.recipe_link}}</p>
-			        <p>Published Date: {{module.date_published}}</p>
-				</a>
-				<button type="button" ng-click="deleteCourseModule('{{module}}')">Delete: {{module.title}}</button>
-			</div>	
-		</div>
+<div class="createModule">
+    <h1>Create a new Module</h1>
+    <div ng-show="" class="alert alert-danger" role="alert">
+	  <p ng-show=""><strong></strong><span>Title is required</span></p>
+	  <p ng-show=""><strong></strong>Date Published is required.</p>
 	</div>
-	<div class="col-md-4">
-		<nav class="bs-docs-sidebar">
-			<ul class="nav bs-docs-sidenav">
-				<li><a ui-sref="student({id: '{{course.id}}'})" >Students</a></li>
-				<li><a ui-sref="StudentList" >Instructor</a></li>
-				<li><a href="{{course.syllabus}}" target="_blank">Syllabus</a></li>
-			</ul>
-		</nav>
-	</div>
+    <form name="createModuleForm" ng-submit="addModule()">
+        <p>Title</p>
+        <input type="text" name="title" placeholder="Enter Module Title" ng-model="createModuleForm.title">
+        <p>Date Published</p>
+        <input type="text" name="date_published" placeholder="Enter Date Published" ng-model="createModuleForm.date_published">
+        <p>Recipe Link</p>
+        <input type="text" name="recipe_link" placeholder="Enter Recipe Link" ng-model="createModuleForm.recipe_link">
+        <input type="submit" name="" value="create">
+        <h6>*all the fields are mandatory</h6>
+    </form>
 </div>
 </baselayout>

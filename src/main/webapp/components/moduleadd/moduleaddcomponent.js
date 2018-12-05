@@ -6,56 +6,38 @@ angular.module('ULMS')
     controller: function($scope, $http, $stateParams) {
 
         var ctrl = this;
-        
-        this.$onInit = function() {
-          
-        };
-        
-        $scope.course = [];
-        $scope.moduleForm = {
+        $scope.message=null;
+        $scope.createModuleForm = {
         	module_number: -1,
-            course_id : $stateParams.id,
+           course_id : $stateParams.id,
             title : "",
             date_published : "",
             recipe_link : ""
-        };
-
-        //Now load the data from server
-        _refreshCourseData();
-         
-        //HTTP GET- get all courses collection
-        function _refreshCourseData() {
-            $http({
-                method : 'GET',
-                url : 'http://localhost:8080/courses/' + $stateParams.id
-            }).then(function successCallback(response) {
-                $scope.course = response.data;
-            }, function errorCallback(response) {
-                console.log(response.statusText);
-            });
-        }
+        };     
         
-        $scope.addModule = function() { 
-            $http({
+        this.$onInit = function() {
+        	
+        };       
+        
+        $scope.addModule = function() {         	
+           var temp=angular.toJson($scope.createModuleForm);
+           var method = "POST";
+           var url = "module/add";
+           
+        	$http({
                 method : "POST",
                 url : 'module/add',
-                data : angular.toJson($scope.moduleForm),
+                data : angular.toJson($scope.createModuleForm),
                 headers : {
                     'Content-Type' : 'application/json'
                 }
             }).then( _success, _error );
         };
         
-
-        $scope.deleteCourseModule = function(module){
-        	$http({
-                method : 'DELETE',
-                url : 'http://localhost:8080/module/delete' + module.module_number
-            }).then(_success, _error)
-        }
         
      function _success(response) {  
-    	 _refreshCourseData();
+    	 $scope.message="Successfully created";
+    	 console.log(response.statusText);
     }
 
     function _error(response) {

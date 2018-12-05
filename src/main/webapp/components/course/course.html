@@ -5,18 +5,21 @@
 <baselayout>
 
 <h2>{{course.title}}</h2>
-<a class="btn btn-default" ui-sref="moduleadd({id: course.id})" role="button">Add Module</a>
+<a class="btn btn-success" ui-sref="moduleadd({id: course.id})" role="button">Add Module</a>
+
 <div class="row">
 	<div class="col-md-8">
 		<div class="list-group">
 			<div ng-repeat="module in course.moduleEntity">
+			
+			<a class="btn btn-danger" ui-sref="deleteModule({id: module.module_number})" role="button">Delete Module</a>
 				<a href="{{module.recipe_link}}" target="_blank"
 			       class="list-group-item">
 					<h4 class="list-group-item-heading">Module Name : {{module.title}}</h4>
 			        <p>Recipe Page: {{module.recipe_link}}</p>
 			        <p>Published Date: {{module.date_published}}</p>
 				</a>
-				<a ui-sref="deleteModule({id: module.module_number})">Delete: {{module.title}}</a>
+				
 			</div>	
 		</div>
 	</div>

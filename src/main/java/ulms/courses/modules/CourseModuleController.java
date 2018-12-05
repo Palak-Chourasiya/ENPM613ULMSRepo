@@ -52,12 +52,14 @@ public class CourseModuleController {
 	public ResponseEntity<?> addModule(@RequestParam("module_number") Long module_number,
 			                               @RequestParam("course_id") Long course_id,
 			                               @RequestParam("title") String title,
-			                               @RequestParam("date_published") Date date_published) {
+			                               @RequestParam("date_published") Date date_published,
+			                               @RequestParam("recipe_link") String recipe_link) {
     	
 	    CourseModuleEntity module = new CourseModuleEntity();
 	    module.setModule_number(module_number);
 	    module.setCourse_id(course_id);
 	    module.setTitle(title);
+	    module.setRecipe_link(recipe_link);
 	    module.setDate_published(date_published);
 	    moduleService.addModule(module);
 	    return new ResponseEntity<CourseModuleEntity> (module, HttpStatus.OK);
