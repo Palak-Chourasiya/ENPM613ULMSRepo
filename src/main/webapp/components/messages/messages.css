@@ -29,6 +29,7 @@ header h1 {
   background: #CCDDED;
   border-radius: 0px 5px 0px 0px;
   width: 90%; max-width: 960px;
+  min-height: 200px
 }
 
 .nav {
@@ -36,6 +37,7 @@ header h1 {
   top: 0px; bottom: 0px;
   background: #EEE;
   width: 200px;
+  height: 200px;
 }
 
 .nav a {
@@ -57,6 +59,7 @@ header h1 {
 .messages {
   padding: 10px 10px 10px 210px;
   width: 100%;
+  height: 100%
 }
 
 .actions-dropdown {
@@ -106,7 +109,7 @@ header h1 {
   margin-top: 5px;
 }
 
-input[name=search] {
+input[type=button] {
   display: block;
   float: right;
   margin-bottom: 10px;
@@ -144,9 +147,9 @@ input[name=search]:focus {
   width: 90px;
 }
 
-.message .subject {
+.message .title {
   display: inline-block;
-  padding-left: 150px;
+  padding-left: 250px;
   width: 100%;
 }
 

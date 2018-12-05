@@ -93,7 +93,7 @@ public class messageReceiverEntity implements Serializable {
 	}
 	
 	public enum messageFlag {
-        read("read"), not_read("not_read"), deleted("deleted");
+        read("read"), not_read("not_read"), delete("delete");
 
         private String value;
 
@@ -109,8 +109,8 @@ public class messageReceiverEntity implements Serializable {
         		return messageFlag.read;
         	case "not_read":
         		return messageFlag.not_read;
-        	case "deleted":
-        		return messageFlag.deleted;
+        	case "delete":
+        		return messageFlag.delete;
         	}
         	return messageFlag.not_read;
         }

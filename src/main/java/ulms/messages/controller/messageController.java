@@ -2,6 +2,7 @@ package ulms.messages.controller;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,10 +79,28 @@ public class messageController {
 //	 }
 // 	
  	
-    @RequestMapping(value="/get/{email}/{message_flag}" ,method = RequestMethod.GET)
-    public ResponseEntity<?> getMessageIds(@PathVariable("email") String email,
-    		@PathVariable("message_flag") String flag){
-    	List<messageReceiverEntity> receiverData = messReceiverService.getMessageByEmail(email, messageReceiverEntity.messageFlag.fromString(flag));
+    @RequestMapping(value="/getEmail" ,method = RequestMethod.GET)
+    public ResponseEntity<?> getMessageIds(){
+    	String authenticatedUserName = "";
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	if (!(authentication instanceof AnonymousAuthenticationToken)) {
+    		authenticatedUserName = authentication.getName();
+    	}
+    	
+    	LoginEntity login = loginService.getLogin(authenticatedUserName);
+    	AccountEntity account;
+    	if (login == null) {
+    		return new ResponseEntity(new RuntimeException("Autheticated login not found"), HttpStatus.NOT_FOUND);
+    	} else {
+	        account = accountService.getAccount(login.getAccountId());
+	        if (account == null) {
+	            return new ResponseEntity(new RuntimeException("Account with id " + login.getAccountId() 
+	                    + " not found"), HttpStatus.NOT_FOUND);
+	        }
+    	}  
+
+    	List<messageReceiverEntity> receiverData = messReceiverService.getMessageByEmail(account.getEmail(), messageReceiverEntity.messageFlag.not_read);
+    	receiverData.addAll(messReceiverService.getMessageByEmail(account.getEmail(), messageReceiverEntity.messageFlag.read));
     	List<messageDetailsEntity> messageDetails = new ArrayList<>();
       	for(messageReceiverEntity entity : receiverData)
       	{
@@ -89,9 +111,8 @@ public class messageController {
     }
     
     //Delete Message
-    
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?>  deleteMessage(@PathVariable("id") Long messageId) {
+    @RequestMapping(value = "/SenderDelete/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?>  deleteSenderMessage(@PathVariable("id") Long messageId) {
     	messageEntity messageData = messService.getMessage(messageId);
     	messageData.setDeleted(true);
     	messService.updateMessage(messageData);
@@ -99,12 +120,38 @@ public class messageController {
 	}
     
     
-    @RequestMapping(value = "/delete/{id}/{email}", method = RequestMethod.PUT)
-	public ResponseEntity<?>  deleteMessage(@PathVariable("id") Long messageId, @PathVariable("email") String email) {
-    	messageReceiverEntity messageData = messReceiverService.findById(messageId, email);
-    	messageData.setMessage_flags(messageReceiverEntity.messageFlag.deleted);
-    	messReceiverService.update(messageData);
-        return new ResponseEntity<>(messageId, HttpStatus.OK);
+    @RequestMapping(value = "/ReceiverDelete/{ids}", method = RequestMethod.GET)
+	public ResponseEntity<?>  deleteReceiverMessage(@PathVariable("ids") String messageIds) {
+    	String authenticatedUserName = "";
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	if (!(authentication instanceof AnonymousAuthenticationToken)) {
+    		authenticatedUserName = authentication.getName();
+    	}
+    	
+    	LoginEntity login = loginService.getLogin(authenticatedUserName);
+    	AccountEntity account;
+    	if (login == null) {
+    		return new ResponseEntity(new RuntimeException("Autheticated login not found"), HttpStatus.NOT_FOUND);
+    	} else {
+	        account = accountService.getAccount(login.getAccountId());
+	        if (account == null) {
+	            return new ResponseEntity(new RuntimeException("Account with id " + login.getAccountId() 
+	                    + " not found"), HttpStatus.NOT_FOUND);
+	        }
+    	}
+    	
+    	
+    	List<String> idList = Arrays.asList(messageIds.split(","));
+    	for(String id : idList)
+    	{
+    		Long idLong = null;
+    		idLong = idLong.valueOf(id);
+    		messageReceiverEntity messageData = messReceiverService.findById(idLong, account.getEmail());
+        	messageData.setMessage_flags(messageReceiverEntity.messageFlag.delete);
+        	messReceiverService.update(messageData);
+    	}
+   	
+        return new ResponseEntity<>(account, HttpStatus.OK);
 
 	}
     
@@ -142,6 +189,30 @@ public class messageController {
 		}
         return new ResponseEntity<>(messageDto, HttpStatus.CREATED);
 	}
+	
+//	 @GetMapping("/authenticatedAccount")
+	    @RequestMapping(value="/authenticatedAccount" ,method = RequestMethod.GET)
+
+	    public ResponseEntity<?> getAuthenticatedAccount() {
+	    	String authenticatedUserName = "";
+	    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    	if (!(authentication instanceof AnonymousAuthenticationToken)) {
+	    		authenticatedUserName = authentication.getName();
+	    	}
+	    	
+	    	LoginEntity login = loginService.getLogin(authenticatedUserName);
+	    	
+	    	if (login == null) {
+	    		return new ResponseEntity(new RuntimeException("Autheticated login not found"), HttpStatus.NOT_FOUND);
+	    	} else {
+		        AccountEntity account = accountService.getAccount(login.getAccountId());
+		        if (account == null) {
+		            return new ResponseEntity(new RuntimeException("Account with id " + login.getAccountId() 
+		                    + " not found"), HttpStatus.NOT_FOUND);
+		        }
+		        return new ResponseEntity<AccountEntity>(account, HttpStatus.OK);
+	    	}
+	    }
 	
 	
 

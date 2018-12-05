@@ -7,19 +7,32 @@
 
 <div class="mailbox">
   <div class="nav">
-    <a href="compose.html">compose</a>
-    <a href="messages/messages.html" class="active">inbox</a>
+    <a href="http://localhost:8080/ulms#!/compose">compose</a>
+    <a href="http://localhost:8080/ulms#!/messages" class="active">inbox</a>
+    <a href="#">sent</a>
+    <a href="#">trash</a>
   </div>
   <div class="messages">
-    <input type="button" value="DELETE" name="DELETEBTN"/>
-   	<a ng-repeat="messageData in messagesData" class="list-group-item">
-	   	<div class = "message">
-		   	<input type="checkbox"/>
-		   	<span class="sender">{{messageData.user_name}}</span>
-		   	<span class="date">{{messageData.send_date}}</span>
-		  	<span class="subject">{{messageData.subject}}</span>
-	   	</div>
-	</a>
+        
+    <div class="message">
+      <span class="sender">Sender</span>
+      <span class="date">Date</span>
+      <span class="title">Subject</span>
+    </div>
     
+    <div>    
+     	<div class="message" ng-repeat="messageData in unreadMessagesData">
+      	<input type="checkbox" id = "messageData.id" ng-model="messageData.selected" />
+	   	<span class="sender">{{messageData.user_name}}</span>
+	   	<span class="date">{{messageData.send_date | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+	  	<span class="title">{{messageData.subject}}</span>
+    	</div>
+    	<input type="button" value="DELETE" ng-click="deleteMessage(unreadMessagesData)"/>
+    	
+    </div>
+
   </div>
+
+
+
 </div>
