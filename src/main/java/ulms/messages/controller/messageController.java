@@ -68,37 +68,37 @@ public class messageController {
 			return new ResponseEntity<>("Message not found", HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(MessageDto.toDto(messageData), HttpStatus.OK);
     }
-    
-//	 @GetMapping("/course/{course_id}")
-//	    public ResponseEntity<?> getStudentsinCourse(@PathVariable("course_id") long course_id) {
-//		 Iterable <AccountEntity> courseStudents = student.getAllParticipantsInCourse(course_id);
-//		if(courseStudents==null) {
-//	     return new ResponseEntity(new RuntimeException("No Students are present in this course"), HttpStatus.NOT_FOUND);
-//		}
-//		return new ResponseEntity<Iterable<AccountEntity>>(courseStudents, HttpStatus.OK);
-//	 }
-// 	
+
+ 	public AccountEntity getCurrentAccout()
+ 	{
+ 	   	LoginEntity login = getLoginEntity();
+    	AccountEntity account;
+	    account = accountService.getAccount(login.getAccountId());
+	    if (account == null) {
+	    	return new AccountEntity();
+	    }
+    	return account;
+ 	}
  	
-    @RequestMapping(value="/getEmail" ,method = RequestMethod.GET)
-    public ResponseEntity<?> getMessageIds(){
-    	String authenticatedUserName = "";
+ 	public LoginEntity getLoginEntity()
+ 	{
+ 		String authenticatedUserName = "";
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	if (!(authentication instanceof AnonymousAuthenticationToken)) {
     		authenticatedUserName = authentication.getName();
     	}
     	
     	LoginEntity login = loginService.getLogin(authenticatedUserName);
-    	AccountEntity account;
-    	if (login == null) {
-    		return new ResponseEntity(new RuntimeException("Autheticated login not found"), HttpStatus.NOT_FOUND);
-    	} else {
-	        account = accountService.getAccount(login.getAccountId());
-	        if (account == null) {
-	            return new ResponseEntity(new RuntimeException("Account with id " + login.getAccountId() 
-	                    + " not found"), HttpStatus.NOT_FOUND);
-	        }
-    	}  
-
+    	if (login == null)
+    		return new LoginEntity();
+    	return login;
+ 	}
+ 	
+ 	
+ 	
+    @RequestMapping(value="/getEmail" ,method = RequestMethod.GET)
+    public ResponseEntity<?> getMessageIds(){
+    	AccountEntity account = this.getCurrentAccout();
     	List<messageReceiverEntity> receiverData = messReceiverService.getMessageByEmail(account.getEmail(), messageReceiverEntity.messageFlag.not_read);
     	receiverData.addAll(messReceiverService.getMessageByEmail(account.getEmail(), messageReceiverEntity.messageFlag.read));
     	List<messageDetailsEntity> messageDetails = new ArrayList<>();
@@ -120,27 +120,45 @@ public class messageController {
 	}
     
     
+    //Delete Message
+    @RequestMapping(value = "/sent", method = RequestMethod.GET)
+	public ResponseEntity<?>  getSentMessage() {
+    	LoginEntity login = this.getLoginEntity();
+    	List<messageEntity> messages = messService.getMessageByUserName(login.getUserName());
+    	return new ResponseEntity<Iterable<messageEntity>>(messages, HttpStatus.OK);
+    	
+	}
+    
+    //Delete Message
+    @RequestMapping(value = "/trash", method = RequestMethod.GET)
+	public ResponseEntity<?>  getDeletedMessage() {
+    	AccountEntity account = this.getCurrentAccout();
+    	List<messageReceiverEntity> receiverData = messReceiverService.getMessageByEmail(account.getEmail(), messageReceiverEntity.messageFlag.delete);
+    	List<messageDetailsEntity> messageDetails = new ArrayList<>();
+      	for(messageReceiverEntity entity : receiverData)
+      	{
+      		messageDetailsEntity messageDetail = messageDetailsEntity.toEntity(messService.getMessage(entity.getMessage_id()), entity);	
+      		messageDetails.add(messageDetail);
+      	}
+    	return new ResponseEntity<Iterable<messageDetailsEntity>>(messageDetails, HttpStatus.OK);
+    	
+	}
+    
+    
+    //Delete Message
+//    @RequestMapping(value = "/sent", method = RequestMethod.GET)
+//	public @ResponseBody String  getSentMessage() {
+//    	LoginEntity login = this.getLoginEntity();
+//    	List<messageEntity> messages = messService.getMessageByUserName(login.getUserName());
+//    	//return new ResponseEntity<Iterable<messageEntity>>(messages, HttpStatus.OK);
+//    	return "Test";
+//    	
+//	}
+    
+    
     @RequestMapping(value = "/ReceiverDelete/{ids}", method = RequestMethod.GET)
 	public ResponseEntity<?>  deleteReceiverMessage(@PathVariable("ids") String messageIds) {
-    	String authenticatedUserName = "";
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	if (!(authentication instanceof AnonymousAuthenticationToken)) {
-    		authenticatedUserName = authentication.getName();
-    	}
-    	
-    	LoginEntity login = loginService.getLogin(authenticatedUserName);
-    	AccountEntity account;
-    	if (login == null) {
-    		return new ResponseEntity(new RuntimeException("Autheticated login not found"), HttpStatus.NOT_FOUND);
-    	} else {
-	        account = accountService.getAccount(login.getAccountId());
-	        if (account == null) {
-	            return new ResponseEntity(new RuntimeException("Account with id " + login.getAccountId() 
-	                    + " not found"), HttpStatus.NOT_FOUND);
-	        }
-    	}
-    	
-    	
+    	AccountEntity account = this.getCurrentAccout();
     	List<String> idList = Arrays.asList(messageIds.split(","));
     	for(String id : idList)
     	{

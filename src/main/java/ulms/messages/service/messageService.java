@@ -1,4 +1,5 @@
 package ulms.messages.service;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class messageService {
 	
     public Page<messageEntity> getAllMessage(Pageable pageRequest) {
         return messRepository.findAll(pageRequest);
+    }
+    
+    public List<messageEntity> getMessageByUserName(String userName)
+    {
+    	return messRepository.findByUserName(userName);
     }
 
 	public void addMessage(messageEntity newMessage) {

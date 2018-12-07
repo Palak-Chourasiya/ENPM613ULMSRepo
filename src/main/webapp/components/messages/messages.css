@@ -39,6 +39,23 @@ header h1 {
   width: 200px;
   height: 200px;
 }
+.nav input[type=button] {
+  border: none;
+  background: none;
+  background-color: #4CAF50;
+  text-transform: uppercase;
+  width: 80%;
+  height: 20%;
+  float: left;
+  font-weight: 700;
+  color: black;
+  letter-spacing: 1px;
+  font-size: inherit;
+  transition: all 0.3s;
+  outline: none;
+
+
+}
 
 .nav a {
   display: block;
@@ -47,6 +64,8 @@ header h1 {
   font-weight: bold;
   text-decoration: none;
 }
+
+
 
 .nav a.active {
   background: #CCDDED;
@@ -119,11 +138,8 @@ input[type=button] {
   border-radius: 5px;
 }
 
-input[name=search]:focus {
-  outline: none;
-}
 
-.message {
+.messageHeader, .messageData {
   clear: both;
   margin-bottom: 5px;
   position: relative;
@@ -132,13 +148,14 @@ input[name=search]:focus {
   border-radius: 5px;
 }
 
-.message input {
+.messageHeader input, .messageData input {
   position: absolute;
   top: 8px; left: 10px;
   width: 30px;
+  display: block;
 }
 
-.message .sender {
+.messageHeader .sender, .messageData .sender {
   display: block;
   position: absolute;
   left: 40px;
@@ -147,13 +164,75 @@ input[name=search]:focus {
   width: 90px;
 }
 
-.message .title {
+.messageHeader .title, .messageData .title {
   display: inline-block;
   padding-left: 250px;
   width: 100%;
 }
 
-.message .date {
+.messageHeader .date, .messageData .date{
   position: absolute;
   right: 10px;
+}
+
+
+/* The popup form - hidden by default */
+.form-popup {
+  position: absolute;
+  border: 3px solid #f1f1f1;
+  left: 10%;
+  top: 20%;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 100%;
+  padding: 10px;
+  background-color: white;
+}
+
+.form-container h1{
+	text-align: center;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container textarea{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus , .form-container textarea:focus{
+  background-color: #ddd;
+  outline: none;
+}
+.form-container input[type=text]:read-only , .form-container textarea:read-only{
+    background-color: white;
+	text: black;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  margin-bottom:10px;
+  opacity: 0.8;
+  display: inline;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
 }

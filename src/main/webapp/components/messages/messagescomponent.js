@@ -8,17 +8,25 @@ angular.module('ULMS')
       var ctrl = this;
       
       this.$onInit = function() {
-        
+          getUnreadMessageData();
+
       };
       
       $scope.unreadMessagesData=[];
-      $scope.readMessagesData=[];
       $scope.deletedIds=[];
-      $scope.count = 0;
-      $scope.message = "test";
+      $scope.messageTest = "Test";
+      $scope.popupFormIsVisible = false;
+      $scope.showDeleteBtn = false;
+      $scope.showSentBtn = false;
+      $scope.showReplyBtn = false;
+      $scope.deleteMessageBtnVisibility = true;
 
-      getUnreadMessageData();
-      function getUnreadMessageData(){
+
+
+      $scope.getUnreadMessageData = function(){
+          $scope.deleteMessageBtnVisibility = true;
+          $scope.popupFormIsVisible = false;
+          $scope.unreadMessagesData=[];
     	  $http({
     		  method: 'GET',
     		  url : 'http://localhost:8080/messages/getEmail'
@@ -28,11 +36,10 @@ angular.module('ULMS')
     		  console.log(response.statusText);
     	  });
       }
-
-
+      
+      //Delete Messages
       $scope.deleteMessage = function(unreadMessagesData)
       {
-    	  var message = unreadMessagesData.length;
     	  for (var i = 0; i < unreadMessagesData.length; i++){
     		  if (unreadMessagesData[i].selected){
     			  $scope.deletedIds.push(unreadMessagesData[i].id);
@@ -43,41 +50,75 @@ angular.module('ULMS')
 		  method: 'GET',
 		  url : url
 	  }).then(function successCallback(response){
-		  getUnreadMessageData();
+		  $scope.getUnreadMessageData();
 		  $scope.message = "success";
 	  }, function errorCallback(response){
 		  $scope.message = "failed";
 		  console.log(response.statusText);
-	  });
-    	  
+	  });    	  
       }
-      
-      
-      
-      
-      
-      
-      //Messagew
-      this.showModal = false;
-      this.showView = false;
-      this.counter = 1;
-      this.toggleDialog = function () {
-          this.showModal = !this.showModal;
-      }
-      this.toggleView = function () {
-          this.showView = !this.showView;
-      }
-      this.changeDisplay = function () {
-          this.counter++;
-      }
-      
-      
+
       $scope.openMessage = function(messageData)
       {
-    	  var message = "sender: "+messageData.userName+"\n"+
-    	  "Subject: "+messageData.subject+"\n\n"+
-    	  "Content: \n"+messageData.message+"\n";
-    	  $window.alert(message);
+          $scope.popupFormIsVisible = true;
+          $scope.showDeleteBtn = true;
+          $scope.showSentBtn = false;
+          $scope.showReplyBtn = true;
+          $scope.subjectText = messageData.subject;
+          $scope.emailText = messageData.user_name;
+          $scope.messageText = messageData.message;
       }
+      
+      $scope.openComposeForm = function() {
+          $scope.popupFormIsVisible = true;
+          $scope.showDeleteBtn = false;
+          $scope.showSentBtn = true;
+          $scope.showReplyBtn = false;
+    	}
+
+    	$scope.openSent = function(){
+    	  $scope.deleteMessageBtnVisibility = false;
+    	  $scope.unreadMessagesData=[];
+
+      	  $http({
+    		  method: 'GET',
+    		  url : 'http://localhost:8080/messages/sent'
+    	  }).then(function successCallback(response){
+    		  $scope.unreadMessagesData = response.data;
+    	  }, function errorCallback(response){
+    		  console.log(response.statusText);
+    	  });
+    	}
+
+    	$scope.openTrash = function(){
+    		
+    		$scope.deleteMessageBtnVisibility = false;
+      	  	$scope.unreadMessagesData=[];
+
+        	  $http({
+      		  method: 'GET',
+      		  url : 'http://localhost:8080/messages/trash'
+      	  }).then(function successCallback(response){
+      		  $scope.unreadMessagesData = response.data;
+      	  }, function errorCallback(response){
+      		  console.log(response.statusText);
+      	  });
+        	  
+        	  
+    	}
+    	$scope.closeForm = function() {
+      		$scope.popupFormIsVisible = false;
+            $scope.subjectText = "";
+            $scope.emailText = "";
+            $scope.messageText = "";
+    	}
+    	$scope.sendMessage = function() {
+      		$scope.popupFormIsVisible = false;
+
+    	}
+      
+      
+      
+      
     }
   })

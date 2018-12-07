@@ -63,4 +63,8 @@ public class LoginEntity {
 	public AccountEntity getAccount() {
 		return this.account;
 	}
+	public LoginEntity()
+	{
+		
+	}
 }

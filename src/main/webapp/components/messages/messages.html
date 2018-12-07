@@ -4,39 +4,57 @@
   <h1>messages</h1>
 </header>
 <script src="https://m-e-conroy.github.io/angular-dialog-service/javascripts/dialogs.min.js" type="text/javascript"></script>
-
-
-
 <link href="components/messages/messages.css" rel="stylesheet" type="text/css">
-<div class="mailbox">
-  <div class="nav">
-    <a href="http://localhost:8080/ulms#!/compose">compose</a>
-    <a href="http://localhost:8080/ulms#!/messages" class="active">inbox</a>
-    <a href="#">sent</a>
-    <a href="#">trash</a>
+</link>
+<div class="mailbox" ng-init="getUnreadMessageData()">
+	<div class="nav">
+		<input type="button" value = "Compose" id = "composeBtn" ng-click="openComposeForm()"/>
+		<input type="button" value = "Inbox" id = "inboxBtn" ng-click="getUnreadMessageData()"/>
+		<input type="button" value = "Sent" id = "sendBtn" ng-click="openSent()"/>
+		<input type="button" value = "Trash" id = "trashBtn" ng-click="openTrash()"/>
+	</div>
+	<div class="messages">    
+		<div class="messageHeader">
+			<span class="sender" id = "messageSenderLabel">Sender</span>
+			<span class="date" id = "messageDateLabel">Date</span>
+			<span class="title" id = "messageTitleLabel">Subject</span>
+		</div>
+	    <div>    
+	     	<div class="messageData" ng-repeat="messageData in unreadMessagesData">
+		      	<input type="checkbox" id = "messageData.id" ng-model="messageData.selected" />
+			   	<a class="sender">{{messageData.user_name}}</a>
+			   	<a class="date" >{{messageData.send_date | date:'yyyy-MM-dd HH:mm:ss'}}</a>
+			  	<a class="title" ng-click="openMessage(messageData)" data-toggle="modal">{{messageData.subject}}</a>
+	    	</div>
+		
+			<div>
+	    		<input type="button" value="DELETE" id = "deleteMesageBtn" ng-show="deleteMessageBtnVisibility" ng-click="deleteMessage(unreadMessagesData)"/>	
+			</div>
+			<div>{{messageTest}}</div>
+	    </div>
   </div>
-  <div class="messages">
-        
-    <div class="message">
-      <span class="sender">Sender</span>
-      <span class="date">Date</span>
-      <span class="title">Subject</span>
-    </div>
-    
-    <div>    
-     	<div class="message" ng-repeat="messageData in unreadMessagesData">
-      	<input type="checkbox" id = "messageData.id" ng-model="messageData.selected" />
-	   	<a class="sender">{{messageData.user_name}}</a>
-	   	<a class="date" >{{messageData.send_date | date:'yyyy-MM-dd HH:mm:ss'}}</a>
-	  	<a class="title" ng-click="openMessage(messageData)" data-toggle="modal">{{messageData.subject}}</a>
-    	</div>
-    	<input type="button" value="DELETE" ng-click="deleteMessage(unreadMessagesData)"/>
-    	
-    </div>
+  
+  
+  
+	<div class="form-popup" ng-show="popupFormIsVisible" >
+	  <form class="form-container">
+		<h1 id="messageHeaderLabel">Compose</h1>
+		<br>
+		<br>
 
-  </div>
+		<label for="email" ng-model="emailLabel"><b>Receivers</b></label>
+		<input type="text" ng-model="emailText" placeholder="Enter Receivers' email" required>
 
+		<label for="title"><b>Subject</b></label>
+		<input type="text" ng-model = "subjectText" placeholder="Subject">
+		<label for="message"><b>Message</b></label>
 
+		<textarea ng-model="messageText" cols="10" rows="10"></textarea>
 
-
+		<button type="button" class="btn" ng-click="deleteMessage()" ng-show = "showDeleteBtn">Delete</button>
+		<button type="submit" class="btn" ng-click="sendMessage()" ng-show = "showSentBtn">Send</button>
+		<button type="button" class="btn reply" ng-click="replyMessage()" ng-show = "showReplyBtn">Reply</button>
+		<button type="button" class="btn cancel" ng-click="closeForm()">Cancel</button>
+	  </form>
+	</div>
 </div>
