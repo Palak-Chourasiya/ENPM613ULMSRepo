@@ -71,7 +71,7 @@ public class messageController {
 
  	public AccountEntity getCurrentAccout()
  	{
- 	   	LoginEntity login = getLoginEntity();
+ 	   	LoginEntity login = this.getLoginEntity();
     	AccountEntity account;
 	    account = accountService.getAccount(login.getAccountId());
 	    if (account == null) {
@@ -196,8 +196,6 @@ public class messageController {
 	@RequestMapping(value = "/add" , method = RequestMethod.POST)
 	public ResponseEntity<?> addMessage(@RequestBody MessageFormDto messageDto)
 	{
-<<<<<<< HEAD
-		return new ResponseEntity<>("Success", HttpStatus.OK);
 		LoginEntity account = this.getLoginEntity();
 		
 		if (account == null)
@@ -205,7 +203,11 @@ public class messageController {
 			return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 		}
 		List<String> receiverEmails = messageDto.getEmail();
-		messageEntity messEntity = new messageEntity(account.getUserName(), messageDto.getSubject(), messageDto.getMessage());
+		messageEntity messEntity = new messageEntity();
+		messEntity.setUser_name(account.getUserName());
+		messEntity.setSubject(messageDto.getSubjectText());
+		messEntity.setMessage(messageDto.getMessageText());
+		messEntity.setSend_date(new Date());
 		messService.addMessage(messEntity);
 		
 		
@@ -216,8 +218,6 @@ public class messageController {
 			messReceiverService.addMessageReceiver(entity);
 		}
         return new ResponseEntity<>(messEntity, HttpStatus.OK);
-=======
-		return new ResponseEntity<>(messageDto, HttpStatus.OK);
 //		LoginEntity account = this.getLoginEntity();
 //		
 //		if (account == null)
@@ -236,7 +236,6 @@ public class messageController {
 //			messReceiverService.addMessageReceiver(entity);
 //		}
 //        return new ResponseEntity<>(messEntity, HttpStatus.OK);
->>>>>>> 4b7b492be66b1cbddc8bc8adb6daf0c98c8b0319
 	}
 	
 //	 @GetMapping("/authenticatedAccount")

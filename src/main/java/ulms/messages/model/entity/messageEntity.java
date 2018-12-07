@@ -32,8 +32,14 @@ public class messageEntity {
 	@Id
 	@Column(name="id", unique = true)
 	@NotNull
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	
+
+	
+	
+	
 	
 	@Column(name="user_name")
 	private String user_name;
