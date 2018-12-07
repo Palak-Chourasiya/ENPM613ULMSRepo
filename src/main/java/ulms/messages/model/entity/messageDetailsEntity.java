@@ -14,6 +14,8 @@ public class messageDetailsEntity {
 	
 	private Boolean deleted;
 	
+	private String senderEmail;
+	
 	public Long getId() {
 		return id;
 	}
@@ -98,7 +100,7 @@ public class messageDetailsEntity {
 		
 	}
 	
-	public messageDetailsEntity(Long id, String user_name, Boolean deleted, Date send_date, String subject, String message, String email, messageFlag message_flag)
+	public messageDetailsEntity(Long id, String user_name, String senderEmail, Boolean deleted, Date send_date, String subject, String message, String email, messageFlag message_flag)
 	{
 		this.id = id;
 		this.user_name = user_name;
@@ -108,6 +110,7 @@ public class messageDetailsEntity {
 		this.message = message;
 		this.email = email;
 		this.message_flag = message_flag;
+		this.senderEmail = senderEmail;
 	}
 
 
@@ -145,7 +148,7 @@ public class messageDetailsEntity {
     }
 	public static messageDetailsEntity toEntity(MessageDetailsDto entityItem)
 	{
-		return new messageDetailsEntity(entityItem.getId(), entityItem.getUser_name(), entityItem.getDeleted(), entityItem.getSend_date(), 
+		return new messageDetailsEntity(entityItem.getId(), entityItem.getUser_name(), entityItem.getSenderEmail(), entityItem.getDeleted(), entityItem.getSend_date(), 
 				entityItem.getSubject(), entityItem.getMessage(), entityItem.getEmail(), messageDetailsEntity.messageFlag.fromString(entityItem.getMessage_flag().toString()));
 	}
 	
@@ -163,5 +166,15 @@ public class messageDetailsEntity {
   		messageDetail.setSubject(messageData.getSubject());
   		messageDetail.setMessage(messageData.getMessage());	
   		return messageDetail;
+	}
+
+
+	public String getSenderEmail() {
+		return senderEmail;
+	}
+
+
+	public void setSenderEmail(String senderEmail) {
+		this.senderEmail = senderEmail;
 	}
 }

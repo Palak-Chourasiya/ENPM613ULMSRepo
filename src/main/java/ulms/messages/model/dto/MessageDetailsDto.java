@@ -22,8 +22,21 @@ public class MessageDetailsDto {
 	@JsonProperty("deleted")
 	private Boolean deleted;
 	
+	@JsonProperty("senderEmail")
+	private String senderEmail;
+	
 	public Long getId() {
 		return id;
+	}
+
+
+	public String getSenderEmail() {
+		return senderEmail;
+	}
+
+
+	public void setSenderEmail(String senderEmail) {
+		this.senderEmail = senderEmail;
 	}
 
 
@@ -106,7 +119,7 @@ public class MessageDetailsDto {
 		
 	}
 	
-	public MessageDetailsDto(Long id, String user_name, Boolean deleted, Date send_date, String subject, String message, String email, messageFlag message_flag)
+	public MessageDetailsDto(Long id, String user_name, String senderEmail, Boolean deleted, Date send_date, String subject, String message, String email, messageFlag message_flag)
 	{
 		this.id = id;
 		this.user_name = user_name;
@@ -116,6 +129,7 @@ public class MessageDetailsDto {
 		this.message = message;
 		this.email = email;
 		this.message_flag = message_flag;
+		this.senderEmail = senderEmail;
 	}
 
 
@@ -157,7 +171,7 @@ public class MessageDetailsDto {
     }
 	public static MessageDetailsDto toEntity(messageDetailsEntity entityItem)
 	{
-		return new MessageDetailsDto(entityItem.getId(), entityItem.getUser_name(), entityItem.getDeleted(), entityItem.getSend_date(), 
+		return new MessageDetailsDto(entityItem.getId(), entityItem.getUser_name(), entityItem.getSenderEmail(), entityItem.getDeleted(), entityItem.getSend_date(), 
 				entityItem.getSubject(), entityItem.getMessage(), entityItem.getEmail(), MessageDetailsDto.messageFlag.fromString(entityItem.getMessage_flag().toString()));
 	}
 	public static MessageDetailsDto toEntity(MessageDto messageData, MessageReceiverDto entity)

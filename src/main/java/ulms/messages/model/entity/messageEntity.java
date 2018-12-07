@@ -145,6 +145,8 @@ public class messageEntity {
 		this.user_name = userName;
 		this.subject = subject;
 		this.message = message;
+		this.send_date = new Date();
+		this.deleted = false;
 	}
 	
 	

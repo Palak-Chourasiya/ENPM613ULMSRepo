@@ -20,6 +20,19 @@ angular.module('ULMS')
       $scope.showSentBtn = false;
       $scope.showReplyBtn = false;
       $scope.deleteMessageBtnVisibility = true;
+      $scope.ComposeLabel = "COMPOSE";
+      
+      $scope.emailIsReadOnly = false;
+      $scope.subjectIsReadOnly = false;
+      $scope.messageIsReadOnly = false;
+      var currentMessage = [];
+      
+      
+      $scope.myForm = {
+    		  emailText: "",
+    		  subjectText: "",
+    		  messageText: ""
+      }
 
 
 
@@ -60,20 +73,36 @@ angular.module('ULMS')
 
       $scope.openMessage = function(messageData)
       {
+    	  $scope.ComposeLabel = "MESSAGE";
+    	  currentMessage = messageData;
           $scope.popupFormIsVisible = true;
           $scope.showDeleteBtn = true;
           $scope.showSentBtn = false;
           $scope.showReplyBtn = true;
-          $scope.subjectText = messageData.subject;
-          $scope.emailText = messageData.user_name;
-          $scope.messageText = messageData.message;
+          $scope.emailIsReadOnly = true;
+          $scope.subjectIsReadOnly = true;
+          $scope.messageIsReadOnly = true;
+          $scope.myForm = {
+        		  emailText: messageData.user_name,
+        		  subjectText: messageData.subject,
+        		  messageText: messageData.message
+          }
       }
       
       $scope.openComposeForm = function() {
+    	  $scope.ComposeLabel = "COMPOSE";
+          $scope.myForm = {
+        		  emailText: "",
+        		  subjectText: "",
+        		  messageText: ""
+          }
           $scope.popupFormIsVisible = true;
           $scope.showDeleteBtn = false;
           $scope.showSentBtn = true;
           $scope.showReplyBtn = false;
+  	      $scope.emailIsReadOnly = false;
+  	      $scope.subjectIsReadOnly = false;
+  	      $scope.messageIsReadOnly = false;
     	}
 
     	$scope.openSent = function(){
@@ -113,12 +142,56 @@ angular.module('ULMS')
             $scope.messageText = "";
     	}
     	$scope.sendMessage = function() {
-      		$scope.popupFormIsVisible = false;
-
+      	  $http({
+      		  method: 'POST',
+      		  url : 'http://localhost:8080/messages/trash',
+      		  data: angular.toJson($scope.myForm)
+      	  }).then(function successCallback(response){
+      		  $scope.messageTest = response.data;
+    		  $scope.popupFormIsVisible = false;
+    		  }, function errorCallback(response){
+        		  $scope.messageTest = "Failed: " + response.data;
+          		  $scope.popupFormIsVisible = false;
+          		  });
     	}
-      
-      
-      
+    	
+        //Delete Messages
+        $scope.deleteAMessage = function()
+        {
+        	
+	        var url = 'http://localhost:8080/messages/ReceiverDelete/'+ currentMessage.id;
+	        $http({
+	  		  method: 'GET',
+	  		  url : url
+	  	  }).then(function successCallback(response){
+	  		  $scope.getUnreadMessageData();
+	  		  $scope.message = "success";
+      		  $scope.popupFormIsVisible = false;
+	  	  }, function errorCallback(response){
+	  		  $scope.message = "failed";
+	  		  console.log(response.statusText);
+      		  $scope.popupFormIsVisible = false;
+
+	  	  }); 
+        }
+        $scope.replyMessage = function()
+        {
+  		  $scope.popupFormIsVisible = false;
+  		  
+  		  
+  	      $scope.emailIsReadOnly = false;
+  	      $scope.subjectIsReadOnly = false;
+  	      $scope.messageIsReadOnly = false;
+  	      
+            $scope.myForm = {
+          		  emailText: currentMessage.senderEmail,
+          		  subjectText: "Re: " + currentMessage.subject,
+          		  messageText: "\n\n\n\------------------reply-------------\n" + currentMessage.message
+            }
+  		  $scope.popupFormIsVisible = true;
+
+        }
+    
       
     }
   })

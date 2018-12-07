@@ -38,20 +38,20 @@
   
 	<div class="form-popup" ng-show="popupFormIsVisible" >
 	  <form class="form-container">
-		<h1 id="messageHeaderLabel">Compose</h1>
+		<h1 id="messageHeaderLabel">{{ComposeLabel}}</h1>
 		<br>
 		<br>
 
 		<label for="email" ng-model="emailLabel"><b>Receivers</b></label>
-		<input type="text" ng-model="emailText" placeholder="Enter Receivers' email" required>
+		<input type="text" ng-model="myForm.emailText" placeholder="Enter Receivers' email" ng-readonly = "emailIsReadOnly" required>
 
 		<label for="title"><b>Subject</b></label>
-		<input type="text" ng-model = "subjectText" placeholder="Subject">
+		<input type="text" ng-model = "myForm.subjectText" ng-readonly = "subjectIsReadOnly" placeholder="Subject">
 		<label for="message"><b>Message</b></label>
 
-		<textarea ng-model="messageText" cols="10" rows="10"></textarea>
+		<textarea ng-model="myForm.messageText" ng-readonly = "messageIsReadOnly" cols="10" rows="10"></textarea>
 
-		<button type="button" class="btn" ng-click="deleteMessage()" ng-show = "showDeleteBtn">Delete</button>
+		<button type="button" class="btn" ng-click="deleteAMessage()" ng-show = "showDeleteBtn">Delete</button>
 		<button type="submit" class="btn" ng-click="sendMessage()" ng-show = "showSentBtn">Send</button>
 		<button type="button" class="btn reply" ng-click="replyMessage()" ng-show = "showReplyBtn">Reply</button>
 		<button type="button" class="btn cancel" ng-click="closeForm()">Cancel</button>

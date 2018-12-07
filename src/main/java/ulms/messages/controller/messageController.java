@@ -104,7 +104,13 @@ public class messageController {
     	List<messageDetailsEntity> messageDetails = new ArrayList<>();
       	for(messageReceiverEntity entity : receiverData)
       	{
-      		messageDetailsEntity messageDetail = messageDetailsEntity.toEntity(messService.getMessage(entity.getMessage_id()), entity);	
+      		messageEntity messEntity = messService.getMessage(entity.getMessage_id());
+      		String userName = messEntity.getUser_name();
+      		Long id = loginService.getLogin(userName).getAccountId();
+      		String email = accountService.getAccount(id).getEmail();
+
+      		messageDetailsEntity messageDetail = messageDetailsEntity.toEntity(messEntity, entity);	
+      		messageDetail.setSenderEmail(email);
       		messageDetails.add(messageDetail);
       	}
     	return new ResponseEntity<Iterable<messageDetailsEntity>>(messageDetails, HttpStatus.OK);
@@ -137,7 +143,13 @@ public class messageController {
     	List<messageDetailsEntity> messageDetails = new ArrayList<>();
       	for(messageReceiverEntity entity : receiverData)
       	{
-      		messageDetailsEntity messageDetail = messageDetailsEntity.toEntity(messService.getMessage(entity.getMessage_id()), entity);	
+      		messageEntity messEntity = messService.getMessage(entity.getMessage_id());
+      		String userName = messEntity.getUser_name();
+      		Long id = loginService.getLogin(userName).getAccountId();
+      		String email = accountService.getAccount(id).getEmail();
+
+      		messageDetailsEntity messageDetail = messageDetailsEntity.toEntity(messEntity, entity);	
+      		messageDetail.setSenderEmail(email);
       		messageDetails.add(messageDetail);
       	}
     	return new ResponseEntity<Iterable<messageDetailsEntity>>(messageDetails, HttpStatus.OK);
@@ -181,31 +193,29 @@ public class messageController {
 
     
     //Add Message
-	@RequestMapping(value = "/{userName}", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<?> addMessage(@PathVariable("userName") String userName, @RequestBody MessageFormDto messageDto)
+	@RequestMapping(value = "/add" , method = RequestMethod.POST)
+    @ResponseBody
+	public ResponseEntity<?> addMessage(@RequestBody MessageFormDto messageDto)
 	{
-		LoginEntity account = loginService.getAccount(userName);
-		if (account == null)
-		{
-			return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-		}
-		
-		for(MessageReceiverDto receiver : messageDto.getReceivers())
-		{
-			if(accountService.getMessageByEmail(receiver.getEmail()) == null)
-				return new ResponseEntity<>("Receivers not found", HttpStatus.NOT_FOUND); 
-		}
-		messageEntity messageData = messageEntity.toEntity(messageDto.getSender());
-		messageData.setSend_date(new Date());
-		messService.addMessage(messageData);
-		for(messageReceiverEntity receiverData : messageReceiverEntity.toEntity(messageDto.getReceivers()))
-		{
-			receiverData.setMessage_id(messageData.getId());
-			receiverData.setMessage_flags(messageReceiverEntity.messageFlag.not_read);
-			messReceiverService.addMessageReceiver(receiverData);
-		}
-        return new ResponseEntity<>(messageDto, HttpStatus.CREATED);
+		return new ResponseEntity<>("Success", HttpStatus.OK);
+//		LoginEntity account = this.getLoginEntity();
+//		
+//		if (account == null)
+//		{
+//			return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+//		}
+//		List<String> receiverEmails = messageDto.getEmail();
+//		messageEntity messEntity = new messageEntity(account.getUserName(), messageDto.getSubject(), messageDto.getMessage());
+//		messService.addMessage(messEntity);
+//		
+//		
+//		List<messageReceiverEntity> receiverEntities;
+//		for(String email : receiverEmails)
+//		{
+//			messageReceiverEntity entity = new messageReceiverEntity(messEntity.getId(), email, messageReceiverEntity.messageFlag.not_read);
+//			messReceiverService.addMessageReceiver(entity);
+//		}
+//        return new ResponseEntity<>(messEntity, HttpStatus.OK);
 	}
 	
 //	 @GetMapping("/authenticatedAccount")
