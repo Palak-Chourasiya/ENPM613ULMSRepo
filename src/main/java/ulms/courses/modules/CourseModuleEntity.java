@@ -34,10 +34,6 @@ public class CourseModuleEntity implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long module_number;
 	
-	public Long getModule_number() {
-		return module_number;
-	}
-	
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name="course_id",insertable=false, updatable=false)
@@ -64,23 +60,27 @@ public class CourseModuleEntity implements Serializable {
 		this.course = course;
 	}
 
-	public String getRecipe_link() {
+	public String getRecipeLink() {
 		return recipe_link;
 	}
 
-	public void setRecipe_link(String recipe_link) {
+	public void setRecipeLink(String recipe_link) {
 		this.recipe_link = recipe_link;
 	}
+	
+	public Long getModuleNumber() {
+		return this.module_number;
+	}
 
-	public void setModule_number(Long module_number) {
+	public void setModuleNumber(Long module_number) {
 		this.module_number = module_number;
 	}
 
-	public Long getCourse_id() {
+	public Long getCourseId() {
 		return course_id;
 	}
-
-	public void setCourse_id(Long course_id) {
+	
+	public void setCourseId(Long course_id) {
 		this.course_id = course_id;
 	}
 
@@ -92,11 +92,11 @@ public class CourseModuleEntity implements Serializable {
 		this.title = title;
 	}
 
-	public Date getDate_published() {
+	public Date getDatePublished() {
 		return date_published;
 	}
 
-	public void setDate_published(Date date_published) {
+	public void setDatePublished(Date date_published) {
 		this.date_published = date_published;
 	}
 	

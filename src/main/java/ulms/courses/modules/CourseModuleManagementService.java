@@ -71,7 +71,7 @@ public class CourseModuleManagementService implements CourseModuleManagementServ
 		
 		try {
 			for(CourseModuleEntity module:modules) {
-				if(course_id==module.getCourse_id()) {
+				if(course_id==module.getCourseId()) {
 					modulesforcourse.add(module);
 				}
 			}

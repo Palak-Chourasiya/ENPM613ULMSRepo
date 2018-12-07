@@ -194,10 +194,9 @@ public class messageController {
     
     //Add Message
 	@RequestMapping(value = "/add" , method = RequestMethod.POST)
-    @ResponseBody
 	public ResponseEntity<?> addMessage(@RequestBody MessageFormDto messageDto)
 	{
-		return new ResponseEntity<>("Success", HttpStatus.OK);
+		return new ResponseEntity<>(messageDto, HttpStatus.OK);
 //		LoginEntity account = this.getLoginEntity();
 //		
 //		if (account == null)

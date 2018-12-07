@@ -144,7 +144,7 @@ angular.module('ULMS')
     	$scope.sendMessage = function() {
       	  $http({
       		  method: 'POST',
-      		  url : 'http://localhost:8080/messages/trash',
+      		  url : 'http://localhost:8080/messages/add',
       		  data: angular.toJson($scope.myForm)
       	  }).then(function successCallback(response){
       		  $scope.messageTest = response.data;

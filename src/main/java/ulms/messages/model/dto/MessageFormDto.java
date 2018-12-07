@@ -39,27 +39,27 @@ public class MessageFormDto {
 		this.email = email;
 	}
 
-	public String getEmails() {
+	public String getEmailText() {
 		return emailText;
 	}
 
-	public void setEmails(String emails) {
+	public void setEmailText(String emails) {
 		this.emailText = emails;
 	}
 
-	public String getSubject() {
+	public String getSubjectText() {
 		return subjectText;
 	}
 
-	public void setSubject(String subject) {
+	public void setSubjectText(String subject) {
 		this.subjectText = subject;
 	}
 
-	public String getMessage() {
+	public String getMessageText() {
 		return messageText;
 	}
 
-	public void setMessage(String message) {
+	public void setMessageText(String message) {
 		this.messageText = message;
 	}
 }
