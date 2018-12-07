@@ -29,37 +29,34 @@ public class MessageFormDto {
 		return email;
 	}
 
-	@Override
-	public String toString() {
-		return "MessageFormDto [emails=" + emailText + ", subject=" + subjectText + ", message=" + messageText + ", email=" + email
-				+ "]";
+	public String getEmailText() {
+		return emailText;
+	}
+
+	public void setEmailText(String emailText) {
+		this.emailText = emailText;
+	}
+
+	public String getSubjectText() {
+		return subjectText;
+	}
+
+	public void setSubjectText(String subjectText) {
+		this.subjectText = subjectText;
+	}
+
+	public String getMessageText() {
+		return messageText;
+	}
+
+	public void setMessageText(String messageText) {
+		this.messageText = messageText;
 	}
 
 	public void setEmail(List<String> email) {
 		this.email = email;
 	}
 
-	public String getEmails() {
-		return emailText;
-	}
 
-	public void setEmails(String emails) {
-		this.emailText = emails;
-	}
-
-	public String getSubject() {
-		return subjectText;
-	}
-
-	public void setSubject(String subject) {
-		this.subjectText = subject;
-	}
-
-	public String getMessage() {
-		return messageText;
-	}
-
-	public void setMessage(String message) {
-		this.messageText = message;
-	}
+	
 }
