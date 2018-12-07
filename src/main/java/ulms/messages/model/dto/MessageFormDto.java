@@ -29,28 +29,56 @@ public class MessageFormDto {
 		return email;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public String toString() {
+		return "MessageFormDto [emails=" + emailText + ", subject=" + subjectText + ", message=" + messageText + ", email=" + email
+				+ "]";
+	}
+
+	public void setEmail(List<String> email) {
+		this.email = email;
+	}
+
+>>>>>>> 4b7b492be66b1cbddc8bc8adb6daf0c98c8b0319
 	public String getEmailText() {
 		return emailText;
 	}
 
+<<<<<<< HEAD
 	public void setEmailText(String emailText) {
 		this.emailText = emailText;
+=======
+	public void setEmailText(String emails) {
+		this.emailText = emails;
+>>>>>>> 4b7b492be66b1cbddc8bc8adb6daf0c98c8b0319
 	}
 
 	public String getSubjectText() {
 		return subjectText;
 	}
 
+<<<<<<< HEAD
 	public void setSubjectText(String subjectText) {
 		this.subjectText = subjectText;
+=======
+	public void setSubjectText(String subject) {
+		this.subjectText = subject;
+>>>>>>> 4b7b492be66b1cbddc8bc8adb6daf0c98c8b0319
 	}
 
 	public String getMessageText() {
 		return messageText;
 	}
 
+<<<<<<< HEAD
 	public void setMessageText(String messageText) {
 		this.messageText = messageText;
+=======
+	public void setMessageText(String message) {
+		this.messageText = message;
+>>>>>>> 4b7b492be66b1cbddc8bc8adb6daf0c98c8b0319
 	}
 
 	public void setEmail(List<String> email) {

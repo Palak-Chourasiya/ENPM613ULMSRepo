@@ -12,12 +12,12 @@
 		<div class="list-group">
 			<div ng-repeat="module in course.moduleEntity">
 			
-			<a class="btn btn-danger" ui-sref="deleteModule({id: module.module_number})" role="button">Delete Module</a>
-				<a href="{{module.recipe_link}}" target="_blank"
+			<a class="btn btn-danger" ui-sref="deleteModule({id: module.moduleNumber})" role="button">Delete Module</a>
+				<a href="{{module.recipeLink}}" target="_blank"
 			       class="list-group-item">
 					<h4 class="list-group-item-heading">Module Name : {{module.title}}</h4>
-			        <p>Recipe Page: {{module.recipe_link}}</p>
-			        <p>Published Date: {{module.date_published}}</p>
+			        <p>Recipe Page: {{module.recipeLink}}</p>
+			        <p>Published Date: {{module.datePublished}}</p>
 				</a>
 				
 			</div>	

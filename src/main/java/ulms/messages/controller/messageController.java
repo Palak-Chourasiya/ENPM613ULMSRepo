@@ -194,9 +194,9 @@ public class messageController {
     
     //Add Message
 	@RequestMapping(value = "/add" , method = RequestMethod.POST)
-    @ResponseBody
 	public ResponseEntity<?> addMessage(@RequestBody MessageFormDto messageDto)
 	{
+<<<<<<< HEAD
 		return new ResponseEntity<>("Success", HttpStatus.OK);
 		LoginEntity account = this.getLoginEntity();
 		
@@ -216,6 +216,27 @@ public class messageController {
 			messReceiverService.addMessageReceiver(entity);
 		}
         return new ResponseEntity<>(messEntity, HttpStatus.OK);
+=======
+		return new ResponseEntity<>(messageDto, HttpStatus.OK);
+//		LoginEntity account = this.getLoginEntity();
+//		
+//		if (account == null)
+//		{
+//			return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+//		}
+//		List<String> receiverEmails = messageDto.getEmail();
+//		messageEntity messEntity = new messageEntity(account.getUserName(), messageDto.getSubject(), messageDto.getMessage());
+//		messService.addMessage(messEntity);
+//		
+//		
+//		List<messageReceiverEntity> receiverEntities;
+//		for(String email : receiverEmails)
+//		{
+//			messageReceiverEntity entity = new messageReceiverEntity(messEntity.getId(), email, messageReceiverEntity.messageFlag.not_read);
+//			messReceiverService.addMessageReceiver(entity);
+//		}
+//        return new ResponseEntity<>(messEntity, HttpStatus.OK);
+>>>>>>> 4b7b492be66b1cbddc8bc8adb6daf0c98c8b0319
 	}
 	
 //	 @GetMapping("/authenticatedAccount")

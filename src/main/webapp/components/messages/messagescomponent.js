@@ -147,11 +147,17 @@ angular.module('ULMS')
     		var temp = angular.toJson($scope.myForm);
     		String stringValue = "";//"emailText="+$scope.myForm.emailText + "&subjectText="+$scope.myForm.emailText+"&messageText="+$scope.myForm.messageText;
       	  $http({
+<<<<<<< HEAD
       		  method: 'GET',
       		  url : "http://localhost:8080/messages/addMessage?",// + stringValue,
               headers : {
                   'Content-Type' : 'application/json'
               }
+=======
+      		  method: 'POST',
+      		  url : 'http://localhost:8080/messages/add',
+      		  data: angular.toJson($scope.myForm)
+>>>>>>> 4b7b492be66b1cbddc8bc8adb6daf0c98c8b0319
       	  }).then(function successCallback(response){
       		  $scope.messageTest = response.data;
     		  $scope.popupFormIsVisible = false;
