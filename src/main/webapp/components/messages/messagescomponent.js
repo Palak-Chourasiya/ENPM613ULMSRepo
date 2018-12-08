@@ -154,7 +154,6 @@ angular.module('ULMS')
     	}
     	$scope.sendMessage = function() {
     		var temp = JSON.stringify($scope.myForm);
-<<<<<<< HEAD
     		var url = 'http://localhost:8080/messages/add';	        
 	        $http({
 	  		  method: 'POST',
@@ -170,21 +169,7 @@ angular.module('ULMS')
       		  $scope.popupFormIsVisible = false;
 
 	  	  }); 
-=======
-    		var url = 'http://localhost:8080/messages/add';
-    		$http({
-    			method: 'POST',
-    			url: url,
-    			data: angular.toJson($scope.myForm)
-    		}).then(function successCallback(response) {
-    			$scope.messageTest = response.data;      		
-    			$scope.popupFormIsVisible = false;
 
-    		}, function errorCallback(response) {
-      		  $scope.messageTest = "Failed: " + temp;
-        		$scope.popupFormIsVisible = false;
-    		});
->>>>>>> d62f6da090d8952ea75fa1950ce54f37e5a7c310
     	}
     	
         //Delete Messages
