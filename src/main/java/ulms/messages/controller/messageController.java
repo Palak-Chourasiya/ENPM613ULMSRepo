@@ -204,20 +204,21 @@ public class messageController {
 		}
 		List<String> receiverEmails = messageDto.getEmail();
 		messageEntity messEntity = new messageEntity();
+		messEntity.setId(-1L);
 		messEntity.setUser_name(account.getUserName());
 		messEntity.setSubject(messageDto.getSubjectText());
 		messEntity.setMessage(messageDto.getMessageText());
 		messEntity.setSend_date(new Date());
-		messService.addMessage(messEntity);
+		messageEntity saved = messService.addMessage(messEntity);
 		
 		
 		List<messageReceiverEntity> receiverEntities;
 		for(String email : receiverEmails)
 		{
-			messageReceiverEntity entity = new messageReceiverEntity(messEntity.getId(), email, messageReceiverEntity.messageFlag.not_read);
+			messageReceiverEntity entity = new messageReceiverEntity(saved.getId(), email, messageReceiverEntity.messageFlag.not_read);
 			messReceiverService.addMessageReceiver(entity);
 		}
-        return new ResponseEntity<>(messEntity, HttpStatus.OK);
+        return new ResponseEntity<messageEntity>(saved, HttpStatus.OK);
 //		LoginEntity account = this.getLoginEntity();
 //		
 //		if (account == null)

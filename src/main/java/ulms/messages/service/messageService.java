@@ -38,8 +38,8 @@ public class messageService {
     	return messRepository.findByUserName(userName);
     }
 
-	public void addMessage(messageEntity newMessage) {
-		messRepository.save(newMessage);
+	public messageEntity addMessage(messageEntity newMessage) {
+		return messRepository.save(newMessage);
 	}
 	
 	public void deleteMessage(Long messageID) {

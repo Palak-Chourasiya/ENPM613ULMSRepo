@@ -146,13 +146,15 @@ angular.module('ULMS')
     	$scope.sendMessage = function() {
     		var temp = JSON.stringify($scope.myForm);
     		var url = 'http://localhost:8080/messages/add';
-    		$http.post(url, temp).
-    		success(function(response){
+    		$http({
+    			method: 'POST',
+    			url: url,
+    			data: angular.toJson($scope.myForm)
+    		}).then(function successCallback(response) {
     			$scope.messageTest = response.data;      		
     			$scope.popupFormIsVisible = false;
 
-    		}).
-    		error(function(response){
+    		}, function errorCallback(response) {
       		  $scope.messageTest = "Failed: " + temp;
         		$scope.popupFormIsVisible = false;
     		});
