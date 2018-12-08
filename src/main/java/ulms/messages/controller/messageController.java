@@ -204,23 +204,50 @@ public class messageController {
 		}
 		List<String> receiverEmails = messageDto.getEmail();
 		messageEntity messEntity = new messageEntity();
+		messEntity.setId(-1L);
 		messEntity.setUser_name(account.getUserName());
 		messEntity.setSubject(messageDto.getSubjectText());
 		messEntity.setMessage(messageDto.getMessageText());
 		messEntity.setSend_date(new Date());
+<<<<<<< HEAD
 		messEntity.setDeleted(false);
 		messEntity.setId((long)messService.getAllMessage().size()+1);
 		messService.addMessage(messEntity);
+=======
+		messageEntity saved = messService.addMessage(messEntity);
+>>>>>>> d62f6da090d8952ea75fa1950ce54f37e5a7c310
 		
 		
 		List<messageReceiverEntity> receiverEntities;
 		for(String email : receiverEmails)
 		{
-			messageReceiverEntity entity = new messageReceiverEntity(messEntity.getId(), email, messageReceiverEntity.messageFlag.not_read);
+			messageReceiverEntity entity = new messageReceiverEntity(saved.getId(), email, messageReceiverEntity.messageFlag.not_read);
 			messReceiverService.addMessageReceiver(entity);
 		}
+<<<<<<< HEAD
         return new ResponseEntity<>(messEntity, HttpStatus.OK);
 
+=======
+        return new ResponseEntity<messageEntity>(saved, HttpStatus.OK);
+//		LoginEntity account = this.getLoginEntity();
+//		
+//		if (account == null)
+//		{
+//			return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+//		}
+//		List<String> receiverEmails = messageDto.getEmail();
+//		messageEntity messEntity = new messageEntity(account.getUserName(), messageDto.getSubject(), messageDto.getMessage());
+//		messService.addMessage(messEntity);
+//		
+//		
+//		List<messageReceiverEntity> receiverEntities;
+//		for(String email : receiverEmails)
+//		{
+//			messageReceiverEntity entity = new messageReceiverEntity(messEntity.getId(), email, messageReceiverEntity.messageFlag.not_read);
+//			messReceiverService.addMessageReceiver(entity);
+//		}
+//        return new ResponseEntity<>(messEntity, HttpStatus.OK);
+>>>>>>> d62f6da090d8952ea75fa1950ce54f37e5a7c310
 	}
 	
 //	 @GetMapping("/authenticatedAccount")

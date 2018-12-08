@@ -32,14 +32,14 @@ header h1 {
   min-height: 200px
 }
 
-.nav {
+.navmail {
   position: absolute;
   top: 0px; bottom: 0px;
   background: #EEE;
   width: 200px;
   height: 200px;
 }
-.nav input[type=button] {
+.navmail input[type=button] {
   border: none;
   background: none;
   background-color: #4CAF50;
@@ -57,7 +57,7 @@ header h1 {
 
 }
 
-.nav a {
+.navmail a {
   display: block;
   padding: 5px 10px;
   color: #3D9FC4;
@@ -67,11 +67,11 @@ header h1 {
 
 
 
-.nav a.active {
+.navmail a.active {
   background: #CCDDED;
 }
 
-.nav a:first-child {
+.navmail a:first-child {
   margin: 10px 0px 10px;
 }
 

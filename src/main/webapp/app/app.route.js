@@ -85,7 +85,7 @@ angular.module('ULMS').config(function($stateProvider, $urlServiceProvider, $url
 	    url: '/messages',
 	    component: 'messages'
   })
-    // State to view instructor details 
+  // State to view instructor details 
   $stateProvider.state('instructor', {
 	    url: '/instructor',
 	    component: 'instructor',
