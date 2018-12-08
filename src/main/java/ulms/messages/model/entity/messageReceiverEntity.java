@@ -51,7 +51,7 @@ public class messageReceiverEntity implements Serializable {
 
 	
 	@ManyToOne
-	@JoinColumn(name="message_id",insertable=false, updatable=false)
+	@JoinColumn(name="message_id", insertable=false, updatable=false, referencedColumnName="id")
     private messageEntity message;
 
 	

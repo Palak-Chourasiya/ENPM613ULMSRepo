@@ -48,6 +48,7 @@ angular.module('ULMS')
     	  }, function errorCallback(response){
     		  console.log(response.statusText);
     	  });
+  		  $scope.messageTest = "";
       }
       
       //Delete Messages
@@ -68,7 +69,9 @@ angular.module('ULMS')
 	  }, function errorCallback(response){
 		  $scope.message = "failed";
 		  console.log(response.statusText);
-	  });    	  
+	  }); 
+		  $scope.messageTest = "";
+
       }
 
       $scope.openMessage = function(messageData)
@@ -103,6 +106,8 @@ angular.module('ULMS')
   	      $scope.emailIsReadOnly = false;
   	      $scope.subjectIsReadOnly = false;
   	      $scope.messageIsReadOnly = false;
+  		  $scope.messageTest = "";
+
     	}
 
     	$scope.openSent = function(){
@@ -117,6 +122,8 @@ angular.module('ULMS')
     	  }, function errorCallback(response){
     		  console.log(response.statusText);
     	  });
+  		  $scope.messageTest = "";
+
     	}
 
     	$scope.openTrash = function(){
@@ -132,6 +139,8 @@ angular.module('ULMS')
       	  }, function errorCallback(response){
       		  console.log(response.statusText);
       	  });
+	  		  $scope.messageTest = "";
+
         	  
         	  
     	}
@@ -145,17 +154,21 @@ angular.module('ULMS')
     	}
     	$scope.sendMessage = function() {
     		var temp = JSON.stringify($scope.myForm);
-    		var url = 'http://localhost:8080/messages/add';
-    		$http.post(url, temp).
-    		success(function(response){
-    			$scope.messageTest = response.data;      		
-    			$scope.popupFormIsVisible = false;
+    		var url = 'http://localhost:8080/messages/add';	        
+	        $http({
+	  		  method: 'POST',
+	  		  url : url,
+	  		  data : temp
+	  	  }).then(function successCallback(response){
+	  		  $scope.getUnreadMessageData();
+	  		  $scope.messageTest = "Message Sent";
+      		  $scope.popupFormIsVisible = false;
+	  	  }, function errorCallback(response){
+	  		  $scope.messageTest = "Failed to Sent";
+	  		  console.log(response.statusText);
+      		  $scope.popupFormIsVisible = false;
 
-    		}).
-    		error(function(response){
-      		  $scope.messageTest = "Failed: " + temp;
-        		$scope.popupFormIsVisible = false;
-    		});
+	  	  }); 
     	}
     	
         //Delete Messages
@@ -167,10 +180,10 @@ angular.module('ULMS')
 	  		  url : url
 	  	  }).then(function successCallback(response){
 	  		  $scope.getUnreadMessageData();
-	  		  $scope.message = "success";
+	  		  $scope.messageTest = "Deleted";
       		  $scope.popupFormIsVisible = false;
 	  	  }, function errorCallback(response){
-	  		  $scope.message = "failed";
+	  		  $scope.messageTest = "Failed To Delete";
 	  		  console.log(response.statusText);
       		  $scope.popupFormIsVisible = false;
 

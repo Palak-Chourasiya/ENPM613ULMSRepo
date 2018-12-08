@@ -70,10 +70,6 @@ public class messageEntity {
 	
 	
 	public messageEntity() {
-		this.deleted = false;
-		this.user_name = "";
-		this.subject = "";
-		this.message = "";
 	}
 	
 	public long getId() {
@@ -133,16 +129,6 @@ public class messageEntity {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
-	}
-
-
-	public Set<messageReceiverEntity> getReceivers() {
-		return receivers;
-	}
-
-
-	public void setReceivers(Set<messageReceiverEntity> receivers) {
-		this.receivers = receivers;
 	}
 
 

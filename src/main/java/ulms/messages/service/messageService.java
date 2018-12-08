@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import ulms.courses.modules.CourseModuleEntity;
 import ulms.messages.model.entity.messageEntity;
 import ulms.messages.repository.messageRepository;
 @Service
@@ -28,6 +29,15 @@ public class messageService {
 		Optional<messageEntity> message = messRepository.findById(messageID);
 		return message.get();
 	}
+	
+	
+    /**
+     * 
+     * @return Fetches the modules of all courses 
+     */
+    public List<messageEntity> getAllMessage() {
+        return messRepository.findAll();
+    }
 	
     public Page<messageEntity> getAllMessage(Pageable pageRequest) {
         return messRepository.findAll(pageRequest);
